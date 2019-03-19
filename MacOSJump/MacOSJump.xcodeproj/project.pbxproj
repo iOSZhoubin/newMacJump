@@ -1,0 +1,627 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		392693A6223798170020343F /* JumpKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 392693A4223798170020343F /* JumpKeyChain.m */; };
+		39510B69222E1643000A7A62 /* ChooseConmpanyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39510B67222E1643000A7A62 /* ChooseConmpanyWindowController.m */; };
+		39510B6A222E1643000A7A62 /* ChooseConmpanyWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39510B68222E1643000A7A62 /* ChooseConmpanyWindowController.xib */; };
+		39510B6D222E43D4000A7A62 /* JumpCompanyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 39510B6C222E43D4000A7A62 /* JumpCompanyModel.m */; };
+		3978B8D3222CFA8D00D28D95 /* AFNHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3978B8D2222CFA8D00D28D95 /* AFNHelper.m */; };
+		3978B8D6222CFBB300D28D95 /* SecurityNSString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3978B8D4222CFBB300D28D95 /* SecurityNSString.m */; };
+		39803FBC223F22E2004C03AC /* MytitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39803FBB223F22E2004C03AC /* MytitleView.m */; };
+		39813D7C223B47DA00805151 /* ApplicitionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 39813D7B223B47DA00805151 /* ApplicitionModel.m */; };
+		39813D80223B480400805151 /* ApplicitionWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39813D7E223B480400805151 /* ApplicitionWindowController.m */; };
+		39813D81223B480400805151 /* ApplicitionWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39813D7F223B480400805151 /* ApplicitionWindowController.xib */; };
+		398EA46821EC87AD0075F2F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 398EA46721EC87AD0075F2F3 /* AppDelegate.m */; };
+		398EA46B21EC87AD0075F2F3 /* MacOSJump.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 398EA46921EC87AD0075F2F3 /* MacOSJump.xcdatamodeld */; };
+		398EA46D21EC87B80075F2F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 398EA46C21EC87B80075F2F3 /* Assets.xcassets */; };
+		398EA47021EC87B80075F2F3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398EA46E21EC87B80075F2F3 /* MainMenu.xib */; };
+		398EA47321EC87B80075F2F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 398EA47221EC87B80075F2F3 /* main.m */; };
+		398EA47C21EC87E30075F2F3 /* MainWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 398EA47B21EC87E30075F2F3 /* MainWindow.m */; };
+		398EA48021EC87F30075F2F3 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 398EA47E21EC87F30075F2F3 /* MainWindowController.m */; };
+		398EA48121EC87F30075F2F3 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398EA47F21EC87F30075F2F3 /* MainWindowController.xib */; };
+		39A29F912240BBA00021D415 /* RecordRemarkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A29F8F2240BBA00021D415 /* RecordRemarkController.m */; };
+		39A29F922240BBA00021D415 /* RecordRemarkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A29F902240BBA00021D415 /* RecordRemarkController.xib */; };
+		39A29FBB2240DEFB0021D415 /* FirstPageTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A29FB92240DEFB0021D415 /* FirstPageTabController.m */; };
+		39A29FBC2240DEFB0021D415 /* FirstPageTabController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A29FBA2240DEFB0021D415 /* FirstPageTabController.xib */; };
+		39A29FF22240EC280021D415 /* JumpStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A29FF02240EC280021D415 /* JumpStatusViewController.m */; };
+		39A29FF32240EC280021D415 /* JumpStatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A29FF12240EC280021D415 /* JumpStatusViewController.xib */; };
+		39A29FF72240F00C0021D415 /* HistoryRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A29FF52240F00C0021D415 /* HistoryRecordViewController.m */; };
+		39A29FF82240F00C0021D415 /* HistoryRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A29FF62240F00C0021D415 /* HistoryRecordViewController.xib */; };
+		39A29FFC2240F2930021D415 /* JumpRegistereViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A29FFA2240F2930021D415 /* JumpRegistereViewController.m */; };
+		39A29FFD2240F2930021D415 /* JumpRegistereViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A29FFB2240F2930021D415 /* JumpRegistereViewController.xib */; };
+		39A2A0012240F6970021D415 /* FirstPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A29FFF2240F6970021D415 /* FirstPageViewController.m */; };
+		39A2A0022240F6970021D415 /* FirstPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A2A0002240F6970021D415 /* FirstPageViewController.xib */; };
+		A4403418C8B29942D6480EE2 /* libPods-MacOSJump.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 363499DF91722AEF7106C8AE /* libPods-MacOSJump.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		363499DF91722AEF7106C8AE /* libPods-MacOSJump.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MacOSJump.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		392693A4223798170020343F /* JumpKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JumpKeyChain.m; sourceTree = "<group>"; };
+		392693A5223798170020343F /* JumpKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpKeyChain.h; sourceTree = "<group>"; };
+		39510B66222E1643000A7A62 /* ChooseConmpanyWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseConmpanyWindowController.h; sourceTree = "<group>"; };
+		39510B67222E1643000A7A62 /* ChooseConmpanyWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseConmpanyWindowController.m; sourceTree = "<group>"; };
+		39510B68222E1643000A7A62 /* ChooseConmpanyWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseConmpanyWindowController.xib; sourceTree = "<group>"; };
+		39510B6B222E43D4000A7A62 /* JumpCompanyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JumpCompanyModel.h; sourceTree = "<group>"; };
+		39510B6C222E43D4000A7A62 /* JumpCompanyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JumpCompanyModel.m; sourceTree = "<group>"; };
+		3978B8D0222CF99500D28D95 /* PrefixPch.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixPch.pch; sourceTree = "<group>"; };
+		3978B8D1222CFA8D00D28D95 /* AFNHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNHelper.h; sourceTree = "<group>"; };
+		3978B8D2222CFA8D00D28D95 /* AFNHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNHelper.m; sourceTree = "<group>"; };
+		3978B8D4222CFBB300D28D95 /* SecurityNSString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityNSString.m; sourceTree = "<group>"; };
+		3978B8D5222CFBB300D28D95 /* SecurityNSString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityNSString.h; sourceTree = "<group>"; };
+		3978B8D8222CFDA500D28D95 /* InterfaceHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceHeader.h; sourceTree = "<group>"; };
+		39803FBA223F22E2004C03AC /* MytitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MytitleView.h; sourceTree = "<group>"; };
+		39803FBB223F22E2004C03AC /* MytitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MytitleView.m; sourceTree = "<group>"; };
+		39813D7A223B47DA00805151 /* ApplicitionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicitionModel.h; sourceTree = "<group>"; };
+		39813D7B223B47DA00805151 /* ApplicitionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicitionModel.m; sourceTree = "<group>"; };
+		39813D7D223B480400805151 /* ApplicitionWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicitionWindowController.h; sourceTree = "<group>"; };
+		39813D7E223B480400805151 /* ApplicitionWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicitionWindowController.m; sourceTree = "<group>"; };
+		39813D7F223B480400805151 /* ApplicitionWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ApplicitionWindowController.xib; sourceTree = "<group>"; };
+		398EA46321EC87AD0075F2F3 /* MacOSJump.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacOSJump.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		398EA46621EC87AD0075F2F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		398EA46721EC87AD0075F2F3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		398EA46A21EC87AD0075F2F3 /* MacOSJump.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MacOSJump.xcdatamodel; sourceTree = "<group>"; };
+		398EA46C21EC87B80075F2F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		398EA46F21EC87B80075F2F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		398EA47121EC87B80075F2F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		398EA47221EC87B80075F2F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		398EA47421EC87B80075F2F3 /* MacOSJump.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacOSJump.entitlements; sourceTree = "<group>"; };
+		398EA47A21EC87E30075F2F3 /* MainWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
+		398EA47B21EC87E30075F2F3 /* MainWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainWindow.m; sourceTree = "<group>"; };
+		398EA47D21EC87F30075F2F3 /* MainWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
+		398EA47E21EC87F30075F2F3 /* MainWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainWindowController.m; sourceTree = "<group>"; };
+		398EA47F21EC87F30075F2F3 /* MainWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindowController.xib; sourceTree = "<group>"; };
+		39A29F8E2240BBA00021D415 /* RecordRemarkController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordRemarkController.h; sourceTree = "<group>"; };
+		39A29F8F2240BBA00021D415 /* RecordRemarkController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordRemarkController.m; sourceTree = "<group>"; };
+		39A29F902240BBA00021D415 /* RecordRemarkController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordRemarkController.xib; sourceTree = "<group>"; };
+		39A29FB82240DEFB0021D415 /* FirstPageTabController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstPageTabController.h; sourceTree = "<group>"; };
+		39A29FB92240DEFB0021D415 /* FirstPageTabController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstPageTabController.m; sourceTree = "<group>"; };
+		39A29FBA2240DEFB0021D415 /* FirstPageTabController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstPageTabController.xib; sourceTree = "<group>"; };
+		39A29FEF2240EC280021D415 /* JumpStatusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JumpStatusViewController.h; sourceTree = "<group>"; };
+		39A29FF02240EC280021D415 /* JumpStatusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JumpStatusViewController.m; sourceTree = "<group>"; };
+		39A29FF12240EC280021D415 /* JumpStatusViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JumpStatusViewController.xib; sourceTree = "<group>"; };
+		39A29FF42240F00C0021D415 /* HistoryRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryRecordViewController.h; sourceTree = "<group>"; };
+		39A29FF52240F00C0021D415 /* HistoryRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryRecordViewController.m; sourceTree = "<group>"; };
+		39A29FF62240F00C0021D415 /* HistoryRecordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryRecordViewController.xib; sourceTree = "<group>"; };
+		39A29FF92240F2930021D415 /* JumpRegistereViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JumpRegistereViewController.h; sourceTree = "<group>"; };
+		39A29FFA2240F2930021D415 /* JumpRegistereViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JumpRegistereViewController.m; sourceTree = "<group>"; };
+		39A29FFB2240F2930021D415 /* JumpRegistereViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JumpRegistereViewController.xib; sourceTree = "<group>"; };
+		39A29FFE2240F6970021D415 /* FirstPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstPageViewController.h; sourceTree = "<group>"; };
+		39A29FFF2240F6970021D415 /* FirstPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstPageViewController.m; sourceTree = "<group>"; };
+		39A2A0002240F6970021D415 /* FirstPageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstPageViewController.xib; sourceTree = "<group>"; };
+		E9F2E15EF293D7501129EDB0 /* Pods-MacOSJump.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacOSJump.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacOSJump/Pods-MacOSJump.release.xcconfig"; sourceTree = "<group>"; };
+		F3194C161FFA9DDD7824F447 /* Pods-MacOSJump.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacOSJump.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacOSJump/Pods-MacOSJump.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		398EA46021EC87AD0075F2F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4403418C8B29942D6480EE2 /* libPods-MacOSJump.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		20BFC497EAA8C603E70D52AF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F3194C161FFA9DDD7824F447 /* Pods-MacOSJump.debug.xcconfig */,
+				E9F2E15EF293D7501129EDB0 /* Pods-MacOSJump.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		2C6523FD398ACA88CC5092A8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				363499DF91722AEF7106C8AE /* libPods-MacOSJump.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		39510B65222E0D80000A7A62 /* Choose(选择部门) */ = {
+			isa = PBXGroup;
+			children = (
+				39510B66222E1643000A7A62 /* ChooseConmpanyWindowController.h */,
+				39510B67222E1643000A7A62 /* ChooseConmpanyWindowController.m */,
+				39510B68222E1643000A7A62 /* ChooseConmpanyWindowController.xib */,
+				39510B6B222E43D4000A7A62 /* JumpCompanyModel.h */,
+				39510B6C222E43D4000A7A62 /* JumpCompanyModel.m */,
+			);
+			path = "Choose(选择部门)";
+			sourceTree = "<group>";
+		};
+		3978B8CF222CF90600D28D95 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				392693A5223798170020343F /* JumpKeyChain.h */,
+				392693A4223798170020343F /* JumpKeyChain.m */,
+				3978B8D1222CFA8D00D28D95 /* AFNHelper.h */,
+				3978B8D2222CFA8D00D28D95 /* AFNHelper.m */,
+				3978B8D5222CFBB300D28D95 /* SecurityNSString.h */,
+				3978B8D4222CFBB300D28D95 /* SecurityNSString.m */,
+				39803FBA223F22E2004C03AC /* MytitleView.h */,
+				39803FBB223F22E2004C03AC /* MytitleView.m */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		39813D79223B47DA00805151 /* Process(进程管家) */ = {
+			isa = PBXGroup;
+			children = (
+				39813D7A223B47DA00805151 /* ApplicitionModel.h */,
+				39813D7B223B47DA00805151 /* ApplicitionModel.m */,
+				39813D7D223B480400805151 /* ApplicitionWindowController.h */,
+				39813D7E223B480400805151 /* ApplicitionWindowController.m */,
+				39813D7F223B480400805151 /* ApplicitionWindowController.xib */,
+			);
+			path = "Process(进程管家)";
+			sourceTree = "<group>";
+		};
+		39813DB6223B9D1100805151 /* History(检查记录) */ = {
+			isa = PBXGroup;
+			children = (
+				39A29FF42240F00C0021D415 /* HistoryRecordViewController.h */,
+				39A29FF52240F00C0021D415 /* HistoryRecordViewController.m */,
+				39A29FF62240F00C0021D415 /* HistoryRecordViewController.xib */,
+				39A29F8E2240BBA00021D415 /* RecordRemarkController.h */,
+				39A29F8F2240BBA00021D415 /* RecordRemarkController.m */,
+				39A29F902240BBA00021D415 /* RecordRemarkController.xib */,
+			);
+			path = "History(检查记录)";
+			sourceTree = "<group>";
+		};
+		398EA45A21EC87AD0075F2F3 = {
+			isa = PBXGroup;
+			children = (
+				398EA46521EC87AD0075F2F3 /* MacOSJump */,
+				398EA46421EC87AD0075F2F3 /* Products */,
+				20BFC497EAA8C603E70D52AF /* Pods */,
+				2C6523FD398ACA88CC5092A8 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		398EA46421EC87AD0075F2F3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				398EA46321EC87AD0075F2F3 /* MacOSJump.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		398EA46521EC87AD0075F2F3 /* MacOSJump */ = {
+			isa = PBXGroup;
+			children = (
+				3978B8CF222CF90600D28D95 /* Public */,
+				398EA48821EC8AEB0075F2F3 /* BaseWindow */,
+				398EA48721EC8AE40075F2F3 /* Class */,
+				398EA46621EC87AD0075F2F3 /* AppDelegate.h */,
+				398EA46721EC87AD0075F2F3 /* AppDelegate.m */,
+				398EA46C21EC87B80075F2F3 /* Assets.xcassets */,
+				398EA46E21EC87B80075F2F3 /* MainMenu.xib */,
+				398EA47121EC87B80075F2F3 /* Info.plist */,
+				398EA47221EC87B80075F2F3 /* main.m */,
+				398EA47421EC87B80075F2F3 /* MacOSJump.entitlements */,
+				398EA46921EC87AD0075F2F3 /* MacOSJump.xcdatamodeld */,
+				3978B8D8222CFDA500D28D95 /* InterfaceHeader.h */,
+				3978B8D0222CF99500D28D95 /* PrefixPch.pch */,
+			);
+			path = MacOSJump;
+			sourceTree = "<group>";
+		};
+		398EA48721EC8AE40075F2F3 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				398EA48C21EC8B2C0075F2F3 /* Others（其他） */,
+				398EA48B21EC8B190075F2F3 /* firstPage（首页） */,
+				398EA48A21EC8B040075F2F3 /* registere（注册） */,
+				398EA48921EC8AF60075F2F3 /* login（登录） */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		398EA48821EC8AEB0075F2F3 /* BaseWindow */ = {
+			isa = PBXGroup;
+			children = (
+				398EA47A21EC87E30075F2F3 /* MainWindow.h */,
+				398EA47B21EC87E30075F2F3 /* MainWindow.m */,
+			);
+			path = BaseWindow;
+			sourceTree = "<group>";
+		};
+		398EA48921EC8AF60075F2F3 /* login（登录） */ = {
+			isa = PBXGroup;
+			children = (
+				398EA47D21EC87F30075F2F3 /* MainWindowController.h */,
+				398EA47E21EC87F30075F2F3 /* MainWindowController.m */,
+				398EA47F21EC87F30075F2F3 /* MainWindowController.xib */,
+			);
+			path = "login（登录）";
+			sourceTree = "<group>";
+		};
+		398EA48A21EC8B040075F2F3 /* registere（注册） */ = {
+			isa = PBXGroup;
+			children = (
+				39A29FF92240F2930021D415 /* JumpRegistereViewController.h */,
+				39A29FFA2240F2930021D415 /* JumpRegistereViewController.m */,
+				39A29FFB2240F2930021D415 /* JumpRegistereViewController.xib */,
+			);
+			path = "registere（注册）";
+			sourceTree = "<group>";
+		};
+		398EA48B21EC8B190075F2F3 /* firstPage（首页） */ = {
+			isa = PBXGroup;
+			children = (
+				39A29FB82240DEFB0021D415 /* FirstPageTabController.h */,
+				39A29FB92240DEFB0021D415 /* FirstPageTabController.m */,
+				39A29FBA2240DEFB0021D415 /* FirstPageTabController.xib */,
+				39A29FFE2240F6970021D415 /* FirstPageViewController.h */,
+				39A29FFF2240F6970021D415 /* FirstPageViewController.m */,
+				39A2A0002240F6970021D415 /* FirstPageViewController.xib */,
+			);
+			path = "firstPage（首页）";
+			sourceTree = "<group>";
+		};
+		398EA48C21EC8B2C0075F2F3 /* Others（其他） */ = {
+			isa = PBXGroup;
+			children = (
+				39A29F88224096830021D415 /* Status(状态) */,
+				39813DB6223B9D1100805151 /* History(检查记录) */,
+				39813D79223B47DA00805151 /* Process(进程管家) */,
+				39510B65222E0D80000A7A62 /* Choose(选择部门) */,
+			);
+			path = "Others（其他）";
+			sourceTree = "<group>";
+		};
+		39A29F88224096830021D415 /* Status(状态) */ = {
+			isa = PBXGroup;
+			children = (
+				39A29FEF2240EC280021D415 /* JumpStatusViewController.h */,
+				39A29FF02240EC280021D415 /* JumpStatusViewController.m */,
+				39A29FF12240EC280021D415 /* JumpStatusViewController.xib */,
+			);
+			path = "Status(状态)";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		398EA46221EC87AD0075F2F3 /* MacOSJump */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 398EA47721EC87B80075F2F3 /* Build configuration list for PBXNativeTarget "MacOSJump" */;
+			buildPhases = (
+				B2CA18DC44DF1533108597C3 /* [CP] Check Pods Manifest.lock */,
+				398EA45F21EC87AD0075F2F3 /* Sources */,
+				398EA46021EC87AD0075F2F3 /* Frameworks */,
+				398EA46121EC87AD0075F2F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacOSJump;
+			productName = MacOSJump;
+			productReference = 398EA46321EC87AD0075F2F3 /* MacOSJump.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		398EA45B21EC87AD0075F2F3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = zb;
+				TargetAttributes = {
+					398EA46221EC87AD0075F2F3 = {
+						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 398EA45E21EC87AD0075F2F3 /* Build configuration list for PBXProject "MacOSJump" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 398EA45A21EC87AD0075F2F3;
+			productRefGroup = 398EA46421EC87AD0075F2F3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				398EA46221EC87AD0075F2F3 /* MacOSJump */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		398EA46121EC87AD0075F2F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				398EA46D21EC87B80075F2F3 /* Assets.xcassets in Resources */,
+				39813D81223B480400805151 /* ApplicitionWindowController.xib in Resources */,
+				39A29FF82240F00C0021D415 /* HistoryRecordViewController.xib in Resources */,
+				39A2A0022240F6970021D415 /* FirstPageViewController.xib in Resources */,
+				39A29F922240BBA00021D415 /* RecordRemarkController.xib in Resources */,
+				398EA48121EC87F30075F2F3 /* MainWindowController.xib in Resources */,
+				39A29FFD2240F2930021D415 /* JumpRegistereViewController.xib in Resources */,
+				39510B6A222E1643000A7A62 /* ChooseConmpanyWindowController.xib in Resources */,
+				39A29FBC2240DEFB0021D415 /* FirstPageTabController.xib in Resources */,
+				39A29FF32240EC280021D415 /* JumpStatusViewController.xib in Resources */,
+				398EA47021EC87B80075F2F3 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B2CA18DC44DF1533108597C3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MacOSJump-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		398EA45F21EC87AD0075F2F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39A29FF22240EC280021D415 /* JumpStatusViewController.m in Sources */,
+				398EA48021EC87F30075F2F3 /* MainWindowController.m in Sources */,
+				392693A6223798170020343F /* JumpKeyChain.m in Sources */,
+				39510B69222E1643000A7A62 /* ChooseConmpanyWindowController.m in Sources */,
+				39A29FFC2240F2930021D415 /* JumpRegistereViewController.m in Sources */,
+				398EA47C21EC87E30075F2F3 /* MainWindow.m in Sources */,
+				39A2A0012240F6970021D415 /* FirstPageViewController.m in Sources */,
+				398EA46821EC87AD0075F2F3 /* AppDelegate.m in Sources */,
+				39A29FBB2240DEFB0021D415 /* FirstPageTabController.m in Sources */,
+				3978B8D3222CFA8D00D28D95 /* AFNHelper.m in Sources */,
+				39510B6D222E43D4000A7A62 /* JumpCompanyModel.m in Sources */,
+				398EA47321EC87B80075F2F3 /* main.m in Sources */,
+				39813D80223B480400805151 /* ApplicitionWindowController.m in Sources */,
+				39A29FF72240F00C0021D415 /* HistoryRecordViewController.m in Sources */,
+				3978B8D6222CFBB300D28D95 /* SecurityNSString.m in Sources */,
+				39803FBC223F22E2004C03AC /* MytitleView.m in Sources */,
+				39813D7C223B47DA00805151 /* ApplicitionModel.m in Sources */,
+				398EA46B21EC87AD0075F2F3 /* MacOSJump.xcdatamodeld in Sources */,
+				39A29F912240BBA00021D415 /* RecordRemarkController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		398EA46E21EC87B80075F2F3 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				398EA46F21EC87B80075F2F3 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		398EA47521EC87B80075F2F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		398EA47621EC87B80075F2F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		398EA47821EC87B80075F2F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3194C161FFA9DDD7824F447 /* Pods-MacOSJump.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MacOSJump/MacOSJump.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = XDYY7V85NM;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/MacOSJump/PrefixPch.pch";
+				INFOPLIST_FILE = MacOSJump/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.com.accessforMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Debug;
+		};
+		398EA47921EC87B80075F2F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9F2E15EF293D7501129EDB0 /* Pods-MacOSJump.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MacOSJump/MacOSJump.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = XDYY7V85NM;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/MacOSJump/PrefixPch.pch";
+				INFOPLIST_FILE = MacOSJump/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.com.accessforMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		398EA45E21EC87AD0075F2F3 /* Build configuration list for PBXProject "MacOSJump" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				398EA47521EC87B80075F2F3 /* Debug */,
+				398EA47621EC87B80075F2F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		398EA47721EC87B80075F2F3 /* Build configuration list for PBXNativeTarget "MacOSJump" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				398EA47821EC87B80075F2F3 /* Debug */,
+				398EA47921EC87B80075F2F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		398EA46921EC87AD0075F2F3 /* MacOSJump.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				398EA46A21EC87AD0075F2F3 /* MacOSJump.xcdatamodel */,
+			);
+			currentVersion = 398EA46A21EC87AD0075F2F3 /* MacOSJump.xcdatamodel */;
+			path = MacOSJump.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 398EA45B21EC87AD0075F2F3 /* Project object */;
+}

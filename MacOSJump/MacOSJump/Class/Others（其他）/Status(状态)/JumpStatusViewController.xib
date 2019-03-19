@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="JumpStatusViewController">
+            <connections>
+                <outlet property="longtime" destination="ROg-pT-4eA" id="bQo-iA-Xoy"/>
+                <outlet property="status" destination="FS7-bB-HI8" id="25o-bL-ZsM"/>
+                <outlet property="statusImage" destination="vGf-ht-Hgg" id="jHZ-ca-5PS"/>
+                <outlet property="time" destination="vxT-bP-4zL" id="Ogp-ro-dHk"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="515" height="431"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <box boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="dxg-Lq-poK">
+                    <rect key="frame" x="0.0" y="0.0" width="515" height="431"/>
+                    <view key="contentView" id="iEq-Th-SgJ">
+                        <rect key="frame" x="1" y="1" width="513" height="429"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vGf-ht-Hgg">
+                                <rect key="frame" x="162" y="249" width="190" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="190" id="GmB-Y3-bUk"/>
+                                    <constraint firstAttribute="height" constant="160" id="uH3-Sg-vXh"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="bg-state-Y" id="3sy-wO-ScE"/>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AJ0-eg-bTG">
+                                <rect key="frame" x="28" y="189" width="64" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="IJl-h6-7QV"/>
+                                    <constraint firstAttribute="height" constant="20" id="raG-em-1os"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" title="设备状态" id="Wpu-tY-g7g">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FS7-bB-HI8">
+                                <rect key="frame" x="128" y="189" width="347" height="20"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" alignment="left" title="正常" id="qvZ-mV-jsi">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BXC-gk-h9z">
+                                <rect key="frame" x="28" y="144" width="64" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="kZM-9J-z6W"/>
+                                    <constraint firstAttribute="width" constant="60" id="ze1-kV-f8R"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" title="认证时间" id="5d5-uz-Lfj">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Sz-3t-GK4">
+                                <rect key="frame" x="28" y="99" width="64" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="OEu-P6-gfZ"/>
+                                    <constraint firstAttribute="height" constant="20" id="hWv-JJ-qmo"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" title="认证时长" id="mh8-Ah-wlh">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vxT-bP-4zL">
+                                <rect key="frame" x="128" y="144" width="347" height="20"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" alignment="left" title="2019-01-17 15:00:00" id="9fX-0W-cwa">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ROg-pT-4eA">
+                                <rect key="frame" x="128" y="99" width="347" height="20"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" alignment="left" title="8天" id="R6I-VD-v6R">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="3s7-6g-n9K">
+                                <rect key="frame" x="20" y="384" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="QRK-fi-3Pi"/>
+                                    <constraint firstAttribute="width" constant="25" id="VB4-uB-Gej"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="NEJ-m0-z0r">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="FS7-bB-HI8" firstAttribute="height" secondItem="AJ0-eg-bTG" secondAttribute="height" id="547-65-4pg"/>
+                            <constraint firstItem="vxT-bP-4zL" firstAttribute="centerY" secondItem="BXC-gk-h9z" secondAttribute="centerY" id="AP5-Ti-cGt"/>
+                            <constraint firstItem="vxT-bP-4zL" firstAttribute="height" secondItem="BXC-gk-h9z" secondAttribute="height" id="Ayn-wf-ee3"/>
+                            <constraint firstItem="ROg-pT-4eA" firstAttribute="centerY" secondItem="3Sz-3t-GK4" secondAttribute="centerY" id="B1V-Mc-1uc"/>
+                            <constraint firstItem="vxT-bP-4zL" firstAttribute="leading" secondItem="BXC-gk-h9z" secondAttribute="trailing" constant="40" id="BHF-g2-pTn"/>
+                            <constraint firstItem="AJ0-eg-bTG" firstAttribute="top" secondItem="vGf-ht-Hgg" secondAttribute="bottom" constant="40" id="BY2-8q-00L"/>
+                            <constraint firstItem="3s7-6g-n9K" firstAttribute="leading" secondItem="iEq-Th-SgJ" secondAttribute="leading" constant="20" id="DHs-zu-aWm"/>
+                            <constraint firstItem="vGf-ht-Hgg" firstAttribute="top" secondItem="iEq-Th-SgJ" secondAttribute="top" constant="20" id="E31-pZ-8XJ"/>
+                            <constraint firstAttribute="trailing" secondItem="FS7-bB-HI8" secondAttribute="trailing" constant="40" id="ESw-Og-Hac"/>
+                            <constraint firstItem="ROg-pT-4eA" firstAttribute="leading" secondItem="3Sz-3t-GK4" secondAttribute="trailing" constant="40" id="Fer-PW-6zf"/>
+                            <constraint firstItem="FS7-bB-HI8" firstAttribute="leading" secondItem="AJ0-eg-bTG" secondAttribute="trailing" constant="40" id="KDW-XY-JGr"/>
+                            <constraint firstItem="3Sz-3t-GK4" firstAttribute="leading" secondItem="iEq-Th-SgJ" secondAttribute="leading" constant="30" id="LNf-Kg-SPJ"/>
+                            <constraint firstAttribute="trailing" secondItem="ROg-pT-4eA" secondAttribute="trailing" constant="40" id="SA5-se-9uL"/>
+                            <constraint firstItem="ROg-pT-4eA" firstAttribute="height" secondItem="3Sz-3t-GK4" secondAttribute="height" id="V5n-8f-dLt"/>
+                            <constraint firstItem="BXC-gk-h9z" firstAttribute="top" secondItem="AJ0-eg-bTG" secondAttribute="bottom" constant="25" id="eFf-2K-0V0"/>
+                            <constraint firstItem="3Sz-3t-GK4" firstAttribute="top" secondItem="BXC-gk-h9z" secondAttribute="bottom" constant="25" id="icN-7T-l1l"/>
+                            <constraint firstItem="3s7-6g-n9K" firstAttribute="top" secondItem="iEq-Th-SgJ" secondAttribute="top" constant="20" id="l3o-Dv-D7U"/>
+                            <constraint firstAttribute="trailing" secondItem="vxT-bP-4zL" secondAttribute="trailing" constant="40" id="l89-TS-GXh"/>
+                            <constraint firstItem="vGf-ht-Hgg" firstAttribute="centerX" secondItem="iEq-Th-SgJ" secondAttribute="centerX" id="m4T-8g-Ldt"/>
+                            <constraint firstItem="BXC-gk-h9z" firstAttribute="leading" secondItem="iEq-Th-SgJ" secondAttribute="leading" constant="30" id="p5w-Vb-Npy"/>
+                            <constraint firstItem="FS7-bB-HI8" firstAttribute="centerY" secondItem="AJ0-eg-bTG" secondAttribute="centerY" id="vJW-Mk-wDk"/>
+                            <constraint firstItem="AJ0-eg-bTG" firstAttribute="leading" secondItem="iEq-Th-SgJ" secondAttribute="leading" constant="30" id="xLW-kW-j9j"/>
+                        </constraints>
+                    </view>
+                    <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                </box>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="dxg-Lq-poK" secondAttribute="trailing" id="IN1-F5-KiN"/>
+                <constraint firstItem="dxg-Lq-poK" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Prm-yQ-lsa"/>
+                <constraint firstAttribute="bottom" secondItem="dxg-Lq-poK" secondAttribute="bottom" id="Vjd-VW-cgZ"/>
+                <constraint firstItem="dxg-Lq-poK" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="x7b-b2-n3w"/>
+            </constraints>
+            <point key="canvasLocation" x="126.5" y="112.5"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="NSRefreshTemplate" width="11" height="15"/>
+        <image name="bg-state-Y" width="192" height="166"/>
+    </resources>
+</document>

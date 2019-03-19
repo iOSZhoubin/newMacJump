@@ -1,0 +1,7 @@
+target 'MacOSJump' do
+
+pod 'AFNetworking'
+
+pod 'MJExtension'
+
+end

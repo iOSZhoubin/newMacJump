@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="RecordRemarkController">
+            <connections>
+                <outlet property="content" destination="2pE-c9-jRx" id="ZKv-HP-IY1"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="246" height="98"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="2pE-c9-jRx">
+                    <rect key="frame" x="8" y="20" width="230" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="h02-We-7bL"/>
+                    </constraints>
+                    <textFieldCell key="cell" enabled="NO" sendsActionOnEndEditing="YES" placeholderString="等待检测..." id="hab-Kc-doD">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="2pE-c9-jRx" secondAttribute="trailing" constant="10" id="AaX-QT-5zi"/>
+                <constraint firstItem="2pE-c9-jRx" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="QF5-BA-Dkc"/>
+                <constraint firstItem="2pE-c9-jRx" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="8" id="uq7-yi-lBC"/>
+            </constraints>
+            <point key="canvasLocation" x="187" y="265"/>
+        </customView>
+    </objects>
+</document>

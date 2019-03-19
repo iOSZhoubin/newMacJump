@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="FirstPageTabController">
+            <connections>
+                <outlet property="firstItem" destination="Hr5-vD-xhm" id="4ST-Hh-rxw"/>
+                <outlet property="fourthItem" destination="BcF-Fy-GRO" id="13j-oe-0Ap"/>
+                <outlet property="secondItem" destination="oDc-Ri-IR9" id="gVo-S0-Dpf"/>
+                <outlet property="thirdItem" destination="YIa-kU-S3m" id="VIK-HT-EzU"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <tabView translatesAutoresizingMaskIntoConstraints="NO" id="JEI-Wd-Ljt">
+                        <rect key="frame" x="13" y="0.0" width="454" height="266"/>
+                        <font key="font" metaFont="system"/>
+                        <tabViewItems>
+                            <tabViewItem label="检测" identifier="" id="Hr5-vD-xhm">
+                                <view key="view" id="Trb-FS-Cps">
+                                    <rect key="frame" x="10" y="33" width="434" height="220"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="状态" identifier="" id="oDc-Ri-IR9">
+                                <view key="view" id="jZu-QB-bWb">
+                                    <rect key="frame" x="10" y="33" width="434" height="220"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="检测历史" identifier="" id="YIa-kU-S3m">
+                                <view key="view" id="C3s-BW-ao3">
+                                    <rect key="frame" x="10" y="33" width="434" height="220"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="完善信息" identifier="" id="BcF-Fy-GRO">
+                                <view key="view" id="IxA-Su-beC">
+                                    <rect key="frame" x="10" y="33" width="434" height="220"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                            </tabViewItem>
+                        </tabViewItems>
+                    </tabView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="JEI-Wd-Ljt" secondAttribute="trailing" constant="20" id="2fA-XU-CaY"/>
+                    <constraint firstItem="JEI-Wd-Ljt" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="R3W-KA-p3s"/>
+                    <constraint firstAttribute="bottom" secondItem="JEI-Wd-Ljt" secondAttribute="bottom" constant="10" id="XR6-2a-2at"/>
+                    <constraint firstItem="JEI-Wd-Ljt" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="10" id="agb-cl-9gX"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="136" y="39"/>
+        </window>
+        <viewController title="检测" identifier="firstVc" id="Bdc-DQ-dYm"/>
+        <viewController title="状态" identifier="secondVc" id="LrL-hY-Q8m"/>
+        <viewController title="检测历史" identifier="thirdVc" id="Rnb-UO-jdv"/>
+        <viewController title="完善信息" identifier="fourthVc" id="KC5-YO-Ql6"/>
+    </objects>
+</document>
