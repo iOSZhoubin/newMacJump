@@ -9,12 +9,15 @@
 #import "JumpRegistereViewController.h"
 #import "ChooseConmpanyWindowController.h"
 #import "AppDelegate.h"
+#import "FirstPageTabController.h"
 
 
 @interface JumpRegistereViewController ()<ChooseCompanyDelegate>
 
 
 @property (strong,nonatomic) ChooseConmpanyWindowController *choosePeople;
+
+@property (strong,nonatomic) FirstPageTabController *firstWc;
 
 @property (strong,nonatomic) NSMutableDictionary *dataDict;
 //使用人
@@ -158,7 +161,7 @@
     //设置提示框的样式
     alert.alertStyle = NSAlertStyleWarning;
     
-//    [alert beginSheetModalForWindow:self.window completionHandler:nil];
+    [alert beginSheetModalForWindow:self.view.window completionHandler:nil];
 }
 
 

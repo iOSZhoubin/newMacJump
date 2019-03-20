@@ -28,10 +28,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.isClick = NO;
+    
     [self creatInfo];
 }
 
-
+//刷新方法
+- (IBAction)clickRefresh:(NSButton *)sender {
+    
+    self.isClick = YES;
+    
+    [self creatInfo];
+}
 
 
 
@@ -97,7 +105,7 @@
     //设置提示框的样式
     alert.alertStyle = NSAlertStyleWarning;
     
-//    [alert beginSheetModalForWindow:self.view completionHandler:nil];
+    [alert beginSheetModalForWindow:self.view.window completionHandler:nil];
     
 
 }

@@ -15,9 +15,13 @@
 
 @interface FirstPageTabController ()
 
+//检测
 @property (weak) IBOutlet NSTabViewItem *firstItem;
+//状态
 @property (weak) IBOutlet NSTabViewItem *secondItem;
+//完善信息
 @property (weak) IBOutlet NSTabViewItem *thirdItem;
+//检测记录
 @property (weak) IBOutlet NSTabViewItem *fourthItem;
 
 @property (strong,nonatomic) FirstPageViewController *firstVc;
