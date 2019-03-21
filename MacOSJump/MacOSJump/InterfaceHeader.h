@@ -21,6 +21,10 @@
 #define Mac_UserInfo @"/mobile/getUserMessage.action"
 //获取部门组织树
 #define Mac_CompanyTree @"/mobile/getDepTree.action"
+//获取检查项
+#define Mac_CheckEntry @"/mobile/getCheckEntry.action"
+//获取服务器信息
+#define Mac_ServerInfo @"/mobile/getServerMessage.action"
 
 
 #endif /* InterfaceHeader_h */

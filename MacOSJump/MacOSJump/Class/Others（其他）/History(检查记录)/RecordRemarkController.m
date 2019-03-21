@@ -19,9 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
-    
-    self.content.stringValue = @"检查项1正常.\n检查项2正常.\n检查项3正常.\n检查项4正常.";
+
+    self.content.stringValue = self.alertStr;
 }
 
 

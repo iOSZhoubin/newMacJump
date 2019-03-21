@@ -46,6 +46,7 @@
 
 @implementation MainWindowController
 
+
 - (void)windowDidLoad {
     [super windowDidLoad];
     
@@ -57,6 +58,9 @@
 
     self.firstPageWC = [[FirstPageTabController alloc]initWithWindowNibName:@"FirstPageTabController"];
 
+    [self.window setContentSize:NSMakeSize(800, 600)];
+    
+    self.window.restorable = NO;
     
     [self defaultShow];
     

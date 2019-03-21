@@ -25,12 +25,12 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZDs-IC-z9J">
-                    <rect key="frame" x="305" y="355" width="137" height="64"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="123" id="YuG-W7-v8M"/>
+                    <rect key="frame" x="305" y="388" width="137" height="31"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="done_07" id="YuG-W7-v8M"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gc0-Mr-0Do">
-                    <rect key="frame" x="452" y="355" width="137" height="64"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="123" id="wOA-Gj-bbO"/>
+                    <rect key="frame" x="452" y="388" width="137" height="31"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="done_09" id="wOA-Gj-bbO"/>
                 </imageView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dOa-J3-sSo">
                     <rect key="frame" x="253" y="13" width="92" height="32"/>
@@ -47,42 +47,42 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iLG-yU-EGw">
-                    <rect key="frame" x="450" y="308" width="141" height="17"/>
+                    <rect key="frame" x="450" y="341" width="141" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="CxA-ji-Ge2"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" alignment="center" title="检查项4" id="o8f-oG-7Oi">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" alignment="center" title="服务器时间检查" id="o8f-oG-7Oi">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gz8-gb-YUx">
-                    <rect key="frame" x="303" y="308" width="141" height="17"/>
+                    <rect key="frame" x="303" y="341" width="141" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="oqF-NI-2PT"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" alignment="center" title="检查项3" id="P7R-45-J9v">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" alignment="center" title="服务器IP地址检查" id="P7R-45-J9v">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KKh-PR-GiZ">
-                    <rect key="frame" x="155" y="308" width="142" height="17"/>
+                    <rect key="frame" x="155" y="341" width="142" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="NSC-ji-3SU"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" alignment="center" title="检查项2" id="YpZ-FY-9tU">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" alignment="center" title="允许或禁止进程检查" id="YpZ-FY-9tU">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="wgh-Qp-q7i">
-                    <rect key="frame" x="18" y="183" width="563" height="70"/>
+                    <rect key="frame" x="18" y="166" width="563" height="120"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="70" id="NgT-DZ-Yev"/>
+                        <constraint firstAttribute="height" constant="120" id="NgT-DZ-Yev"/>
                     </constraints>
                     <textFieldCell key="cell" enabled="NO" sendsActionOnEndEditing="YES" placeholderString="等待检测..." id="wg2-ze-JXa">
                         <font key="font" metaFont="system"/>
@@ -91,25 +91,25 @@
                     </textFieldCell>
                 </textField>
                 <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="6Hq-2A-7GE">
-                    <rect key="frame" x="20" y="267" width="559" height="22"/>
+                    <rect key="frame" x="20" y="300" width="559" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="Eze-Em-ubD"/>
                     </constraints>
                 </progressIndicator>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xTe-5T-4WP">
-                    <rect key="frame" x="10" y="355" width="137" height="64"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="123" id="G35-P5-gav"/>
+                    <rect key="frame" x="10" y="388" width="137" height="31"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="done_03" id="G35-P5-gav"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Snz-5O-tWG">
-                    <rect key="frame" x="157" y="355" width="138" height="64"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="123" id="1ty-ah-s7T"/>
+                    <rect key="frame" x="157" y="388" width="138" height="31"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="done_05" id="1ty-ah-s7T"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OqG-h1-KF7">
-                    <rect key="frame" x="8" y="308" width="141" height="17"/>
+                    <rect key="frame" x="8" y="341" width="141" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="Wc6-CE-vwT"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" alignment="center" title="检查项1" id="bk4-k7-1rO">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" alignment="center" title="允许或禁止应用检查" id="bk4-k7-1rO">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -160,6 +160,9 @@
         </customView>
     </objects>
     <resources>
-        <image name="123" width="88" height="64"/>
+        <image name="done_03" width="31" height="31"/>
+        <image name="done_05" width="31" height="31"/>
+        <image name="done_07" width="31" height="31"/>
+        <image name="done_09" width="31" height="31"/>
     </resources>
 </document>

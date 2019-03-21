@@ -59,7 +59,9 @@
     self.thirdItem.view = self.historyVC.view;
     
 
+    [self.window setContentSize:NSMakeSize(800, 600)];
     
+    self.window.restorable = NO;
 }
 
 @end

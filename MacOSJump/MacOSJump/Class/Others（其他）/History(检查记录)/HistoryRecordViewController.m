@@ -72,16 +72,27 @@
     
     self.tableView.dataSource = self;
     
-    NSDictionary *dict = @{@"time":@"2019-03-15 17:00",@"status":@"正常"};
+    NSArray *array = [[NSUserDefaults standardUserDefaults] objectForKey:@"status"];
+
+    self.dataArray = array.mutableCopy;
+
+    [self.tableView reloadData];
     
-    for (NSInteger i=0; i<8; i++) {
-        
-        [self.dataArray addObject:dict];
-        
-    }
+    [KNotification addObserver:self selector:@selector(notifi:) name:@"HistoryRecordViewController" object:nil];
+
+}
+
+
+
+- (void)notifi:(NSNotification *)note{
+    
+    NSArray *array = [[NSUserDefaults standardUserDefaults] objectForKey:@"status"];
+    
+    self.dataArray = array.mutableCopy;
     
     [self.tableView reloadData];
 }
+
 
 
 #pragma mark --- NSTableViewDelegate,NSTableViewDataSource
@@ -122,12 +133,22 @@
     
     NSInteger selectRow = tableView.selectedRow;
     
+    if(self.dataArray.count > 0 && selectRow >= 0){
+        
+        self.recordVC.alertStr = self.dataArray[selectRow][@"desc"];
+    }
+    
     NSLog(@"1:点击了第%ld行",selectRow);
     
-    [self.firstPopover showRelativeToRect:CGRectMake(260, 25 * self.dataArray.count, 200, 80) ofView:self.view preferredEdge:NSRectEdgeMaxX];
+    if(selectRow >= 0 ){
+        
+        [self.firstPopover showRelativeToRect:CGRectMake(260, 25 * self.dataArray.count, 200, 80) ofView:self.view preferredEdge:NSRectEdgeMaxX];
+    }
+}
+
+-(void)dealloc{
     
-    
-    
+    [KNotification removeObserver:self];
 }
 
 @end

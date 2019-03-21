@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RecordRemarkController : NSViewController
 
+//提示文字
+@property (copy,nonatomic) NSString *alertStr;
+
 @end
 
 NS_ASSUME_NONNULL_END
