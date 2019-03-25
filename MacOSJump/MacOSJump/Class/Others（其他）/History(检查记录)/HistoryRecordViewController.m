@@ -39,7 +39,7 @@
         
         _firstPopover.behavior = NSPopoverBehaviorTransient;
         
-        _firstPopover.contentSize = NSMakeSize(200, 80);
+        _firstPopover.contentSize = NSMakeSize(400, 100);
         
     }
     return _firstPopover;
@@ -142,8 +142,22 @@
     
     if(selectRow >= 0 ){
         
-        [self.firstPopover showRelativeToRect:CGRectMake(260, 25 * self.dataArray.count, 200, 80) ofView:self.view preferredEdge:NSRectEdgeMaxX];
+        [self.firstPopover showRelativeToRect:CGRectMake(260, 25 * self.dataArray.count, 200, 200) ofView:self.view preferredEdge:NSRectEdgeMaxX];
     }
+}
+
+
+#pragma mark --- 清空记录
+
+- (IBAction)deleteRecords:(NSButton *)sender {
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"status"];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    self.dataArray = nil;
+    
+    [self.tableView reloadData];
 }
 
 -(void)dealloc{

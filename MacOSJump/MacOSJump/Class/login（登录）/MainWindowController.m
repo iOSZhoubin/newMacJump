@@ -172,6 +172,8 @@
     
     L2CWeakSelf(self);
     
+    [self loadAnimat];
+    
     NSString *loginType = @"";
     
     if([self.passwordTitle.stringValue isEqualToString:@"账号密码登录"]){
@@ -228,7 +230,7 @@
             JumpLog(@"登录失败");
             [weakself show:@"提示" andMessage:@"登录失败"];
         }
-
+        
     } andFailed:^(id error) {
         
         [weakself show:@"提示" andMessage:@"请求服务器失败"];
@@ -253,5 +255,16 @@
     
     [alert beginSheetModalForWindow:self.window completionHandler:nil];
 }
+
+#pragma mark --- 加载动画
+
+-(void)loadAnimat{
+    
+//    [NSAnimationContext beginGrouping];
+//    [[NSAnimationContext currentContext]setDuration:3.0f]; //执行时间
+//    [[self.window.contentView animator]setAlphaValue:0.1f]; //改变属性值  此项是设置透明度
+  
+}
+
 
 @end

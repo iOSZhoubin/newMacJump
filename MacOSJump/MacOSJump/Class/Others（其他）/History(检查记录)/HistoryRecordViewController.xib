@@ -19,13 +19,13 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUK-Vn-rrs">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+                    <rect key="frame" x="0.0" y="40" width="480" height="232"/>
                     <clipView key="contentView" id="hFe-pf-T9b">
-                        <rect key="frame" x="1" y="0.0" width="478" height="271"/>
+                        <rect key="frame" x="1" y="0.0" width="478" height="231"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" headerView="6JK-rd-iUO" viewBased="YES" id="mbJ-Wd-2qd">
-                                <rect key="frame" x="0.0" y="0.0" width="478" height="248"/>
+                                <rect key="frame" x="0.0" y="0.0" width="478" height="208"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -114,13 +114,26 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </tableHeaderView>
                 </scrollView>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ktg-Jp-NpZ">
+                    <rect key="frame" x="194" y="1" width="94" height="32"/>
+                    <buttonCell key="cell" type="push" title="清空记录" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YXk-Wo-hSR">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="deleteRecords:" target="-2" id="htN-GV-pOp"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="CUK-Vn-rrs" secondAttribute="bottom" id="1Ma-jr-a3j"/>
+                <constraint firstAttribute="bottom" secondItem="CUK-Vn-rrs" secondAttribute="bottom" constant="40" id="1Ma-jr-a3j"/>
+                <constraint firstAttribute="bottom" secondItem="Ktg-Jp-NpZ" secondAttribute="bottom" constant="8" id="2uQ-KA-6cY"/>
+                <constraint firstItem="Ktg-Jp-NpZ" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="UWP-oB-T3o"/>
                 <constraint firstAttribute="trailing" secondItem="CUK-Vn-rrs" secondAttribute="trailing" id="gjp-IC-jpQ"/>
                 <constraint firstItem="CUK-Vn-rrs" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="poC-CQ-5vm"/>
                 <constraint firstItem="CUK-Vn-rrs" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="wNM-z4-BQY"/>
             </constraints>
+            <point key="canvasLocation" x="88" y="145"/>
         </customView>
     </objects>
 </document>

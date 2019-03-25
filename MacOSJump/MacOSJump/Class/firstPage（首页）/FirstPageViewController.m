@@ -9,6 +9,13 @@
 #import "FirstPageViewController.h"
 #import "ApplicitionModel.h"
 #import "DateCalculater.h"
+#import <sys/socket.h>
+#import <ifaddrs.h>
+#import <netinet/in.h>
+#import <arpa/inet.h>
+#import <sys/sysctl.h>
+#import <net/if.h>
+#import <net/if_dl.h>
 
 @interface FirstPageViewController ()
 
@@ -48,6 +55,10 @@
 @property (assign,nonatomic) NSInteger progressV;
 //
 @property (strong,nonatomic) NSMutableString *contentStr;
+//
+@property (assign,nonatomic) BOOL isTrue;
+//
+@property (assign,nonatomic) BOOL isRight;
 
 @end
 
@@ -70,7 +81,6 @@
     self.installN = [NSMutableArray array];
     self.processY = [NSMutableArray array];
     self.processN = [NSMutableArray array];
-    self.sumArray = [NSMutableArray array];
     
     [self getAllCheck];
 
@@ -86,7 +96,7 @@
     
     self.itemContent.stringValue = @"";
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5f repeats:YES block:^(NSTimer * _Nonnull timer) {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.25f repeats:YES block:^(NSTimer * _Nonnull timer) {
         
         weakself.progressV = weakself.progress.doubleValue;
         
@@ -102,6 +112,15 @@
             
             self.itemContent.stringValue = self.contentStr;
             
+            if(self.isRight==YES && self.isTrue==YES){
+                
+                [self saveData:@"1"];
+                
+            }else{
+                
+                [self saveData:@"0"];
+            }
+            
         }else{
             
             [weakself.progress incrementBy:1];
@@ -115,40 +134,6 @@
     }];
 }
 
-#pragma mark --- 进度判断
-//
-//-(NSString *)isgo:(NSInteger)progressV{
-//
-//    NSMutableString *contentStr = [NSMutableString string];
-//
-//    if(progressV > 0){
-//
-//        [contentStr appendFormat:@"正在检测..."];
-//    }
-//
-//    if(progressV >= 20){
-//
-//        [contentStr appendFormat:@"\n允许或禁止应用检查正常..."];
-//    }
-//
-//    if(progressV >= 45){
-//
-//        [contentStr appendFormat:@"\n允许或禁止进程检查正常..."];
-//    }
-//
-//    if(progressV >= 60){
-//
-//        [contentStr appendFormat:@"\n服务器IP地址检查正常..."];
-//    }
-//
-//    if(progressV > 99){
-//
-//        [contentStr appendFormat:@"\n服务器时间检查正常..."];
-//    }
-//
-//    return contentStr;
-//}
-
 #pragma mark --- 开始检测
 
 - (IBAction)backAction:(NSButton *)sender {
@@ -156,8 +141,6 @@
     [self getAllCheck];
     
     [self progressStatus];
-    
-    [KNotification postNotificationName:@"HistoryRecordViewController" object:nil userInfo:nil];
 }
 
 
@@ -304,46 +287,44 @@
     NSInteger serverNum = [[NSNumber numberWithDouble:[serverDate timeIntervalSince1970]] integerValue];
     
     NSInteger reductionNum = serverNum - nowNum;
-    
-    BOOL isRight = YES;
-    BOOL isTrue = YES;
 
+    //获取本机的ip地址
+    NSString *macIp = [self getDeviceIPAddress];
+    
     if([self.serverIp isEqualToString:@""]){
         
-        [self.contentStr appendFormat:@"\n服务器IP地址异常..."];
+        NSString *ipaddress = [NSString stringWithFormat:@"\n服务器IP地址异常,服务器IP为:%@",self.serverIp];
 
-        isRight = NO;
+        [self.contentStr appendFormat:@"%@", ipaddress];
+
+        self.isRight = NO;
 
     }else{
-      
-        [self.contentStr appendFormat:@"\n服务器IP地址检查正常..."];
+        
+        NSString *ipaddress = [NSString stringWithFormat:@"\n服务器IP地址正常,服务器IP为:%@",self.serverIp];
 
-        isRight = YES;
+        [self.contentStr appendFormat:@"%@", ipaddress];
+
+        self.isRight = YES;
 
     }
     
     if(reductionNum > 1000){
         
-        [self.contentStr appendFormat:@"\n服务器时间检查异常..."];
+        NSString *time = [NSString stringWithFormat:@"\n服务器时间检查异常,服务器时间为:%@",self.serverTime];
+        
+        [self.contentStr appendFormat:@"%@", time];
             
-        isTrue = NO;
+        self.isTrue = NO;
         
     }else{
         
-        [self.contentStr appendFormat:@"\n服务器时间检查正常..."];
-            
-        isTrue = YES;
+        NSString *time = [NSString stringWithFormat:@"\n服务器时间检查正常,服务器时间为:%@",self.serverTime];
+
+        [self.contentStr appendFormat:@"%@", time];
+
+        self.isTrue = YES;
     }
-    
-    if(isRight==YES && isTrue==YES){
-        
-        [self saveData:@"1"];
-        
-    }else{
-        
-        [self saveData:@"0"];
-    }
-    
 }
 
 
@@ -375,9 +356,11 @@
     
 //    如果本地化的数组有值，那么先加进去
     NSArray *array = [[NSUserDefaults standardUserDefaults] objectForKey:@"status"];
-    
+
+    self.sumArray = [NSMutableArray array];
+
     if(array.count > 0){
-        
+    
         [self.sumArray addObjectsFromArray:array];
     }
     
@@ -389,6 +372,43 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [KNotification postNotificationName:@"HistoryRecordViewController" object:nil userInfo:nil];
+    
+}
+
+#pragma mark --- 获取设备ip地址
+
+- (NSString *)getDeviceIPAddress {
+    
+    NSString *address = @"";
+    
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr = NULL;
+    int success = 0;
+    
+    success = getifaddrs(&interfaces);
+    
+    if (success == 0) { // 0 表示获取成功
+        
+        temp_addr = interfaces;
+        while (temp_addr != NULL) {
+            
+            if( temp_addr->ifa_addr->sa_family == AF_INET) {
+                // Check if interface is en0 which is the wifi connection on the iPhone
+                if ([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+                    // Get NSString from C String
+                    struct sockaddr_in *sockaddr = (struct sockaddr_in *)temp_addr->ifa_addr;
+                    address = [NSString stringWithUTF8String:inet_ntoa(sockaddr->sin_addr)];
+                }
+            }
+            
+            temp_addr = temp_addr->ifa_next;
+        }
+    }
+    
+    freeifaddrs(interfaces);
+    
+    NSLog(@"IP地址是：%@", address);
+    return address;
 }
 
 @end
