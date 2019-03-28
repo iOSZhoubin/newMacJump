@@ -11,7 +11,8 @@
 #import "JumpRegistereViewController.h"
 #import "HistoryRecordViewController.h"
 #import "JumpStatusViewController.h"
-
+//进程管家
+#import "ApplicitionViewController.h"
 
 @interface FirstPageTabController ()
 
@@ -23,6 +24,8 @@
 @property (weak) IBOutlet NSTabViewItem *thirdItem;
 //检测记录
 @property (weak) IBOutlet NSTabViewItem *fourthItem;
+//进程管家
+@property (weak) IBOutlet NSTabViewItem *fifthItem;
 
 @property (strong,nonatomic) FirstPageViewController *firstVc;
 
@@ -31,6 +34,10 @@
 @property (strong,nonatomic) HistoryRecordViewController *historyVC;
 
 @property (strong,nonatomic) JumpStatusViewController *jumpStatusVC;
+
+@property (strong,nonatomic) ApplicitionViewController *applicitionVC;
+
+
 
 @end
 
@@ -58,6 +65,9 @@
 
     self.thirdItem.view = self.historyVC.view;
     
+    self.applicitionVC = [[ApplicitionViewController alloc]initWithNibName:@"ApplicitionViewController" bundle:nil];
+    
+    self.fifthItem.view = self.applicitionVC.view;
 
     [self.window setContentSize:NSMakeSize(800, 600)];
     

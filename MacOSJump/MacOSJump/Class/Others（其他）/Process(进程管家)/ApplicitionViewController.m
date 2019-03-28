@@ -1,23 +1,24 @@
 //
-//  ApplicitionWindowController.m
+//  ApplicitionViewController.m
 //  MacOSJump
 //
-//  Created by jumpapp1 on 2019/3/15.
+//  Created by jumpapp1 on 2019/3/28.
 //  Copyright © 2019年 zb. All rights reserved.
 //
 
-#import "ApplicitionWindowController.h"
+#import "ApplicitionViewController.h"
 #import "ApplicitionModel.h"
 
-@interface ApplicitionWindowController ()<NSTableViewDelegate,NSTableViewDataSource>
+@interface ApplicitionViewController ()<NSTableViewDelegate,NSTableViewDataSource>
 
 @property (weak) IBOutlet NSTableView *tableView;
 //获取进程列表
 @property (strong,nonatomic) NSMutableArray<ApplicitionModel *> *dataArray;
 
+
 @end
 
-@implementation ApplicitionWindowController
+@implementation ApplicitionViewController
 
 
 -(NSMutableArray<ApplicitionModel *> *)dataArray{
@@ -30,9 +31,9 @@
     return _dataArray;
 }
 
-- (void)windowDidLoad {
-    [super windowDidLoad];
-
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
     self.tableView.delegate = self;
     
     self.tableView.dataSource = self;
@@ -72,6 +73,11 @@
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
     
     return self.dataArray.count;
+}
+
+-(CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row{
+    
+    return 20;
 }
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
@@ -134,7 +140,7 @@
     
     __weak typeof (self) weakself = self;
     
-    [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
+    [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
         
         if(returnCode == 1000){
             //确定

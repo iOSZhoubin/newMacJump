@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="FirstPageTabController">
             <connections>
+                <outlet property="fifthItem" destination="Nhz-4F-mtJ" id="AZ8-9L-GEh"/>
                 <outlet property="firstItem" destination="Hr5-vD-xhm" id="4ST-Hh-rxw"/>
                 <outlet property="fourthItem" destination="BcF-Fy-GRO" id="13j-oe-0Ap"/>
                 <outlet property="secondItem" destination="oDc-Ri-IR9" id="gVo-S0-Dpf"/>
@@ -38,19 +39,25 @@
                             </tabViewItem>
                             <tabViewItem label="状态" identifier="" id="oDc-Ri-IR9">
                                 <view key="view" id="jZu-QB-bWb">
-                                    <rect key="frame" x="10" y="33" width="434" height="220"/>
+                                    <rect key="frame" x="10" y="33" width="754" height="450"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="检测历史" identifier="" id="YIa-kU-S3m">
                                 <view key="view" id="C3s-BW-ao3">
-                                    <rect key="frame" x="10" y="33" width="434" height="220"/>
+                                    <rect key="frame" x="10" y="33" width="754" height="450"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="完善信息" identifier="" id="BcF-Fy-GRO">
                                 <view key="view" id="IxA-Su-beC">
-                                    <rect key="frame" x="10" y="33" width="434" height="220"/>
+                                    <rect key="frame" x="10" y="33" width="754" height="450"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="进程管理" identifier="" id="Nhz-4F-mtJ">
+                                <view key="view" id="0Vy-eo-PUx">
+                                    <rect key="frame" x="10" y="33" width="754" height="450"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                             </tabViewItem>
@@ -73,5 +80,6 @@
         <viewController title="状态" identifier="secondVc" id="LrL-hY-Q8m"/>
         <viewController title="检测历史" identifier="thirdVc" id="Rnb-UO-jdv"/>
         <viewController title="完善信息" identifier="fourthVc" id="KC5-YO-Ql6"/>
+        <viewController title="进程管理" id="4Kr-nM-0hS"/>
     </objects>
 </document>

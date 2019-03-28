@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		391828F8224CC6EE00242C41 /* ApplicitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 391828F6224CC6EE00242C41 /* ApplicitionViewController.m */; };
+		391828F9224CC6EE00242C41 /* ApplicitionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 391828F7224CC6EE00242C41 /* ApplicitionViewController.xib */; };
 		392693A6223798170020343F /* JumpKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 392693A4223798170020343F /* JumpKeyChain.m */; };
 		39510B69222E1643000A7A62 /* ChooseConmpanyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39510B67222E1643000A7A62 /* ChooseConmpanyWindowController.m */; };
 		39510B6A222E1643000A7A62 /* ChooseConmpanyWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39510B68222E1643000A7A62 /* ChooseConmpanyWindowController.xib */; };
@@ -15,8 +17,6 @@
 		3978B8D6222CFBB300D28D95 /* SecurityNSString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3978B8D4222CFBB300D28D95 /* SecurityNSString.m */; };
 		39803FBC223F22E2004C03AC /* MytitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39803FBB223F22E2004C03AC /* MytitleView.m */; };
 		39813D7C223B47DA00805151 /* ApplicitionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 39813D7B223B47DA00805151 /* ApplicitionModel.m */; };
-		39813D80223B480400805151 /* ApplicitionWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39813D7E223B480400805151 /* ApplicitionWindowController.m */; };
-		39813D81223B480400805151 /* ApplicitionWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39813D7F223B480400805151 /* ApplicitionWindowController.xib */; };
 		398EA46821EC87AD0075F2F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 398EA46721EC87AD0075F2F3 /* AppDelegate.m */; };
 		398EA46B21EC87AD0075F2F3 /* MacOSJump.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 398EA46921EC87AD0075F2F3 /* MacOSJump.xcdatamodeld */; };
 		398EA46D21EC87B80075F2F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 398EA46C21EC87B80075F2F3 /* Assets.xcassets */; };
@@ -44,6 +44,9 @@
 
 /* Begin PBXFileReference section */
 		363499DF91722AEF7106C8AE /* libPods-MacOSJump.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MacOSJump.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		391828F5224CC6EE00242C41 /* ApplicitionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicitionViewController.h; sourceTree = "<group>"; };
+		391828F6224CC6EE00242C41 /* ApplicitionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicitionViewController.m; sourceTree = "<group>"; };
+		391828F7224CC6EE00242C41 /* ApplicitionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ApplicitionViewController.xib; sourceTree = "<group>"; };
 		392693A4223798170020343F /* JumpKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JumpKeyChain.m; sourceTree = "<group>"; };
 		392693A5223798170020343F /* JumpKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpKeyChain.h; sourceTree = "<group>"; };
 		39510B66222E1643000A7A62 /* ChooseConmpanyWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseConmpanyWindowController.h; sourceTree = "<group>"; };
@@ -61,9 +64,6 @@
 		39803FBB223F22E2004C03AC /* MytitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MytitleView.m; sourceTree = "<group>"; };
 		39813D7A223B47DA00805151 /* ApplicitionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicitionModel.h; sourceTree = "<group>"; };
 		39813D7B223B47DA00805151 /* ApplicitionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicitionModel.m; sourceTree = "<group>"; };
-		39813D7D223B480400805151 /* ApplicitionWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicitionWindowController.h; sourceTree = "<group>"; };
-		39813D7E223B480400805151 /* ApplicitionWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicitionWindowController.m; sourceTree = "<group>"; };
-		39813D7F223B480400805151 /* ApplicitionWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ApplicitionWindowController.xib; sourceTree = "<group>"; };
 		398EA46321EC87AD0075F2F3 /* MacOSJump.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacOSJump.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		398EA46621EC87AD0075F2F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		398EA46721EC87AD0075F2F3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -169,9 +169,9 @@
 			children = (
 				39813D7A223B47DA00805151 /* ApplicitionModel.h */,
 				39813D7B223B47DA00805151 /* ApplicitionModel.m */,
-				39813D7D223B480400805151 /* ApplicitionWindowController.h */,
-				39813D7E223B480400805151 /* ApplicitionWindowController.m */,
-				39813D7F223B480400805151 /* ApplicitionWindowController.xib */,
+				391828F5224CC6EE00242C41 /* ApplicitionViewController.h */,
+				391828F6224CC6EE00242C41 /* ApplicitionViewController.m */,
+				391828F7224CC6EE00242C41 /* ApplicitionViewController.xib */,
 			);
 			path = "Process(进程管家)";
 			sourceTree = "<group>";
@@ -365,7 +365,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				398EA46D21EC87B80075F2F3 /* Assets.xcassets in Resources */,
-				39813D81223B480400805151 /* ApplicitionWindowController.xib in Resources */,
 				39A29FF82240F00C0021D415 /* HistoryRecordViewController.xib in Resources */,
 				39A2A0022240F6970021D415 /* FirstPageViewController.xib in Resources */,
 				39A29F922240BBA00021D415 /* RecordRemarkController.xib in Resources */,
@@ -373,6 +372,7 @@
 				39A29FFD2240F2930021D415 /* JumpRegistereViewController.xib in Resources */,
 				39510B6A222E1643000A7A62 /* ChooseConmpanyWindowController.xib in Resources */,
 				39A29FBC2240DEFB0021D415 /* FirstPageTabController.xib in Resources */,
+				391828F9224CC6EE00242C41 /* ApplicitionViewController.xib in Resources */,
 				39A29FF32240EC280021D415 /* JumpStatusViewController.xib in Resources */,
 				398EA47021EC87B80075F2F3 /* MainMenu.xib in Resources */,
 			);
@@ -415,12 +415,12 @@
 				398EA47C21EC87E30075F2F3 /* MainWindow.m in Sources */,
 				39A2A0012240F6970021D415 /* FirstPageViewController.m in Sources */,
 				398EA46821EC87AD0075F2F3 /* AppDelegate.m in Sources */,
+				391828F8224CC6EE00242C41 /* ApplicitionViewController.m in Sources */,
 				39A29FBB2240DEFB0021D415 /* FirstPageTabController.m in Sources */,
 				39CE977022435ED600566EC6 /* DateCalculater.m in Sources */,
 				3978B8D3222CFA8D00D28D95 /* AFNHelper.m in Sources */,
 				39510B6D222E43D4000A7A62 /* JumpCompanyModel.m in Sources */,
 				398EA47321EC87B80075F2F3 /* main.m in Sources */,
-				39813D80223B480400805151 /* ApplicitionWindowController.m in Sources */,
 				39A29FF72240F00C0021D415 /* HistoryRecordViewController.m in Sources */,
 				3978B8D6222CFBB300D28D95 /* SecurityNSString.m in Sources */,
 				39803FBC223F22E2004C03AC /* MytitleView.m in Sources */,
