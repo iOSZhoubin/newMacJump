@@ -60,15 +60,15 @@
         
         if([responseObject[@"message"] isEqualToString:@"ok"]){
             
-            if([SafeString(responseObject[@"result"][@""]) isEqualToString:@"0"]){
+            if([SafeString(responseObject[@"result"][@"deviceStatus"]) isEqualToString:@"0"]){
                 
                 self.statusImage.image = [NSImage imageNamed:@"bg-state-N"];
-                self.status.stringValue = @"断开";
+                self.status.stringValue = @"正常";
                 
             }else{
                 
                 self.statusImage.image = [NSImage imageNamed:@"bg-state-Y"];
-                self.status.stringValue = @"正常";
+                self.status.stringValue = @"不通过";
                 
             }
             

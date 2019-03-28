@@ -22,6 +22,9 @@
 @property (strong,nonatomic) NSMutableArray *titleArray;
 
 @property (strong,nonatomic) NSMutableDictionary *dataDict;
+
+@property (copy,nonatomic) NSString *accout;
+
 //使用人
 @property (weak) IBOutlet NSTextField *userName;
 //邮箱
@@ -66,7 +69,7 @@
 }
 
 
-//注册
+#pragma mark --- 保存
 
 - (IBAction)backAction:(NSButton *)sender {
     
@@ -165,7 +168,6 @@
 
 
 
-#pragma mark --- 完善个人信息方法
 
 -(void)registerAction{
     
@@ -173,6 +175,7 @@
     
     NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
     
+    paramters[@"account"] = SafeString(self.accout);
     paramters[@"name"] = SafeString(self.userName.stringValue);
     paramters[@"departmentName"] = SafeString(self.dataDict[@"companyName"]);
     paramters[@"departmentId"] = SafeString(self.dataDict[@"companyId"]);
@@ -195,21 +198,20 @@
         
         if([responseObject[@"message"] isEqualToString:@"ok"]){
             
-            AppDelegate *adelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+           
+            [weakself show:@"提示" andMessage:@"保存成功"];
             
-            [[adelegate.mainWindowC window] makeKeyAndOrderFront:nil];
-            
-            [[adelegate.mainWindowC window] center];//显示在屏幕中间
-            
+            [weakself userInfoDetail];
+
         }else{
             
-            [weakself show:@"提示" andMessage:@"注册失败"];
+            [weakself show:@"提示" andMessage:@"保存失败"];
             
         }
         
     } andFailed:^(id error) {
         
-        [weakself show:@"提示" andMessage:@"注册失败"];
+        [weakself show:@"提示" andMessage:@"保存失败"];
     }];
 }
 
@@ -235,7 +237,9 @@
             
             self.titleArray = responseObject[@"result"];
             
-            [weakself settingDefaultUI];
+            [weakself settingDefaultUI];//判断是否可以输入
+            
+            [weakself userInfoDetail];//获取详情
             
         }else{
             
@@ -402,6 +406,57 @@
     }
 }
 
+#pragma mark --- 获取个人信息
+
+-(void)userInfoDetail{
+    
+    L2CWeakSelf(self);
+    
+    NSDictionary *defaultDict = [JumpKeyChain getKeychainDataForKey:@"userInfo"];
+    
+    NSString *port = SafeString(defaultDict[@"port"]);
+    NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
+    NSString *userId = SafeString(defaultDict[@"userId"]);
+    
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_GetUserInfo];
+    
+    
+    [AFNHelper macPost:urlStr parameters:@{@"userId":userId} success:^(id responseObject) {
+        
+        if([responseObject[@"message"] isEqualToString:@"ok"]){
+            
+            //使用人
+            weakself.userName.stringValue = SafeString(responseObject[@"result"][@"name"]);
+            //电子邮箱
+            weakself.mail.stringValue = SafeString(responseObject[@"result"][@"email"]);
+            //设备类型
+            weakself.deviceType.stringValue = SafeString(responseObject[@"result"][@"deviceType"]);
+            //电话
+            weakself.phoneNum.stringValue = SafeString(responseObject[@"result"][@"phoneNumber"]);
+            //设备位置
+            weakself.computerAddress.stringValue = SafeString(responseObject[@"result"][@"address"]);
+            //部门名称
+            weakself.companyName.stringValue = SafeString(responseObject[@"result"][@"departmentName"]);
+            //备注
+            weakself.remark.stringValue = SafeString(responseObject[@"result"][@"remark"]);
+            
+            weakself.dataDict[@"companyName"] = SafeString(responseObject[@"result"][@"departmentName"]);
+            //部门id
+            weakself.dataDict[@"companyId"] = SafeString(responseObject[@"result"][@"departmentId"]);
+
+            weakself.accout = SafeString(responseObject[@"result"][@"account"]);
+            
+        }else{
+            
+            [weakself show:@"提示" andMessage:@"获取设备信息失败"];
+        }
+        
+    } andFailed:^(id error) {
+        
+        [weakself show:@"提示" andMessage:@"请求服务器失败"];
+        
+    }];
+}
 
 #pragma mark --- 提示框
 

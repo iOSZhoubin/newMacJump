@@ -37,10 +37,7 @@
 @property (strong,nonatomic) NSTimer *timer;
 //进程名称
 @property (strong,nonatomic) NSMutableArray <ApplicitionModel *> *dataArray;
-//允许应用安装检查Array
-@property (strong,nonatomic) NSMutableArray *installY;
-//禁止应用安装检查Array
-@property (strong,nonatomic) NSMutableArray *installN;
+
 //允许进程安装检查Array
 @property (strong,nonatomic) NSMutableArray *processY;
 //禁止进程安装检查Array
@@ -77,11 +74,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.installY = [NSMutableArray array];
-    self.installN = [NSMutableArray array];
-    self.processY = [NSMutableArray array];
-    self.processN = [NSMutableArray array];
-    
     [self getAllCheck];
 
     [self progressStatus];
@@ -110,16 +102,16 @@
             
             self.againBtn.enabled = YES;
             
-//            self.itemContent.stringValue = self.contentStr;
-//
-//            if(self.isRight==YES && self.isTrue==YES){
-//
-//                [self saveData:@"1"];
-//
-//            }else{
-//
-//                [self saveData:@"0"];
-//            }
+            self.itemContent.stringValue = self.contentStr;
+
+            if(self.isRight==YES && self.isTrue==YES){
+
+                [self saveData:@"1"];
+
+            }else{
+
+                [self saveData:@"0"];
+            }
             
         }else{
             
@@ -165,14 +157,40 @@
     
     [AFNHelper macPost:urlStr parameters:@{@"userId":userId} success:^(id responseObject) {
         
-        NSDictionary *dict = responseObject[@"result"];
+        weakself.processY = [NSMutableArray array];
+        weakself.processN = [NSMutableArray array];
         
-//        weakself.installY = dict[@"installY"];
-//        weakself.installN = dict[@"installN"];
-//        weakself.processY = dict[@"processY"];
-//        weakself.processN = dict[@"processN"];
-//
-//        [weakself getAppName];
+        NSArray *dataArray = responseObject[@"result"];
+        
+        for (NSDictionary *dict in dataArray) {
+            
+            /**
+             name:必须安装APP检查  type:mobilemustappcheck
+             name:禁止安装APP检查  type:mobileprogibitedappcheck
+             name:必须运行进程检查  type:mobilemustprocesscheck
+             name:禁止运行进程检查  type:mobileprogibitedprocesscheck
+             */
+            
+            NSString *type = dict[@"type"];
+            
+            NSString *jsonStr = dict[@"policy"];
+            
+            NSDictionary *dict = [jsonStr mj_JSONObject];
+            
+            NSArray *array = dict[@"content"];
+            
+            if ([type isEqualToString:@"mobilemustprocesscheck"]){
+                
+                [weakself.processY addObjectsFromArray:array];
+                
+            }else if ([type isEqualToString:@"mobileprogibitedprocesscheck"]){
+                
+                [weakself.processN addObjectsFromArray:array];
+
+            }
+        }
+
+        [weakself getAppName];
         
     } andFailed:^(id error) {
         
@@ -203,42 +221,86 @@
 -(void)ishaveAppname{
     
     NSString *isNormal = @"1";
+    NSString *isBan = @"1";
     
-    NSMutableArray *muArray = [NSMutableArray array];
-    
-    [muArray addObjectsFromArray:self.processN];
-    
-    [muArray addObjectsFromArray:self.processY];
+    for (ApplicitionModel *model in self.dataArray) {
 
+        NSString *name = model.localizedName;
+
+        for (NSInteger i=0; i<self.processN.count; i++) {
+
+            NSString *proName = self.processN[i][@"processname"];
+
+            if([name isEqualToString:proName]){
+
+                isNormal = @"0";
+
+                break;
+
+            }else{
+
+                isNormal = @"1";
+            }
+        }
+
+        if([isNormal isEqualToString:@"0"]){
+
+            break;
+        }
+    }
+    
     for (ApplicitionModel *model in self.dataArray) {
         
         NSString *name = model.localizedName;
         
-        for (NSInteger i=0; i<muArray.count; i++) {
+        for (NSInteger i=0; i<self.processY.count; i++) {
             
-            NSString *proName = muArray[i][@"name"];
+            NSString *proName = self.processY[i][@"processname"];
             
             if([name isEqualToString:proName]){
                 
-                isNormal = @"0";
+                isBan = @"1";
                 
-                break;
-            
             }else{
                 
-                isNormal = @"1";
+                isBan = @"0";
+                
+                break;
+
             }
         }
         
-        if([isNormal isEqualToString:@"0"]){
+        if([isBan isEqualToString:@"0"]){
             
             break;
         }
     }
     
     self.contentStr = [NSMutableString string];
+
     
-    [self.contentStr appendFormat:@"允许或禁止应用检查正常...\n允许或禁止进程检查正常..."];
+    if([isNormal isEqualToString:@"0"]){
+        
+        [self.contentStr appendFormat:@"允许运行进程检查异常..."];
+
+        
+    }else if([isNormal isEqualToString:@"1"]){
+        
+        [self.contentStr appendFormat:@"允许运行进程检查正常..."];
+
+    }
+    
+    
+    if([isBan isEqualToString:@"1"]){
+
+        [self.contentStr appendFormat:@"\n禁止运行进程检查异常..."];
+
+    }else if([isBan isEqualToString:@"0"]){
+
+        [self.contentStr appendFormat:@"\n禁止运行进程检查正常..."];
+
+    }
+    
     
     [self getServerInfo];
     
@@ -262,15 +324,21 @@
     
     NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_ServerInfo];
     
-    [AFNHelper macPost:urlStr parameters:@{@"userId":@"2"} success:^(id responseObject) {
+    [AFNHelper macPost:urlStr parameters:@{@"userId":userId} success:^(id responseObject) {
         
-        NSDictionary *dict = responseObject[@"result"];
+        if([responseObject[@"message"] isEqualToString:@"ok"]){
+            
+            NSDictionary *dict = responseObject[@"result"];
+            
+            weakself.serverTime = dict[@"serverTime"];//服务器时间
+            
+            weakself.serverIp = dict[@"serverIp"];//服务器ip地址
+            
+            [weakself compareIpandTime];
 
-        weakself.serverTime = dict[@"serverTime"];
-        
-        weakself.serverIp = dict[@"serverIp"];
-        
-        [weakself compareIpandTime];
+        }else{
+            
+        }
         
     } andFailed:^(id error) {
         

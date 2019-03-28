@@ -148,19 +148,19 @@
     
     NSDictionary *selectedItem = [outlineView itemAtRow:[outlineView selectedRow]];
     
-    NSArray *array = selectedItem[@"children"];
-    
-    if(array.count > 0){
-        
-        self.dataDict[@"text"] = @"";
-        self.dataDict[@"id"] = @"";
-        
-    }else{
+//    NSArray *array = selectedItem[@"children"];
+//
+//    if(array.count > 0){
+//
+//        self.dataDict[@"text"] = @"";
+//        self.dataDict[@"id"] = @"";
+//
+//    }else{
 
         self.dataDict[@"text"] = SafeString(selectedItem[@"text"]);
         self.dataDict[@"id"] = SafeString(selectedItem[@"id"]);
 
-    }
+//    }
 }
 
 
