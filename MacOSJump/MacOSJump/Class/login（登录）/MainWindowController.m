@@ -15,8 +15,6 @@
 
 @property (strong,nonatomic) FirstPageTabController *firstPageWC;
 
-
-
 //ip地址
 @property (weak) IBOutlet NSTextField *ipcontent;
 //端口
@@ -64,6 +62,8 @@
     
     [self defaultShow];
     
+    [self getLoginType];
+    
 }
 
 -(void)defaultShow{
@@ -102,38 +102,30 @@
     
     NSLog(@"切换登录方式");
     
-    if([sender.title isEqualToString:@"用户名密码登录"]){
-        
-        [self.changeTypeBtn setTitle:@"短信验证码登录"];
-        
-        self.rightDistance.constant = 20;
-        
-        self.getCodeBtn.hidden = YES;
-        
-        self.codecontent.placeholderString = @"请输入密码(必填)";
-        
-        self.passwordTitle.stringValue = @"密码";
-        
-    }else{
-        
-        [self.changeTypeBtn setTitle:@"用户名密码登录"];
-        
-        self.rightDistance.constant = 110;
-        
-        self.getCodeBtn.hidden = NO;
-        
-        self.codecontent.placeholderString = @"请输入验证码(必填)";
-        
-        self.passwordTitle.stringValue = @"验证码";
-        
-    }
+    [self defaultUI:sender.title andType:nil];
 }
 
 #pragma mark --- 获取验证码
 
 - (IBAction)getCodeAction:(NSButton *)sender {
     
-    JumpLog(@"获取验证码");
+    if(SafeString(self.accountcontent.stringValue).length < 1){
+
+        [self show:@"提示" andMessage:@"手机号不能为空"];
+        
+        return;
+    }
+
+    BOOL isPhoneNum = [self validateCellPhoneNumber:SafeString(self.accountcontent.stringValue)];
+
+    if(isPhoneNum == NO){
+
+        [self show:@"提示" andMessage:@"手机号格式有误"];
+
+        return;
+    }
+    
+    [self sendCode];//获取验证码
     
     self.getCodeBtn.enabled = NO;
     
@@ -200,17 +192,19 @@
     }
     
     
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",self.ipcontent.stringValue,self.portcontent.stringValue,Mac_PasswordLogin];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",self.ipcontent.stringValue,self.portcontent.stringValue,Mac_Login];
 
     [AFNHelper macPost:urlStr parameters:parameters success:^(id responseObject) {
         
         if([responseObject[@"message"] isEqualToString:@"ok"]){
             
+            NSString *userId = SafeString(responseObject[@"result"][@"userId"]);
+            
             //登录成功后 ---- 用户名,密码,设备唯一识别号进行保存(在用户名和密码登录的时候才进行保存)
             
             if([loginType isEqualToString:@"1"]){
                 
-                NSDictionary *dict = @{@"userName":self.accountcontent.stringValue,@"password":self.codecontent.stringValue,@"deviceId":@"",@"ipAddress":self.ipcontent.stringValue,@"port":self.portcontent.stringValue};
+                NSDictionary *dict = @{@"userName":self.accountcontent.stringValue,@"password":self.codecontent.stringValue,@"deviceId":@"",@"ipAddress":self.ipcontent.stringValue,@"port":self.portcontent.stringValue,@"userId":userId};
                 
                 [JumpKeyChain addKeychainData:dict forKey:@"userInfo"];
                 
@@ -221,9 +215,6 @@
             [[weakself.firstPageWC window] center];//显示在屏幕中间
             
             [weakself.window orderOut:nil];//关闭当前窗口
-            
-            
-            
             
         }else{
             
@@ -264,6 +255,182 @@
 //    [[NSAnimationContext currentContext]setDuration:3.0f]; //执行时间
 //    [[self.window.contentView animator]setAlphaValue:0.1f]; //改变属性值  此项是设置透明度
   
+}
+
+
+
+#pragma mark --- 获取服务器配置的登录方式
+
+-(void)getLoginType{
+    
+    L2CWeakSelf(self);
+    
+    if(self.ipcontent.stringValue.length < 1){
+        
+        return;
+    }
+    
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",self.ipcontent.stringValue,self.portcontent.stringValue,Mac_GetloginType];
+
+    
+    [AFNHelper macPost:urlStr parameters:nil success:^(id responseObject) {
+        
+        NSString *type = @"3";
+        NSString *title = @"用户名密码登录";
+        
+        if([responseObject[@"message"] isEqualToString:@"ok"]){
+            
+            NSString *smscertType = SafeString(responseObject[@"result"][@"smscert"]);
+            NSString *codeType = SafeString(responseObject[@"result"][@"accountcert"]);
+            
+            if([smscertType isEqualToString:@"1"] && [codeType isEqualToString:@"0"]){
+                //如果只支持短信验证码登录
+                type = @"1";
+                
+                title = @"短信验证码登录";
+                
+            }else if ([smscertType isEqualToString:@"0"] && [codeType isEqualToString:@"1"]){
+                //如果只支持账户密码登录
+                type = @"2";
+                
+                title = @"用户名密码登录";
+                
+            }else{
+                //两者都支持
+                type = @"3";
+                
+                title = @"用户名密码登录";
+            }
+            
+        }else{
+            
+            type = @"3";
+            
+            title = @"用户名密码登录";
+            
+        }
+        
+        [weakself defaultUI:title andType:type];
+        
+    } andFailed:^(id error) {
+        
+        [weakself defaultUI:@"用户名密码登录" andType:@"3"];
+
+    }];
+
+}
+
+
+-(void)defaultUI:(NSString *)title andType:(NSString *)type{
+    
+    if([title isEqualToString:@"用户名密码登录"]){
+        
+        [self.changeTypeBtn setTitle:@"短信验证码登录"];
+        
+        self.rightDistance.constant = 20;
+        
+        self.getCodeBtn.hidden = YES;
+        
+        self.codecontent.placeholderString = @"请输入密码(必填)";
+        
+        self.passwordTitle.stringValue = @"密码";
+        
+    }else{
+        
+        [self.changeTypeBtn setTitle:@"用户名密码登录"];
+        
+        self.rightDistance.constant = 110;
+        
+        self.getCodeBtn.hidden = NO;
+        
+        self.codecontent.placeholderString = @"请输入验证码(必填)";
+        
+        self.passwordTitle.stringValue = @"验证码";
+        
+    }
+    
+    if([type isEqualToString:@"1"] || [type isEqualToString:@"2"]){
+        
+        self.changeTypeBtn.hidden = YES;
+        
+    }else{
+        
+        self.changeTypeBtn.hidden = NO;
+    }
+    
+}
+
+#pragma mark --- 发送验证码
+
+-(void)sendCode{
+    
+    L2CWeakSelf(self);
+    
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",self.ipcontent.stringValue,self.portcontent.stringValue,Mac_CreatCode];
+    
+    [AFNHelper macPost:urlStr parameters:@{@"phoneNumber":SafeString(self.accountcontent.stringValue)} success:^(id responseObject) {
+    
+        if([SafeString(responseObject[@"message"]) isEqualToString:@"ok"]){
+            
+            [weakself show:@"提示" andMessage:@"验证码发送成功"];
+            
+        }else{
+            
+            [weakself show:@"提示" andMessage:@"验证码发送失败"];
+
+        }
+        
+    } andFailed:^(id error) {
+        
+        [weakself show:@"提示" andMessage:@"请求服务器失败"];
+
+    }];
+    
+}
+
+#pragma mark --- 正则校验手机号码
+
+-(BOOL)validateCellPhoneNumber:(NSString *)cellNum{
+    /**
+     * 手机号码
+     * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     * 联通：130,131,132,152,155,156,185,186
+     * 电信：133,1349,153,180,189
+     */
+    NSString * MOBILE = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
+    
+    /**
+     10         * 中国移动：China Mobile
+     11         * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     12         */
+    NSString * CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$";
+    
+    /**
+     15         * 中国联通：China Unicom
+     16         * 130,131,132,152,155,156,175,176,185,186
+     17         */
+    NSString * CU = @"^1(3[0-2]|5[256]|7[56]|8[56])\\d{8}$";
+    
+    /**
+     20         * 中国电信：China Telecom
+     21         * 133,1349,153,177,180,189
+     22         */
+    NSString * CT = @"^1((33|53|77|8[09])[0-9]|349)\\d{7}$";
+    
+    
+    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
+    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
+    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
+    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
+    
+    if(([regextestmobile evaluateWithObject:cellNum] == YES)
+       || ([regextestcm evaluateWithObject:cellNum] == YES)
+       || ([regextestct evaluateWithObject:cellNum] == YES)
+       || ([regextestcu evaluateWithObject:cellNum] == YES)){
+        return YES;
+    }else{
+        return NO;
+    }
 }
 
 

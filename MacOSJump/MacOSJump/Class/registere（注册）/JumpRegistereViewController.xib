@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="JumpRegistereViewController">
             <connections>
+                <outlet property="chooseDepart" destination="HcA-gk-abb" id="TFU-xj-dH3"/>
                 <outlet property="companyName" destination="pYS-eg-dCe" id="eGA-Sv-AW9"/>
                 <outlet property="computerAddress" destination="Gze-Gw-x9m" id="3k4-Ju-JTZ"/>
                 <outlet property="deviceType" destination="e3U-Al-kzA" id="VCq-dp-b2z"/>
@@ -49,7 +50,7 @@
                     </textFieldCell>
                 </textField>
                 <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jDh-a4-NTV">
-                    <rect key="frame" x="380" y="307" width="218" height="25"/>
+                    <rect key="frame" x="400" y="307" width="198" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="mb6-0x-u1e"/>
                     </constraints>
@@ -99,7 +100,7 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PD0-n3-41e">
-                    <rect key="frame" x="288" y="305" width="84" height="25"/>
+                    <rect key="frame" x="308" y="305" width="84" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="AJx-9x-1Ti"/>
                         <constraint firstAttribute="width" constant="80" id="BYp-3D-tK1"/>
@@ -111,10 +112,10 @@
                     </textFieldCell>
                 </textField>
                 <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="e3U-Al-kzA">
-                    <rect key="frame" x="110" y="307" width="150" height="25"/>
+                    <rect key="frame" x="110" y="307" width="170" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="C8S-JZ-dzz"/>
-                        <constraint firstAttribute="width" constant="150" id="qck-jZ-Akw"/>
+                        <constraint firstAttribute="width" constant="170" id="qck-jZ-Akw"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" focusRingType="none" placeholderString="请输入设备类型(必填)" drawsBackground="YES" id="VrJ-ae-OsJ">
                         <font key="font" metaFont="system"/>
@@ -140,7 +141,7 @@
                         <constraint firstAttribute="height" constant="25" id="AjC-h3-u9I"/>
                         <constraint firstAttribute="width" constant="80" id="pR9-b0-W7j"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="部门" id="bdk-05-2g6">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="所属部门" id="bdk-05-2g6">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -152,17 +153,17 @@
                         <constraint firstAttribute="height" constant="25" id="at1-4m-VqO"/>
                         <constraint firstAttribute="width" constant="80" id="flU-lk-iQU"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="计算机所在地" id="3fz-oE-jr0">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="设备位置" id="3fz-oE-jr0">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1ZU-1D-AXC">
-                    <rect key="frame" x="110" y="352" width="150" height="25"/>
+                    <rect key="frame" x="110" y="352" width="170" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="KYR-jG-mGE"/>
-                        <constraint firstAttribute="width" constant="150" id="n3H-DC-Ahw"/>
+                        <constraint firstAttribute="width" constant="170" id="n3H-DC-Ahw"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" focusRingType="none" placeholderString="请输入使用人(必填)" drawsBackground="YES" id="C4F-Za-3re">
                         <font key="font" metaFont="system"/>
@@ -193,7 +194,7 @@
                     </textFieldCell>
                 </textField>
                 <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jWc-iZ-07r">
-                    <rect key="frame" x="380" y="352" width="218" height="25"/>
+                    <rect key="frame" x="400" y="352" width="198" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="20I-TQ-TUl"/>
                     </constraints>
@@ -204,7 +205,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="l0a-o8-IRu">
-                    <rect key="frame" x="288" y="358" width="84" height="17"/>
+                    <rect key="frame" x="308" y="358" width="84" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="f1I-fA-eKW"/>
                         <constraint firstAttribute="height" constant="17" id="z4q-Iv-M6L"/>

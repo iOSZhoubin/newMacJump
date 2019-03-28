@@ -19,6 +19,8 @@
 
 @property (strong,nonatomic) FirstPageTabController *firstWc;
 
+@property (strong,nonatomic) NSMutableArray *titleArray;
+
 @property (strong,nonatomic) NSMutableDictionary *dataDict;
 //使用人
 @property (weak) IBOutlet NSTextField *userName;
@@ -28,12 +30,14 @@
 @property (weak) IBOutlet NSTextField *deviceType;
 //联系电话
 @property (weak) IBOutlet NSTextField *phoneNum;
-//计算机所在地
+//设备位置
 @property (weak) IBOutlet NSTextField *computerAddress;
 //部门名称
 @property (weak) IBOutlet NSTextField *companyName;
 //备注
 @property (weak) IBOutlet NSTextField *remark;
+//选择部门
+@property (weak) IBOutlet NSButton *chooseDepart;
 
 @end
 
@@ -57,7 +61,8 @@
     self.choosePeople = [[ChooseConmpanyWindowController alloc]initWithWindowNibName:@"ChooseConmpanyWindowController"];
     
     self.choosePeople.delegate = self;
-    
+ 
+    [self getTitleNameArray];//获取注册列表
 }
 
 
@@ -65,15 +70,77 @@
 
 - (IBAction)backAction:(NSButton *)sender {
     
-    if(self.userName.stringValue.length < 1 || self.deviceType.stringValue.length < 1 || self.phoneNum.stringValue.length < 1 || self.companyName.stringValue.length < 1){
+    NSString *isgo = @"1";
+    
+    for (NSDictionary *titleDict in self.titleArray) {
         
-        [self show:@"提示" andMessage:@"必填字段不能为空"];
+        NSString *title = SafeString(titleDict[@"titleName"]);
+        NSString *type = SafeString(titleDict[@"type"]);
         
-        return;
+        if([title isEqualToString:@"使用人"] && self.userName.stringValue.length < 1 && [type isEqualToString:@"1"]){
+            
+            [self show:@"提示" andMessage:@"请输入使用人"];
+            
+            isgo = @"0";
+            
+            break;
+            
+        }else if ([title isEqualToString:@"所属部门"] && self.companyName.stringValue.length < 1&& [type isEqualToString:@"1"]){
+            
+            [self show:@"提示" andMessage:@"请选择部门"];
+            
+            isgo = @"0";
+            
+            break;
+            
+        }else if ([title isEqualToString:@"设备位置"] && self.computerAddress.stringValue.length < 1&& [type isEqualToString:@"1"]){
+            
+            [self show:@"提示" andMessage:@"请输入设备位置"];
+            
+            isgo = @"0";
+            
+            break;
+            
+        }else if ([title isEqualToString:@"联系电话"] && self.phoneNum.stringValue.length < 1&& [type isEqualToString:@"1"]){
+            
+            [self show:@"提示" andMessage:@"请输入联系电话"];
+            
+            isgo = @"0";
+            
+            break;
+            
+        }else if ([title isEqualToString:@"电子邮箱"] && self.mail.stringValue.length < 1 && [type isEqualToString:@"1"]){
+            
+            [self show:@"提示" andMessage:@"请输入电子邮箱"];
+            
+            isgo = @"0";
+            
+            break;
+            
+        }else if ([title isEqualToString:@"设备类型"] && self.deviceType.stringValue.length < 1 && [type isEqualToString:@"1"]){
+            
+            [self show:@"提示" andMessage:@"请输入设备类型"];
+            
+            isgo = @"0";
+            
+            break;
+            
+        }else if ([title isEqualToString:@"备注"] && self.remark.stringValue.length < 1 && [type isEqualToString:@"1"]){
+            
+            [self show:@"提示" andMessage:@"请输入备注"];
+            
+            isgo = @"0";
+            
+            break;
+            
+        }
     }
     
+    if([isgo isEqualToString:@"1"]){
+        
+        [self registerAction];
+    }
     
-    [self registerAction];
 }
 
 #pragma mark --- 选择部门
@@ -98,7 +165,7 @@
 
 
 
-#pragma mark --- 注册方法
+#pragma mark --- 完善个人信息方法
 
 -(void)registerAction{
     
@@ -122,7 +189,7 @@
     NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
     
     
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_Registered];
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_Register];
     
     [AFNHelper macPost:urlStr parameters:paramters success:^(id responseObject) {
         
@@ -146,6 +213,194 @@
     }];
 }
 
+#pragma mark --- 获取注册列表
+
+-(void)getTitleNameArray{
+    
+    L2CWeakSelf(self);
+    
+    NSDictionary *defaultDict = [JumpKeyChain getKeychainDataForKey:@"userInfo"];
+    
+    NSString *port = SafeString(defaultDict[@"port"]);
+    NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
+    NSString *userId = SafeString(defaultDict[@"userId"]);
+
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_RegInfoName];
+    
+    [AFNHelper macPost:urlStr parameters:@{@"userId":userId} success:^(id responseObject) {
+        
+        if([SafeString(responseObject[@"message"]) isEqualToString:@"ok"]){
+            
+            self.titleArray = [NSMutableArray array];
+            
+            self.titleArray = responseObject[@"result"];
+            
+            [weakself settingDefaultUI];
+            
+        }else{
+            
+            [weakself show:@"提示" andMessage:@"获取服务器配置失败"];
+        }
+        
+    } andFailed:^(id error) {
+        
+        [weakself show:@"提示" andMessage:@"服务器请求失败"];
+
+    }];
+}
+
+//设置默认。隐藏时不让输入
+-(void)settingDefaultUI{
+    
+    for (NSDictionary *titleDict in self.titleArray) {
+        
+        NSString *title = SafeString(titleDict[@"title"]);
+        NSString *type = SafeString(titleDict[@"type"]);
+        NSString *defaultContent = SafeString(titleDict[@"default_item"]);
+        NSString *discripe = SafeString(titleDict[@"discripe"]);
+
+        if([title isEqualToString:@"使用人"]){
+            
+            if([type isEqualToString:@"0"]){
+                
+                self.userName.enabled = NO;
+
+            }else{
+
+                self.userName.enabled = YES;
+            }
+            
+            if(defaultContent.length > 0){
+                
+                self.userName.placeholderString = defaultContent;
+                
+            }else{
+                
+                self.userName.placeholderString = discripe;
+            }
+            
+        }else if ([title isEqualToString:@"所属部门"]){
+            
+            if([type isEqualToString:@"0"]){
+                
+                self.chooseDepart.enabled = NO;
+                
+            }else{
+                
+                self.chooseDepart.enabled = YES;
+            }
+            
+            if(defaultContent.length > 0){
+                
+                self.companyName.placeholderString = defaultContent;
+                
+            }else{
+                
+                self.companyName.placeholderString = discripe;
+            }
+            
+        }else if ([title isEqualToString:@"设备位置"]){
+            
+            if([type isEqualToString:@"0"]){
+                
+                self.computerAddress.enabled = NO;
+                
+            }else{
+                
+                self.computerAddress.enabled = YES;
+            }
+            
+            if(defaultContent.length > 0){
+                
+                self.computerAddress.placeholderString = defaultContent;
+                
+            }else{
+                
+                self.computerAddress.placeholderString = discripe;
+            }
+            
+        }else if ([title isEqualToString:@"联系电话"]){
+            
+            if([type isEqualToString:@"0"]){
+                
+                self.phoneNum.enabled = NO;
+                
+            }else{
+                
+                self.phoneNum.enabled = YES;
+            }
+            
+            if(defaultContent.length > 0){
+                
+                self.phoneNum.placeholderString = defaultContent;
+                
+            }else{
+                
+                self.phoneNum.placeholderString = discripe;
+            }
+
+        }else if ([title isEqualToString:@"电子邮箱"]){
+            
+            if([type isEqualToString:@"0"]){
+                
+                self.mail.enabled = NO;
+                
+            }else{
+                
+                self.mail.enabled = YES;
+            }
+            
+            if(defaultContent.length > 0){
+                
+                self.mail.placeholderString = defaultContent;
+                
+            }else{
+                
+                self.mail.placeholderString = discripe;
+            }
+            
+        }else if ([title isEqualToString:@"设备类型"]){
+            
+            if([type isEqualToString:@"0"]){
+                
+                self.deviceType.enabled = NO;
+                
+            }else{
+                
+                self.deviceType.enabled = YES;
+            }
+            
+            if(defaultContent.length > 0){
+                
+                self.deviceType.placeholderString = defaultContent;
+                
+            }else{
+                
+                self.deviceType.placeholderString = discripe;
+            }
+            
+        }else if ([title isEqualToString:@"备注"]){
+            
+            if([type isEqualToString:@"0"]){
+                
+                self.remark.enabled = NO;
+                
+            }else{
+                
+                self.remark.enabled = YES;
+            }
+            
+            if(defaultContent.length > 0){
+                
+                self.remark.placeholderString = defaultContent;
+                
+            }else{
+                
+                self.remark.placeholderString = discripe;
+            }
+        }
+    }
+}
 
 
 #pragma mark --- 提示框

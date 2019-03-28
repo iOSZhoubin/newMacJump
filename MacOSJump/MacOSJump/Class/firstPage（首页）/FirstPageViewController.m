@@ -110,16 +110,16 @@
             
             self.againBtn.enabled = YES;
             
-            self.itemContent.stringValue = self.contentStr;
-            
-            if(self.isRight==YES && self.isTrue==YES){
-                
-                [self saveData:@"1"];
-                
-            }else{
-                
-                [self saveData:@"0"];
-            }
+//            self.itemContent.stringValue = self.contentStr;
+//
+//            if(self.isRight==YES && self.isTrue==YES){
+//
+//                [self saveData:@"1"];
+//
+//            }else{
+//
+//                [self saveData:@"0"];
+//            }
             
         }else{
             
@@ -158,18 +158,21 @@
     
     NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
     
+    NSString *userId = SafeString(defaultDict[@"userId"]);
+
+    
     NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_CheckEntry];
     
-    [AFNHelper macPost:urlStr parameters:@{@"userId":@"2"} success:^(id responseObject) {
+    [AFNHelper macPost:urlStr parameters:@{@"userId":userId} success:^(id responseObject) {
         
         NSDictionary *dict = responseObject[@"result"];
         
-        weakself.installY = dict[@"installY"];
-        weakself.installN = dict[@"installN"];
-        weakself.processY = dict[@"processY"];
-        weakself.processN = dict[@"processN"];
-        
-        [weakself getAppName];
+//        weakself.installY = dict[@"installY"];
+//        weakself.installN = dict[@"installN"];
+//        weakself.processY = dict[@"processY"];
+//        weakself.processN = dict[@"processN"];
+//
+//        [weakself getAppName];
         
     } andFailed:^(id error) {
         
@@ -254,6 +257,8 @@
     NSString *port = SafeString(defaultDict[@"port"]);
     
     NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
+    
+    NSString *userId = SafeString(defaultDict[@"userId"]);
     
     NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_ServerInfo];
     

@@ -51,11 +51,12 @@
     
     NSString *port = SafeString(defaultDict[@"port"]);
     NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
+    NSString *userId = SafeString(defaultDict[@"userId"]);
+
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_GetUserInfo];
     
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_UserInfo];
     
-    
-    [AFNHelper macPost:urlStr parameters:@{@"userId":@"2"} success:^(id responseObject) {
+    [AFNHelper macPost:urlStr parameters:@{@"userId":userId} success:^(id responseObject) {
         
         if([responseObject[@"message"] isEqualToString:@"ok"]){
             

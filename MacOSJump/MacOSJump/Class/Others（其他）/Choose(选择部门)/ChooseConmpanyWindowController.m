@@ -115,7 +115,9 @@
     
     NSDictionary *dict = item;
     
-    if([SafeString(dict[@"isLeaf"]) isEqualToString:@"1"]){
+    NSArray *array = dict[@"children"];
+    
+    if(array.count > 0){
         
         return YES;
     }
@@ -149,6 +151,9 @@
     NSArray *array = selectedItem[@"children"];
     
     if(array.count > 0){
+        
+        self.dataDict[@"text"] = @"";
+        self.dataDict[@"id"] = @"";
         
     }else{
 
@@ -188,14 +193,13 @@
     
     NSString *port = SafeString(defaultDict[@"port"]);
     NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
-    
+    NSString *userId = SafeString(defaultDict[@"userId"]);
+
     NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_CompanyTree];
     
-    [AFNHelper macPost:urlStr parameters:@{@"userId":@""} success:^(id responseObject) {
+    [AFNHelper macPost:urlStr parameters:@{@"userId":userId} success:^(id responseObject) {
         
-        NSDictionary *dict = responseObject;
-        
-        NSArray *childArray = @[dict];
+        NSArray *childArray = responseObject;
         
         self.dataArray = childArray.mutableCopy;
         
