@@ -9,11 +9,16 @@
 #import "MainWindowController.h"
 #import "AppDelegate.h"
 #import "FirstPageTabController.h"
+#import "JumpRegistereWindowController.h"
 
 
 @interface MainWindowController ()
 
 @property (strong,nonatomic) FirstPageTabController *firstPageWC;
+
+@property (strong,nonatomic) JumpRegistereWindowController *registereWC;
+
+
 
 //ip地址
 @property (weak) IBOutlet NSTextField *ipcontent;
@@ -40,6 +45,9 @@
 
 @property (assign,nonatomic) NSInteger timerNum;
 
+//设备唯一识别码
+@property (copy,nonatomic) NSString *deviceCode;
+
 @end
 
 @implementation MainWindowController
@@ -56,6 +64,9 @@
 
     self.firstPageWC = [[FirstPageTabController alloc]initWithWindowNibName:@"FirstPageTabController"];
 
+    self.registereWC = [[JumpRegistereWindowController alloc]initWithWindowNibName:@"JumpRegistereWindowController"];
+
+    
     [self.window setContentSize:NSMakeSize(800, 600)];
     
     self.window.restorable = NO;
@@ -75,6 +86,9 @@
     self.ipcontent.stringValue = SafeString(defaultDict[@"ipAddress"]);
     self.codecontent.stringValue = SafeString(defaultDict[@"password"]);
 
+    [JumpKeyChain deleteKeyChain];
+    
+    self.deviceCode = [JumpKeyChain firstGetUUIDInKeychain];
 
 }
 
@@ -209,13 +223,28 @@
                 [JumpKeyChain addKeychainData:dict forKey:@"userInfo"];
                 
             }
-
-            [weakself.firstPageWC.window orderFront:nil];//显示要跳转的窗口
             
-            [[weakself.firstPageWC window] center];//显示在屏幕中间
-            
-            [weakself.window orderOut:nil];//关闭当前窗口
-            
+            if(weakself.deviceCode.length > 0){
+  
+                [weakself.firstPageWC.window orderFront:nil];//显示要跳转的窗口
+                
+                [[weakself.firstPageWC window] center];//显示在屏幕中间
+                
+                [weakself.window orderOut:nil];//关闭当前窗口
+                
+            }else{
+                
+                weakself.deviceCode = [JumpKeyChain getUUIDInKeychain];
+                
+                weakself.registereWC.deviceCode = weakself.deviceCode;
+                
+                [weakself.registereWC.window orderFront:nil];//显示要跳转的窗口
+                
+                [[weakself.registereWC window] center];//显示在屏幕中间
+                
+                [weakself.window orderOut:nil];//关闭当前窗口
+            }
+  
         }else{
             
             JumpLog(@"登录失败");

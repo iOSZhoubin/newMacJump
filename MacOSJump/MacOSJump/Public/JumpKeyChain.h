@@ -46,6 +46,13 @@
  */
 + (NSString *)getUUID;
 
+
+/**
+ * 从Keychain获取UUID的方法
+ */
++ (NSString *)firstGetUUIDInKeychain;
+
+
 /**
  * 获取到UUID后存入系统中的keychain中，保证以后每次可以得到相同的唯一标志
  * 不用添加plist文件，当程序删除后重装，仍可以得到相同的唯一标示

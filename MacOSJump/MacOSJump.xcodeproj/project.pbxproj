@@ -37,6 +37,8 @@
 		39A29FFD2240F2930021D415 /* JumpRegistereViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A29FFB2240F2930021D415 /* JumpRegistereViewController.xib */; };
 		39A2A0012240F6970021D415 /* FirstPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A29FFF2240F6970021D415 /* FirstPageViewController.m */; };
 		39A2A0022240F6970021D415 /* FirstPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A2A0002240F6970021D415 /* FirstPageViewController.xib */; };
+		39C512E42254650500EBA745 /* JumpRegistereWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C512E22254650500EBA745 /* JumpRegistereWindowController.m */; };
+		39C512E52254650500EBA745 /* JumpRegistereWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39C512E32254650500EBA745 /* JumpRegistereWindowController.xib */; };
 		39CE977022435ED600566EC6 /* DateCalculater.m in Sources */ = {isa = PBXBuildFile; fileRef = 39CE976E22435ED600566EC6 /* DateCalculater.m */; };
 		39CE97732243601300566EC6 /* CalenarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 39CE97722243601300566EC6 /* CalenarManager.m */; };
 		A4403418C8B29942D6480EE2 /* libPods-MacOSJump.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 363499DF91722AEF7106C8AE /* libPods-MacOSJump.a */; };
@@ -96,6 +98,9 @@
 		39A29FFE2240F6970021D415 /* FirstPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstPageViewController.h; sourceTree = "<group>"; };
 		39A29FFF2240F6970021D415 /* FirstPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstPageViewController.m; sourceTree = "<group>"; };
 		39A2A0002240F6970021D415 /* FirstPageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstPageViewController.xib; sourceTree = "<group>"; };
+		39C512E12254650500EBA745 /* JumpRegistereWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JumpRegistereWindowController.h; sourceTree = "<group>"; };
+		39C512E22254650500EBA745 /* JumpRegistereWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JumpRegistereWindowController.m; sourceTree = "<group>"; };
+		39C512E32254650500EBA745 /* JumpRegistereWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JumpRegistereWindowController.xib; sourceTree = "<group>"; };
 		39CE976E22435ED600566EC6 /* DateCalculater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCalculater.m; sourceTree = "<group>"; };
 		39CE976F22435ED600566EC6 /* DateCalculater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCalculater.h; sourceTree = "<group>"; };
 		39CE97712243601300566EC6 /* CalenarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalenarManager.h; sourceTree = "<group>"; };
@@ -263,6 +268,9 @@
 				39A29FF92240F2930021D415 /* JumpRegistereViewController.h */,
 				39A29FFA2240F2930021D415 /* JumpRegistereViewController.m */,
 				39A29FFB2240F2930021D415 /* JumpRegistereViewController.xib */,
+				39C512E12254650500EBA745 /* JumpRegistereWindowController.h */,
+				39C512E22254650500EBA745 /* JumpRegistereWindowController.m */,
+				39C512E32254650500EBA745 /* JumpRegistereWindowController.xib */,
 			);
 			path = "registere（注册）";
 			sourceTree = "<group>";
@@ -364,6 +372,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39C512E52254650500EBA745 /* JumpRegistereWindowController.xib in Resources */,
 				398EA46D21EC87B80075F2F3 /* Assets.xcassets in Resources */,
 				39A29FF82240F00C0021D415 /* HistoryRecordViewController.xib in Resources */,
 				39A2A0022240F6970021D415 /* FirstPageViewController.xib in Resources */,
@@ -422,6 +431,7 @@
 				39510B6D222E43D4000A7A62 /* JumpCompanyModel.m in Sources */,
 				398EA47321EC87B80075F2F3 /* main.m in Sources */,
 				39A29FF72240F00C0021D415 /* HistoryRecordViewController.m in Sources */,
+				39C512E42254650500EBA745 /* JumpRegistereWindowController.m in Sources */,
 				3978B8D6222CFBB300D28D95 /* SecurityNSString.m in Sources */,
 				39803FBC223F22E2004C03AC /* MytitleView.m in Sources */,
 				39813D7C223B47DA00805151 /* ApplicitionModel.m in Sources */,

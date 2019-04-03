@@ -20,7 +20,7 @@
             <subviews>
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUK-Vn-rrs">
                     <rect key="frame" x="0.0" y="40" width="480" height="232"/>
-                    <clipView key="contentView" id="hFe-pf-T9b">
+                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hFe-pf-T9b">
                         <rect key="frame" x="1" y="0.0" width="478" height="231"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -102,11 +102,11 @@
                         </subviews>
                     </clipView>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="hh1-v4-wDx">
-                        <rect key="frame" x="1" y="253" width="478" height="16"/>
+                        <rect key="frame" x="1" y="215" width="478" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="2y6-dg-FX8">
-                        <rect key="frame" x="224" y="17" width="15" height="102"/>
+                        <rect key="frame" x="463" y="23" width="16" height="208"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <tableHeaderView key="headerView" id="6JK-rd-iUO">
@@ -115,7 +115,7 @@
                     </tableHeaderView>
                 </scrollView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ktg-Jp-NpZ">
-                    <rect key="frame" x="194" y="1" width="94" height="32"/>
+                    <rect key="frame" x="193" y="1" width="94" height="32"/>
                     <buttonCell key="cell" type="push" title="清空记录" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YXk-Wo-hSR">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>

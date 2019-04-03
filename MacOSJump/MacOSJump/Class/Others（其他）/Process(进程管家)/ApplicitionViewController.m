@@ -38,8 +38,8 @@
     
     self.tableView.dataSource = self;
     
+    //双击事件
     [self.tableView setDoubleAction:@selector(doubleAction:)];
-    
     
     [self getAppName];
     
@@ -121,7 +121,7 @@
 }
 
 
-//双击方法(点击关闭，需要关闭沙盒机制)
+//双击方法(点击关闭)
 
 -(void)doubleAction:(NSTableView *)tableView{
     

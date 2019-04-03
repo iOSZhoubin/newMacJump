@@ -87,6 +87,14 @@ NSString * const kUUIDKey = @"com.jump.uuid";
 
 #pragma mark - 获取到UUID后存入系统中的keychain中
 
++ (NSString *)firstGetUUIDInKeychain {
+    
+    NSString *getUDIDInKeychain = (NSString *)[JumpKeyChain load:kUUIDKey];
+
+    return getUDIDInKeychain;
+
+}
+
 + (NSString *)getUUIDInKeychain {
     // 1.直接从keychain中获取UUID
     NSString *getUDIDInKeychain = (NSString *)[JumpKeyChain load:kUUIDKey];
