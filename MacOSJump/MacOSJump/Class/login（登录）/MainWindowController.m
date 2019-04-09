@@ -18,8 +18,6 @@
 
 @property (strong,nonatomic) JumpRegistereWindowController *registereWC;
 
-
-
 //ip地址
 @property (weak) IBOutlet NSTextField *ipcontent;
 //端口
@@ -34,8 +32,6 @@
 @property (weak) IBOutlet NSButton *getCodeBtn;
 //切换登录方式
 @property (weak) IBOutlet NSButton *changeTypeBtn;
-//注册按钮
-@property (weak) IBOutlet NSButton *registerBtn;
 //登录按钮
 @property (weak) IBOutlet NSButton *loginBtn;
 //距离右侧距离  验证码98  账号20
@@ -47,6 +43,16 @@
 
 //设备唯一识别码
 @property (copy,nonatomic) NSString *deviceCode;
+
+@property (assign,nonatomic) BOOL isgetServer;
+
+//是否为网内手机才可以登录
+@property (copy,nonatomic) NSString *isIn;
+//是否将手机号同步到设备联系电话
+@property (copy,nonatomic) NSString *isSyn;
+//登录界面是否自动填充手机号
+@property (copy,nonatomic) NSString *isPut;
+
 
 @end
 
@@ -71,6 +77,8 @@
     
     self.window.restorable = NO;
     
+    self.isgetServer = NO;
+    
     [self defaultShow];
     
     [self getLoginType];
@@ -85,8 +93,6 @@
     self.portcontent.stringValue = SafeString(defaultDict[@"port"]);
     self.ipcontent.stringValue = SafeString(defaultDict[@"ipAddress"]);
     self.codecontent.stringValue = SafeString(defaultDict[@"password"]);
-
-    [JumpKeyChain deleteKeyChain];
     
     self.deviceCode = [JumpKeyChain firstGetUUIDInKeychain];
 
@@ -97,17 +103,129 @@
 
 - (IBAction)LoginAction:(NSButton *)sender {
     
-    if(self.accountcontent.stringValue.length < 1 || self.codecontent.stringValue.length < 1 || self.ipcontent.stringValue.length < 1 || self.portcontent.stringValue.length < 1){
+    if (self.isgetServer == NO){
+        
+        [self show:@"提示" andMessage:@"请先获取服务器配置"];
+        
+        return;
+   
+    }else if(self.accountcontent.stringValue.length < 1 || self.codecontent.stringValue.length < 1 || self.ipcontent.stringValue.length < 1 || self.portcontent.stringValue.length < 1){
         
         [self show:@"提示" andMessage:@"必填字段不能为空"];
 
         return;
+    
     }
- 
-    [self loginAction];
-
+    
+    if(self.isgetServer == YES){
+        
+        [self clicklogin];
+    }
+  
 }
 
+
+-(void)clicklogin{
+    
+    L2CWeakSelf(self);
+    
+    NSString *loginType = @"";
+    
+    if([self.passwordTitle.stringValue isEqualToString:@"密码"]){
+        
+        loginType = @"1";
+        
+    }else{
+        
+        loginType = @"2";
+    }
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"account"] = SafeString(self.accountcontent.stringValue);
+    parameters[@"loginType"] = SafeString(loginType);
+    
+    //登录方式 1-账号密码登录  2-验证码登录
+    if([loginType isEqualToString:@"1"]){
+        
+        parameters[@"password"] = SafeString(self.codecontent.stringValue);
+        
+    }else{
+        
+        parameters[@"code"] = SafeString(self.codecontent.stringValue);
+    }
+    
+    
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",self.ipcontent.stringValue,self.portcontent.stringValue,Mac_Login];
+    
+    [AFNHelper macPost:urlStr parameters:parameters success:^(id responseObject) {
+        
+        if([responseObject[@"message"] isEqualToString:@"ok"]){
+            
+            NSString *userId = SafeString(responseObject[@"result"][@"userId"]);
+
+            if(weakself.deviceCode.length > 0){
+            
+                [weakself.firstPageWC.window orderFront:nil];//显示要跳转的窗口
+                
+                [[weakself.firstPageWC window] center];//显示在屏幕中间
+                
+                [weakself.window orderOut:nil];//关闭当前窗口
+                
+            }else{
+
+                weakself.deviceCode = [JumpKeyChain getUUIDInKeychain];
+
+                weakself.registereWC.deviceCode = weakself.deviceCode;
+
+                [weakself.registereWC.window orderFront:nil];//显示要跳转的窗口
+
+                [[weakself.registereWC window] center];//显示在屏幕中间
+
+                [weakself.window orderOut:nil];//关闭当前窗口
+            }
+            
+            //登录成功后 ---- 用户名,密码,设备唯一识别号进行保存(在用户名和密码登录的时候才进行保存)
+            
+            if([loginType isEqualToString:@"1"]){
+                
+                NSDictionary *dict = @{@"userName":self.accountcontent.stringValue,@"password":@"",@"deviceId":weakself.deviceCode,@"ipAddress":self.ipcontent.stringValue,@"port":self.portcontent.stringValue,@"userId":userId};
+                
+                [JumpKeyChain addKeychainData:dict forKey:@"userInfo"];
+                
+            }else{
+                
+                NSString *accountStr = @"";
+
+                if([weakself.isPut isEqualToString:@"1"]){
+
+                    accountStr = SafeString(self.accountcontent.stringValue);
+                }
+
+                NSDictionary *dict = @{@"userName":accountStr,@"password":@"",@"deviceId":SafeString(weakself.deviceCode),@"userId":SafeString(userId)};
+
+                [JumpKeyChain addKeychainData:dict forKey:@"userInfo"];
+                
+            }
+  
+            
+            if([weakself.isSyn isEqualToString:@"1"] && [weakself.passwordTitle.stringValue isEqualToString:@"验证码"]){
+                //服务器勾选了将手机号同步到设备联系电话
+                
+                [self synWithPhone];
+            }
+        
+        }else{
+            
+            JumpLog(@"登录失败");
+            [weakself show:@"提示" andMessage:@"登录失败"];
+        }
+        
+    } andFailed:^(id error) {
+        
+        [weakself show:@"提示" andMessage:@"请求服务器失败"];
+        
+    }];
+}
 
 
 #pragma mark --- 切换登录方式
@@ -139,18 +257,80 @@
         return;
     }
     
-    [self sendCode];//获取验证码
+    if([self.isIn isEqualToString:@"1"]){//服务器勾选了只能网内手机获取验证码
+        
+        [self ischeck];
     
-    self.getCodeBtn.enabled = NO;
-    
-    self.timerNum = 60;
-    
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f  //间隔时间
-                                                  target:self
-                                                selector:@selector(countdown)
-                                                userInfo:nil
-                                                 repeats:YES];
+    }else{
+        
+        [self sendCode];//获取验证码
+        
+        self.getCodeBtn.enabled = NO;
+        
+        self.timerNum = 60;
+        
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f  //间隔时间
+                                                          target:self
+                                                        selector:@selector(countdown)
+                                                        userInfo:nil
+                                                         repeats:YES];
+    }
 }
+
+
+#pragma mark --- 校验手机号是否为内网号
+
+-(void)ischeck{
+    
+    if(self.ipcontent.stringValue.length < 1){
+        
+        [self show:@"提示" andMessage:@"请填写ip地址"];
+        
+        return;
+        
+    }else if (self.portcontent.stringValue.length < 1){
+        
+        [self show:@"提示" andMessage:@"请填写端口号"];
+        
+        return;
+    }
+    
+    L2CWeakSelf(self);
+    
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",self.ipcontent.stringValue,self.portcontent.stringValue,Mac_IsIntranet];
+    
+    [AFNHelper macPost:urlStr parameters:@{@"phoneNumber":self.accountcontent.stringValue} success:^(id responseObject) {
+       
+        if([responseObject[@"message"] isEqualToString:@"ok"]){
+            
+            [weakself sendCode];//获取验证码
+            
+            weakself.getCodeBtn.enabled = NO;
+            
+            weakself.timerNum = 60;
+            
+            weakself.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f  //间隔时间
+                                                          target:self
+                                                        selector:@selector(countdown)
+                                                        userInfo:nil
+                                                         repeats:YES];
+            
+        }else{
+            
+            [weakself show:@"提示" andMessage:@"请联系管理员,目前只允许网内手机登录"];
+            
+            return;
+            
+        }
+        
+    } andFailed:^(id error) {
+        
+        [weakself show:@"提示" andMessage:@"请求服务器失败"];
+
+    }];
+}
+
+
 
 - (void)countdown{
     
@@ -174,89 +354,6 @@
     }
 }
 
--(void)loginAction{
-    
-    L2CWeakSelf(self);
-    
-    [self loadAnimat];
-    
-    NSString *loginType = @"";
-    
-    if([self.passwordTitle.stringValue isEqualToString:@"账号密码登录"]){
-        
-        loginType = @"1";
-        
-    }else{
-        
-        loginType = @"1";
-    }
-    
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"account"] = SafeString(self.accountcontent.stringValue);
-    parameters[@"loginType"] = SafeString(loginType);
-    
-    //登录方式 1-账号密码登录  2-验证码登录
-    if([loginType isEqualToString:@"1"]){
-        
-        parameters[@"password"] = SafeString(self.codecontent.stringValue);
-        
-    }else{
-        
-        parameters[@"code"] = SafeString(self.codecontent.stringValue);
-    }
-    
-    
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",self.ipcontent.stringValue,self.portcontent.stringValue,Mac_Login];
-
-    [AFNHelper macPost:urlStr parameters:parameters success:^(id responseObject) {
-        
-        if([responseObject[@"message"] isEqualToString:@"ok"]){
-            
-            NSString *userId = SafeString(responseObject[@"result"][@"userId"]);
-            
-            //登录成功后 ---- 用户名,密码,设备唯一识别号进行保存(在用户名和密码登录的时候才进行保存)
-            
-            if([loginType isEqualToString:@"1"]){
-                
-                NSDictionary *dict = @{@"userName":self.accountcontent.stringValue,@"password":self.codecontent.stringValue,@"deviceId":@"",@"ipAddress":self.ipcontent.stringValue,@"port":self.portcontent.stringValue,@"userId":userId};
-                
-                [JumpKeyChain addKeychainData:dict forKey:@"userInfo"];
-                
-            }
-            
-            if(weakself.deviceCode.length > 0){
-  
-                [weakself.firstPageWC.window orderFront:nil];//显示要跳转的窗口
-                
-                [[weakself.firstPageWC window] center];//显示在屏幕中间
-                
-                [weakself.window orderOut:nil];//关闭当前窗口
-                
-            }else{
-                
-                weakself.deviceCode = [JumpKeyChain getUUIDInKeychain];
-                
-                weakself.registereWC.deviceCode = weakself.deviceCode;
-                
-                [weakself.registereWC.window orderFront:nil];//显示要跳转的窗口
-                
-                [[weakself.registereWC window] center];//显示在屏幕中间
-                
-                [weakself.window orderOut:nil];//关闭当前窗口
-            }
-  
-        }else{
-            
-            JumpLog(@"登录失败");
-            [weakself show:@"提示" andMessage:@"登录失败"];
-        }
-        
-    } andFailed:^(id error) {
-        
-        [weakself show:@"提示" andMessage:@"请求服务器失败"];
-
-    }];
-}
 
 
 
@@ -276,18 +373,6 @@
     [alert beginSheetModalForWindow:self.window completionHandler:nil];
 }
 
-#pragma mark --- 加载动画
-
--(void)loadAnimat{
-    
-//    [NSAnimationContext beginGrouping];
-//    [[NSAnimationContext currentContext]setDuration:3.0f]; //执行时间
-//    [[self.window.contentView animator]setAlphaValue:0.1f]; //改变属性值  此项是设置透明度
-  
-}
-
-
-
 #pragma mark --- 获取服务器配置的登录方式
 
 -(void)getLoginType{
@@ -300,17 +385,31 @@
     }
     
     NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",self.ipcontent.stringValue,self.portcontent.stringValue,Mac_GetloginType];
-
     
     [AFNHelper macPost:urlStr parameters:nil success:^(id responseObject) {
         
         NSString *type = @"3";
         NSString *title = @"用户名密码登录";
+
+        if([weakself.passwordTitle.stringValue isEqualToString:@"验证码"]){
+            
+            title = @"短信验证码登录";
+            
+        }else{
+            
+            title = @"用户名密码登录";
+            
+        }
         
         if([responseObject[@"message"] isEqualToString:@"ok"]){
             
             NSString *smscertType = SafeString(responseObject[@"result"][@"smscert"]);
             NSString *codeType = SafeString(responseObject[@"result"][@"accountcert"]);
+            
+            weakself.isIn = SafeString(responseObject[@"result"][@"checknetphone"]);
+            weakself.isSyn = SafeString(responseObject[@"result"][@"syncdevicephone"]);
+            weakself.isPut = SafeString(responseObject[@"result"][@"filleddevicephone"]);
+
             
             if([smscertType isEqualToString:@"1"] && [codeType isEqualToString:@"0"]){
                 //如果只支持短信验证码登录
@@ -328,22 +427,64 @@
                 //两者都支持
                 type = @"3";
                 
-                title = @"用户名密码登录";
+                if([weakself.passwordTitle.stringValue isEqualToString:@"验证码"]){
+                    
+                    title = @"短信验证码登录";
+
+                }else{
+                    
+                    title = @"用户名密码登录";
+                    
+                }
+                
             }
             
+            if(weakself.isgetServer == NO){
+                
+                [weakself show:@"提示" andMessage:@"获取服务器配置成功"];
+            
+            }else{
+                
+                [weakself show:@"提示" andMessage:@"获取服务器配置失败,请检查ip地址是否正确"];
+
+            }
+            
+            weakself.isgetServer = YES;
+
         }else{
             
             type = @"3";
             
-            title = @"用户名密码登录";
-            
+            if([weakself.passwordTitle.stringValue isEqualToString:@"验证码"]){
+                
+                title = @"短信验证码登录";
+                
+            }else{
+                
+                title = @"用户名密码登录";
+
+            }
         }
         
         [weakself defaultUI:title andType:type];
         
     } andFailed:^(id error) {
         
-        [weakself defaultUI:@"用户名密码登录" andType:@"3"];
+        NSString *title;
+        
+        if([weakself.passwordTitle.stringValue isEqualToString:@"验证码"]){
+            
+            title = @"短信验证码登录";
+            
+        }else{
+            
+            title = @"用户名密码登录";
+            
+        }
+        
+        [weakself defaultUI:title andType:@"3"];
+        
+        [weakself show:@"提示" andMessage:@"获取服务器配置失败,请检查ip地址是否正确"];
 
     }];
 
@@ -460,6 +601,52 @@
     }else{
         return NO;
     }
+}
+
+
+#pragma mark --- 获取服务器配置
+
+- (IBAction)getServerSet:(NSButton *)sender {
+    
+    if(self.ipcontent.stringValue.length < 1){
+        
+        [self show:@"提示" andMessage:@"请填写ip地址"];
+        
+        return;
+    
+    }else if (self.portcontent.stringValue.length < 1){
+        
+        [self show:@"提示" andMessage:@"请填写端口号"];
+
+        return;
+    }
+    
+    self.isgetServer = NO;
+    
+    [self getLoginType];
+}
+
+#pragma mark --- 同步手机号到设备
+
+-(void)synWithPhone{
+    
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",self.ipcontent.stringValue,self.portcontent.stringValue,Mac_UpdataPhone];
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"phoneNumber"] = self.accountcontent.stringValue;
+    parameters[@"sid"] = self.deviceCode;
+
+    [AFNHelper macPost:urlStr parameters:parameters success:^(id responseObject) {
+        
+        if([responseObject[@"message"] isEqualToString:@"ok"]){
+            
+            JumpLog(@"同步成功");
+        }
+        
+    } andFailed:^(id error) {
+        
+    }];
 }
 
 

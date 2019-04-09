@@ -151,7 +151,6 @@
     NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
     
     NSString *userId = SafeString(defaultDict[@"userId"]);
-
     
     NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_CheckEntry];
     
@@ -364,27 +363,27 @@
     //获取本机的ip地址
     NSString *macIp = [self getDeviceIPAddress];
     
-    if([self.serverIp isEqualToString:@""]){
+    if([self.serverIp isEqualToString:macIp]){
         
-        NSString *ipaddress = [NSString stringWithFormat:@"\n服务器IP地址异常,服务器IP为:%@",self.serverIp];
-
+        NSString *ipaddress = [NSString stringWithFormat:@"\n设备IP地址正常,服务器设备IP为:%@",self.serverIp];
+        
         [self.contentStr appendFormat:@"%@", ipaddress];
-
-        self.isRight = NO;
+        
+        self.isRight = YES;
 
     }else{
         
-        NSString *ipaddress = [NSString stringWithFormat:@"\n服务器IP地址正常,服务器IP为:%@",self.serverIp];
-
+        NSString *ipaddress = [NSString stringWithFormat:@"\n设备IP地址异常,服务器设备IP为:%@",self.serverIp];
+        
         [self.contentStr appendFormat:@"%@", ipaddress];
-
-        self.isRight = YES;
+        
+        self.isRight = NO;
 
     }
     
     if(reductionNum > 1000){
         
-        NSString *time = [NSString stringWithFormat:@"\n服务器时间检查异常,服务器时间为:%@",self.serverTime];
+        NSString *time = [NSString stringWithFormat:@"\n设备时间检查异常,服务器时间为:%@",self.serverTime];
         
         [self.contentStr appendFormat:@"%@", time];
             
@@ -392,7 +391,7 @@
         
     }else{
         
-        NSString *time = [NSString stringWithFormat:@"\n服务器时间检查正常,服务器时间为:%@",self.serverTime];
+        NSString *time = [NSString stringWithFormat:@"\n设备时间检查正常,服务器时间为:%@",self.serverTime];
 
         [self.contentStr appendFormat:@"%@", time];
 

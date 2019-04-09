@@ -12,9 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JumpRegistereViewController : NSViewController
 
-//设备唯一识别码
-@property (copy,nonatomic) NSString *deviceCode;
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -27,6 +27,9 @@
 #define Mac_CheckEntry @"/mobile/getCheck.action"
 //获取服务器信息
 #define Mac_ServerInfo @"/mobile/getServiceInfo.action"
-
+//校验手机号是否为内网手机号
+#define Mac_IsIntranet @"/mobile/getCheckNetMobile.action"
+//更新手机号到设备详情
+#define Mac_UpdataPhone @"/mobile/updateDevinfoPhone.action"
 
 #endif /* InterfaceHeader_h */

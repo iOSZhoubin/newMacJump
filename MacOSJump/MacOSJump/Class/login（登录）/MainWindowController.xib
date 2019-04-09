@@ -8,14 +8,14 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController">
             <connections>
-                <outlet property="accountcontent" destination="Blf-Va-zBz" id="l2G-BR-cKA"/>
+                <outlet property="accountcontent" destination="slq-l1-9kI" id="pbd-vj-nRt"/>
                 <outlet property="changeTypeBtn" destination="MnG-Ck-Hwa" id="s64-lK-Kc5"/>
                 <outlet property="codecontent" destination="7qL-fL-fe5" id="gE2-eA-sft"/>
                 <outlet property="getCodeBtn" destination="uMF-XH-Kj3" id="zot-pO-1nq"/>
                 <outlet property="ipcontent" destination="P6w-5W-IFt" id="Rct-ov-kKa"/>
                 <outlet property="loginBtn" destination="Mlh-Pd-ZZj" id="UvP-iQ-mdh"/>
                 <outlet property="passwordTitle" destination="Abe-zH-u5d" id="Fvt-5c-zzj"/>
-                <outlet property="portcontent" destination="slq-l1-9kI" id="Hyl-7l-Sak"/>
+                <outlet property="portcontent" destination="Blf-Va-zBz" id="faB-qV-FBv"/>
                 <outlet property="rightDistance" destination="L0l-US-C1v" id="tcf-Ed-Uzq"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
@@ -69,7 +69,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="VNp-fc-Vqi"/>
                                     </constraints>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" focusRingType="none" placeholderString="请输入用户名(必填)" bezelStyle="round" id="pil-tk-CML">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" focusRingType="none" placeholderString="请输入端口号(必填)" bezelStyle="round" id="pil-tk-CML">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -80,7 +80,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="x8D-mz-fXF"/>
                                     </constraints>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" focusRingType="none" placeholderString="请输入端口号(必填)" bezelStyle="round" id="8js-b6-4A3">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" focusRingType="none" placeholderString="请输入用户名(必填)" bezelStyle="round" id="8js-b6-4A3">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -125,9 +125,10 @@
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MnG-Ck-Hwa">
-                                    <rect key="frame" x="109" y="115" width="100" height="19"/>
+                                    <rect key="frame" x="20" y="117" width="100" height="19"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="100" id="wHy-al-aNU"/>
+                                        <constraint firstAttribute="height" constant="18" id="1gu-Bd-d5R"/>
+                                        <constraint firstAttribute="width" constant="100" id="Cb1-Ha-kxH"/>
                                     </constraints>
                                     <buttonCell key="cell" type="roundRect" title="短信验证码登录" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rTo-50-p4J">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -155,7 +156,7 @@
                                         <constraint firstAttribute="width" constant="40" id="O9l-VZ-diZ"/>
                                         <constraint firstAttribute="height" constant="20" id="Off-6K-1f2"/>
                                     </constraints>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="用户名" id="6Gc-0X-0uE">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="端口号" id="6Gc-0X-0uE">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -167,7 +168,7 @@
                                         <constraint firstAttribute="width" constant="40" id="DOX-57-wdV"/>
                                         <constraint firstAttribute="height" constant="20" id="FgL-fn-sTz"/>
                                     </constraints>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="端口号" id="dek-6s-KZR">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="用户名" id="dek-6s-KZR">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -185,11 +186,24 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RoC-82-fRP">
+                                    <rect key="frame" x="198" y="117" width="100" height="19"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="18" id="9Je-8S-nlK"/>
+                                        <constraint firstAttribute="width" constant="100" id="HsQ-Fi-dTc"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="roundRect" title="获取服务器配置" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fJk-Vb-PLR">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="cellTitle"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="getServerSet:" target="-2" id="xgm-fA-lRa"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="lmA-bT-rUN" firstAttribute="leading" secondItem="abW-L3-SMT" secondAttribute="leading" id="1VD-Fd-7Be"/>
                                 <constraint firstItem="lmA-bT-rUN" firstAttribute="top" secondItem="abW-L3-SMT" secondAttribute="top" id="4TY-4U-EAB"/>
-                                <constraint firstItem="MnG-Ck-Hwa" firstAttribute="top" secondItem="7qL-fL-fe5" secondAttribute="bottom" constant="20" id="4pQ-WI-GQD"/>
                                 <constraint firstItem="KaG-dK-Gpy" firstAttribute="leading" secondItem="abW-L3-SMT" secondAttribute="leading" constant="20" id="Bdr-M8-eRA"/>
                                 <constraint firstItem="Mlh-Pd-ZZj" firstAttribute="leading" secondItem="abW-L3-SMT" secondAttribute="leading" constant="50" id="EDc-QF-gPK"/>
                                 <constraint firstItem="Blf-Va-zBz" firstAttribute="top" secondItem="P6w-5W-IFt" secondAttribute="bottom" constant="14" id="FJW-I6-gKL"/>
@@ -200,13 +214,15 @@
                                 <constraint firstAttribute="trailing" secondItem="7qL-fL-fe5" secondAttribute="trailing" constant="20" id="L0l-US-C1v"/>
                                 <constraint firstAttribute="trailing" secondItem="Mlh-Pd-ZZj" secondAttribute="trailing" constant="50" id="WEr-Fc-WKk"/>
                                 <constraint firstAttribute="trailing" secondItem="lmA-bT-rUN" secondAttribute="trailing" id="Wmr-m7-Exd"/>
+                                <constraint firstItem="MnG-Ck-Hwa" firstAttribute="leading" secondItem="abW-L3-SMT" secondAttribute="leading" constant="20" id="Xhm-Rg-iG8"/>
                                 <constraint firstItem="Abe-zH-u5d" firstAttribute="top" secondItem="CHA-qL-OLQ" secondAttribute="bottom" constant="25" id="XjY-XR-Ygq"/>
                                 <constraint firstItem="Abe-zH-u5d" firstAttribute="leading" secondItem="abW-L3-SMT" secondAttribute="leading" constant="20" id="Xm3-Aq-XY9"/>
                                 <constraint firstItem="7qL-fL-fe5" firstAttribute="leading" secondItem="Abe-zH-u5d" secondAttribute="trailing" constant="8" id="Xmn-uG-Rpj"/>
-                                <constraint firstItem="MnG-Ck-Hwa" firstAttribute="centerX" secondItem="abW-L3-SMT" secondAttribute="centerX" id="Ylq-9O-rlo"/>
+                                <constraint firstAttribute="trailing" secondItem="RoC-82-fRP" secondAttribute="trailing" constant="20" id="YFz-Db-aWe"/>
                                 <constraint firstItem="P6w-5W-IFt" firstAttribute="top" secondItem="lmA-bT-rUN" secondAttribute="bottom" constant="10" id="acq-YE-yQT"/>
                                 <constraint firstItem="uMF-XH-Kj3" firstAttribute="top" secondItem="slq-l1-9kI" secondAttribute="bottom" constant="21" id="eSF-Zx-RfC"/>
                                 <constraint firstAttribute="trailing" secondItem="lmA-bT-rUN" secondAttribute="trailing" id="haS-YP-Hcw"/>
+                                <constraint firstItem="MnG-Ck-Hwa" firstAttribute="top" secondItem="7qL-fL-fe5" secondAttribute="bottom" constant="18" id="hvU-3o-0Wl"/>
                                 <constraint firstAttribute="trailing" secondItem="Blf-Va-zBz" secondAttribute="trailing" constant="20" id="jUZ-BV-02e"/>
                                 <constraint firstItem="slq-l1-9kI" firstAttribute="top" secondItem="Blf-Va-zBz" secondAttribute="bottom" constant="15" id="nXc-RH-LHC"/>
                                 <constraint firstItem="P6w-5W-IFt" firstAttribute="leading" secondItem="KaG-dK-Gpy" secondAttribute="trailing" constant="8" id="nh6-K1-jBr"/>
@@ -216,6 +232,7 @@
                                 <constraint firstItem="7qL-fL-fe5" firstAttribute="top" secondItem="slq-l1-9kI" secondAttribute="bottom" constant="15" id="pco-gT-0sy"/>
                                 <constraint firstItem="CHA-qL-OLQ" firstAttribute="top" secondItem="P5v-NF-Tyd" secondAttribute="bottom" constant="25" id="qKd-gp-DPF"/>
                                 <constraint firstAttribute="bottom" secondItem="Mlh-Pd-ZZj" secondAttribute="bottom" constant="20" id="qjd-IL-0MI"/>
+                                <constraint firstItem="RoC-82-fRP" firstAttribute="top" secondItem="7qL-fL-fe5" secondAttribute="bottom" constant="18" id="r3A-mA-8ia"/>
                                 <constraint firstAttribute="trailing" secondItem="P6w-5W-IFt" secondAttribute="trailing" constant="20" id="uYb-PN-K2s"/>
                                 <constraint firstAttribute="trailing" secondItem="uMF-XH-Kj3" secondAttribute="trailing" constant="24" id="w8q-L4-FhY"/>
                                 <constraint firstItem="slq-l1-9kI" firstAttribute="leading" secondItem="CHA-qL-OLQ" secondAttribute="trailing" constant="8" id="wrb-t7-Jby"/>

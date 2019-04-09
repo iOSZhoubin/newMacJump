@@ -11,6 +11,14 @@
 #import "AppDelegate.h"
 #import "FirstPageTabController.h"
 #import "FirstPageTabController.h"
+//wifi信息
+#import <sys/socket.h>
+#import <ifaddrs.h>
+#import <netinet/in.h>
+#import <arpa/inet.h>
+#import <sys/sysctl.h>
+#import <net/if.h>
+#import <net/if_dl.h>
 
 @interface JumpRegistereWindowController ()<ChooseCompanyDelegate>
 
@@ -42,6 +50,8 @@
 @property (weak) IBOutlet NSTextField *remark;
 //选择部门
 @property (weak) IBOutlet NSButton *chooseDepart;
+//mac地址
+@property (copy,nonatomic) NSString *macAddress;
 
 @end
 
@@ -66,6 +76,8 @@
     self.firstPageWC = [[FirstPageTabController alloc]initWithWindowNibName:@"FirstPageTabController"];
     
     self.choosePeople.delegate = self;
+    
+    [self getMacaddress];
     
     [self getTitleNameArray];//获取注册列表
 }
@@ -175,47 +187,42 @@
     
     L2CWeakSelf(self);
     
+    //获取本机的ip地址
+    NSString *macIp = [self getDeviceIPAddress];
+    
+    NSDictionary *defaultDict = [JumpKeyChain getKeychainDataForKey:@"userInfo"];
+    
+    NSString *port = SafeString(defaultDict[@"port"]);
+    NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
+    NSString *userId = SafeString(defaultDict[@"userId"]);
+    
     NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
     
-    paramters[@"account"] = SafeString(self.accout);
+    paramters[@"userId"] = userId;
     paramters[@"name"] = SafeString(self.userName.stringValue);
     paramters[@"departmentName"] = SafeString(self.dataDict[@"companyName"]);
     paramters[@"departmentId"] = SafeString(self.dataDict[@"companyId"]);
     paramters[@"address"] = SafeString(self.computerAddress.stringValue);
     paramters[@"phoneNumber"] = SafeString(self.phoneNum.stringValue);
     paramters[@"email"] = SafeString(self.mail.stringValue);
-    paramters[@"deviceType"] = SafeString(self.deviceType.stringValue);
+    paramters[@"deviceType"] = @"3";
     paramters[@"remark"] = SafeString(self.remark.stringValue);
-    
-    
-    NSDictionary *defaultDict = [JumpKeyChain getKeychainDataForKey:@"userInfo"];
-    
-    NSString *port = SafeString(defaultDict[@"port"]);
-    NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
-    
-    
+    paramters[@"sid"] = SafeString(self.deviceCode);
+    paramters[@"ip"] = SafeString(macIp);
+    paramters[@"mac"] = SafeString(self.macAddress);
+
     NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_Register];
     
     [AFNHelper macPost:urlStr parameters:paramters success:^(id responseObject) {
         
         if([responseObject[@"message"] isEqualToString:@"ok"]){
             
-            
-            if(weakself.deviceCode.length > 0){
-                
                 [weakself.firstPageWC.window orderFront:nil];//显示要跳转的窗口
                 
                 [[weakself.firstPageWC window] center];//显示在屏幕中间
                 
                 [weakself.window orderOut:nil];//关闭当前窗口
-                
-            }else{
-                
-                [weakself show:@"提示" andMessage:@"保存成功"];
-                
-                [weakself userInfoDetail];
-            }
-            
+         
         }else{
             
             [weakself show:@"提示" andMessage:@"保存失败"];
@@ -251,8 +258,6 @@
             self.titleArray = responseObject[@"result"];
             
             [weakself settingDefaultUI];//判断是否可以输入
-            
-            [weakself userInfoDetail];//获取详情
             
         }else{
             
@@ -387,14 +392,7 @@
                 self.deviceType.enabled = YES;
             }
             
-            if(defaultContent.length > 0){
-                
-                self.deviceType.placeholderString = defaultContent;
-                
-            }else{
-                
-                self.deviceType.placeholderString = discripe;
-            }
+            self.deviceType.stringValue = @"Mac";
             
         }else if ([title isEqualToString:@"备注"]){
             
@@ -419,57 +417,6 @@
     }
 }
 
-#pragma mark --- 获取个人信息
-
--(void)userInfoDetail{
-    
-    L2CWeakSelf(self);
-    
-    NSDictionary *defaultDict = [JumpKeyChain getKeychainDataForKey:@"userInfo"];
-    
-    NSString *port = SafeString(defaultDict[@"port"]);
-    NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
-    NSString *userId = SafeString(defaultDict[@"userId"]);
-    
-    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_GetUserInfo];
-    
-    
-    [AFNHelper macPost:urlStr parameters:@{@"userId":userId} success:^(id responseObject) {
-        
-        if([responseObject[@"message"] isEqualToString:@"ok"]){
-            
-            //使用人
-            weakself.userName.stringValue = SafeString(responseObject[@"result"][@"name"]);
-            //电子邮箱
-            weakself.mail.stringValue = SafeString(responseObject[@"result"][@"email"]);
-            //设备类型
-            weakself.deviceType.stringValue = SafeString(responseObject[@"result"][@"deviceType"]);
-            //电话
-            weakself.phoneNum.stringValue = SafeString(responseObject[@"result"][@"phoneNumber"]);
-            //设备位置
-            weakself.computerAddress.stringValue = SafeString(responseObject[@"result"][@"address"]);
-            //部门名称
-            weakself.companyName.stringValue = SafeString(responseObject[@"result"][@"departmentName"]);
-            //备注
-            weakself.remark.stringValue = SafeString(responseObject[@"result"][@"remark"]);
-            
-            weakself.dataDict[@"companyName"] = SafeString(responseObject[@"result"][@"departmentName"]);
-            //部门id
-            weakself.dataDict[@"companyId"] = SafeString(responseObject[@"result"][@"departmentId"]);
-            
-            weakself.accout = SafeString(responseObject[@"result"][@"account"]);
-            
-        }else{
-            
-            [weakself show:@"提示" andMessage:@"获取设备信息失败"];
-        }
-        
-    } andFailed:^(id error) {
-        
-        [weakself show:@"提示" andMessage:@"请求服务器失败"];
-        
-    }];
-}
 
 #pragma mark --- 提示框
 
@@ -486,5 +433,94 @@
     
     [alert beginSheetModalForWindow:self.window completionHandler:nil];
 }
+
+
+#pragma mark -- 获取本机IP地址和Mac地址
+
+- (NSString *)getDeviceIPAddress {
+    
+    NSString *address = @"";
+    
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr = NULL;
+    int success = 0;
+    
+    success = getifaddrs(&interfaces);
+    
+    if (success == 0) { // 0 表示获取成功
+        
+        temp_addr = interfaces;
+        while (temp_addr != NULL) {
+            
+            if( temp_addr->ifa_addr->sa_family == AF_INET) {
+                // Check if interface is en0 which is the wifi connection on the iPhone
+                if ([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+                    // Get NSString from C String
+                    struct sockaddr_in *sockaddr = (struct sockaddr_in *)temp_addr->ifa_addr;
+                    address = [NSString stringWithUTF8String:inet_ntoa(sockaddr->sin_addr)];
+                }
+            }
+            
+            temp_addr = temp_addr->ifa_next;
+        }
+    }
+    
+    freeifaddrs(interfaces);
+    
+    NSLog(@"IP地址是：%@", address);
+    return address;
+}
+
+
+- (void)getMacaddress
+{
+    kern_return_t kr;
+    CFMutableDictionaryRef matchDict;
+    io_iterator_t iterator;
+    io_registry_entry_t entry;
+    
+    matchDict = IOServiceMatching("IOEthernetInterface");
+    kr = IOServiceGetMatchingServices(kIOMasterPortDefault, matchDict, &iterator);
+    
+    NSDictionary *resultInfo = nil;
+    
+    while ((entry = IOIteratorNext(iterator)) != 0)
+    {
+        CFMutableDictionaryRef properties=NULL;
+        kr = IORegistryEntryCreateCFProperties(entry,
+                                               &properties,
+                                               kCFAllocatorDefault,
+                                               kNilOptions);
+        if (properties)
+        {
+            resultInfo = (__bridge_transfer NSDictionary *)properties;
+            NSString *bsdName = [resultInfo objectForKey:@"BSD Name"];
+            NSData *macData = [resultInfo objectForKey:@"IOMACAddress"];
+            if (!macData)
+            {
+                continue;
+            }
+            
+            NSMutableString *macAddress = [[NSMutableString alloc] init];
+            const UInt8 *bytes = [macData bytes];
+            for (int i=0; i<macData.length; i++)
+            {
+                [macAddress appendFormat:@"%02x",*(bytes+i)];
+            }
+            
+//            打印Mac地址
+            if (bsdName && macAddress)
+            {
+                NSLog(@"网卡:%@\nMac地址:%@\n",bsdName,macAddress);
+            }
+            
+            self.macAddress = [NSString stringWithFormat:@"%@",macAddress];
+            
+        }
+    }
+    
+    IOObjectRelease(iterator);
+}
+
 
 @end
