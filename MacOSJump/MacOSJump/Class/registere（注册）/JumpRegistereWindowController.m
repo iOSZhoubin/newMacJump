@@ -217,6 +217,8 @@
         
         if([responseObject[@"message"] isEqualToString:@"ok"]){
             
+                [JumpKeyChain addKeychainData:weakself.redataDict forKey:@"userInfo"];
+            
                 [weakself.firstPageWC.window orderFront:nil];//显示要跳转的窗口
                 
                 [[weakself.firstPageWC window] center];//显示在屏幕中间

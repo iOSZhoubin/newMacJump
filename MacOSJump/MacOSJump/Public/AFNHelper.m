@@ -64,6 +64,9 @@
     
     request.HTTPBody = [body dataUsingEncoding:NSUTF8StringEncoding];
     
+    JumpLog(@"%@",url);
+    JumpLog(@"%@",parameters);
+    
     NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         dispatch_async(dispatch_get_main_queue(), ^{ 

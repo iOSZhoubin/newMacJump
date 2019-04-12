@@ -95,6 +95,8 @@
     self.codecontent.stringValue = SafeString(defaultDict[@"password"]);
     
     self.deviceCode = [JumpKeyChain firstGetUUIDInKeychain];
+    
+    JumpLog(@"设备id是(钥匙串中)---%@",self.deviceCode);
 
 }
 
@@ -164,7 +166,11 @@
             NSString *userId = SafeString(responseObject[@"result"][@"userId"]);
 
             if(weakself.deviceCode.length > 0){
-            
+                
+                NSDictionary *dict = [weakself saveDataWithUserId:userId deviceId:weakself.deviceCode];
+
+                [JumpKeyChain addKeychainData:dict forKey:@"userInfo"];
+
                 [weakself.firstPageWC.window orderFront:nil];//显示要跳转的窗口
                 
                 [[weakself.firstPageWC window] center];//显示在屏幕中间
@@ -173,9 +179,15 @@
                 
             }else{
 
+                NSDictionary *dict = [weakself saveDataWithUserId:userId deviceId:weakself.deviceCode];
+
                 weakself.deviceCode = [JumpKeyChain getUUIDInKeychain];
+                
+                JumpLog(@"设备id是(新设备生成的)---%@",weakself.deviceCode);
 
                 weakself.registereWC.deviceCode = weakself.deviceCode;
+                
+                weakself.registereWC.redataDict = dict;
 
                 [weakself.registereWC.window orderFront:nil];//显示要跳转的窗口
 
@@ -184,30 +196,7 @@
                 [weakself.window orderOut:nil];//关闭当前窗口
             }
             
-            //登录成功后 ---- 用户名,密码,设备唯一识别号进行保存(在用户名和密码登录的时候才进行保存)
-            
-            if([loginType isEqualToString:@"1"]){
-                
-                NSDictionary *dict = @{@"userName":self.accountcontent.stringValue,@"password":@"",@"deviceId":weakself.deviceCode,@"ipAddress":self.ipcontent.stringValue,@"port":self.portcontent.stringValue,@"userId":userId};
-                
-                [JumpKeyChain addKeychainData:dict forKey:@"userInfo"];
-                
-            }else{
-                
-                NSString *accountStr = @"";
 
-                if([weakself.isPut isEqualToString:@"1"]){
-
-                    accountStr = SafeString(self.accountcontent.stringValue);
-                }
-
-                NSDictionary *dict = @{@"userName":accountStr,@"password":@"",@"deviceId":SafeString(weakself.deviceCode),@"userId":SafeString(userId)};
-
-                [JumpKeyChain addKeychainData:dict forKey:@"userInfo"];
-                
-            }
-  
-            
             if([weakself.isSyn isEqualToString:@"1"] && [weakself.passwordTitle.stringValue isEqualToString:@"验证码"]){
                 //服务器勾选了将手机号同步到设备联系电话
                 
@@ -216,7 +205,6 @@
         
         }else{
             
-            JumpLog(@"登录失败");
             [weakself show:@"提示" andMessage:@"登录失败"];
         }
         
@@ -226,6 +214,46 @@
         
     }];
 }
+
+
+//保存本地
+-(NSDictionary *)saveDataWithUserId:(NSString *)userId deviceId:(NSString *)deviceId{
+    
+    //登录成功后 ---- 用户名,密码,设备唯一识别号进行保存(在用户名和密码登录的时候才进行保存)
+    
+    NSString *loginType;
+    
+    if([self.passwordTitle.stringValue isEqualToString:@"密码"]){
+        
+        loginType = @"1";
+        
+    }else{
+        
+        loginType = @"2";
+    }
+    
+    NSDictionary *dict;
+
+    if([loginType isEqualToString:@"1"]){
+        
+        dict = @{@"userName":self.accountcontent.stringValue,@"password":@"",@"deviceId":deviceId,@"ipAddress":self.ipcontent.stringValue,@"port":self.portcontent.stringValue,@"userId":userId};
+        
+    }else{
+        
+        NSString *accountStr = @"";
+        
+        if([self.isPut isEqualToString:@"1"]){
+            
+            accountStr = SafeString(self.accountcontent.stringValue);
+        }
+        
+        dict = @{@"userName":accountStr,@"password":@"",@"deviceId":SafeString(deviceId),@"userId":SafeString(userId)};
+        
+    }
+    
+    return dict;
+}
+
 
 
 #pragma mark --- 切换登录方式

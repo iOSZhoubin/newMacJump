@@ -381,7 +381,7 @@
 
     }
     
-    if(reductionNum > 1000){
+    if(reductionNum > 300){
         
         NSString *time = [NSString stringWithFormat:@"\n设备时间检查异常,服务器时间为:%@",self.serverTime];
         
