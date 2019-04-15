@@ -17,6 +17,8 @@
 		3978B8D6222CFBB300D28D95 /* SecurityNSString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3978B8D4222CFBB300D28D95 /* SecurityNSString.m */; };
 		39803FBC223F22E2004C03AC /* MytitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39803FBB223F22E2004C03AC /* MytitleView.m */; };
 		39813D7C223B47DA00805151 /* ApplicitionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 39813D7B223B47DA00805151 /* ApplicitionModel.m */; };
+		3989098C2264558000DBF1CE /* NewAccountWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3989098A2264558000DBF1CE /* NewAccountWindowController.m */; };
+		3989098D2264558000DBF1CE /* NewAccountWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3989098B2264558000DBF1CE /* NewAccountWindowController.xib */; };
 		398EA46821EC87AD0075F2F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 398EA46721EC87AD0075F2F3 /* AppDelegate.m */; };
 		398EA46B21EC87AD0075F2F3 /* MacOSJump.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 398EA46921EC87AD0075F2F3 /* MacOSJump.xcdatamodeld */; };
 		398EA46D21EC87B80075F2F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 398EA46C21EC87B80075F2F3 /* Assets.xcassets */; };
@@ -66,6 +68,9 @@
 		39803FBB223F22E2004C03AC /* MytitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MytitleView.m; sourceTree = "<group>"; };
 		39813D7A223B47DA00805151 /* ApplicitionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicitionModel.h; sourceTree = "<group>"; };
 		39813D7B223B47DA00805151 /* ApplicitionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicitionModel.m; sourceTree = "<group>"; };
+		398909892264558000DBF1CE /* NewAccountWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewAccountWindowController.h; sourceTree = "<group>"; };
+		3989098A2264558000DBF1CE /* NewAccountWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewAccountWindowController.m; sourceTree = "<group>"; };
+		3989098B2264558000DBF1CE /* NewAccountWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewAccountWindowController.xib; sourceTree = "<group>"; };
 		398EA46321EC87AD0075F2F3 /* MacOSJump.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacOSJump.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		398EA46621EC87AD0075F2F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		398EA46721EC87AD0075F2F3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -194,6 +199,16 @@
 			path = "History(检查记录)";
 			sourceTree = "<group>";
 		};
+		398909882264556800DBF1CE /* NewAccount(注册用户) */ = {
+			isa = PBXGroup;
+			children = (
+				398909892264558000DBF1CE /* NewAccountWindowController.h */,
+				3989098A2264558000DBF1CE /* NewAccountWindowController.m */,
+				3989098B2264558000DBF1CE /* NewAccountWindowController.xib */,
+			);
+			path = "NewAccount(注册用户)";
+			sourceTree = "<group>";
+		};
 		398EA45A21EC87AD0075F2F3 = {
 			isa = PBXGroup;
 			children = (
@@ -237,7 +252,7 @@
 			children = (
 				398EA48C21EC8B2C0075F2F3 /* Others（其他） */,
 				398EA48B21EC8B190075F2F3 /* firstPage（首页） */,
-				398EA48A21EC8B040075F2F3 /* registere（注册） */,
+				398EA48A21EC8B040075F2F3 /* registere（完善个人信息） */,
 				398EA48921EC8AF60075F2F3 /* login（登录） */,
 			);
 			path = Class;
@@ -262,7 +277,7 @@
 			path = "login（登录）";
 			sourceTree = "<group>";
 		};
-		398EA48A21EC8B040075F2F3 /* registere（注册） */ = {
+		398EA48A21EC8B040075F2F3 /* registere（完善个人信息） */ = {
 			isa = PBXGroup;
 			children = (
 				39A29FF92240F2930021D415 /* JumpRegistereViewController.h */,
@@ -272,7 +287,7 @@
 				39C512E22254650500EBA745 /* JumpRegistereWindowController.m */,
 				39C512E32254650500EBA745 /* JumpRegistereWindowController.xib */,
 			);
-			path = "registere（注册）";
+			path = "registere（完善个人信息）";
 			sourceTree = "<group>";
 		};
 		398EA48B21EC8B190075F2F3 /* firstPage（首页） */ = {
@@ -291,6 +306,7 @@
 		398EA48C21EC8B2C0075F2F3 /* Others（其他） */ = {
 			isa = PBXGroup;
 			children = (
+				398909882264556800DBF1CE /* NewAccount(注册用户) */,
 				39A29F88224096830021D415 /* Status(状态) */,
 				39813DB6223B9D1100805151 /* History(检查记录) */,
 				39813D79223B47DA00805151 /* Process(进程管家) */,
@@ -376,6 +392,7 @@
 				398EA46D21EC87B80075F2F3 /* Assets.xcassets in Resources */,
 				39A29FF82240F00C0021D415 /* HistoryRecordViewController.xib in Resources */,
 				39A2A0022240F6970021D415 /* FirstPageViewController.xib in Resources */,
+				3989098D2264558000DBF1CE /* NewAccountWindowController.xib in Resources */,
 				39A29F922240BBA00021D415 /* RecordRemarkController.xib in Resources */,
 				398EA48121EC87F30075F2F3 /* MainWindowController.xib in Resources */,
 				39A29FFD2240F2930021D415 /* JumpRegistereViewController.xib in Resources */,
@@ -429,6 +446,7 @@
 				39CE977022435ED600566EC6 /* DateCalculater.m in Sources */,
 				3978B8D3222CFA8D00D28D95 /* AFNHelper.m in Sources */,
 				39510B6D222E43D4000A7A62 /* JumpCompanyModel.m in Sources */,
+				3989098C2264558000DBF1CE /* NewAccountWindowController.m in Sources */,
 				398EA47321EC87B80075F2F3 /* main.m in Sources */,
 				39A29FF72240F00C0021D415 /* HistoryRecordViewController.m in Sources */,
 				39C512E42254650500EBA745 /* JumpRegistereWindowController.m in Sources */,

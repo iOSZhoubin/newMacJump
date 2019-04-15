@@ -31,5 +31,8 @@
 #define Mac_IsIntranet @"/mobile/getCheckNetMobile.action"
 //更新手机号到设备详情
 #define Mac_UpdataPhone @"/mobile/updateDevinfoPhone.action"
+//注册用户
+#define Mac_Registed @"/mobile/registUser.action"
+
 
 #endif /* InterfaceHeader_h */

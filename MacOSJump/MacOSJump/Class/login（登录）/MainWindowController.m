@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "FirstPageTabController.h"
 #import "JumpRegistereWindowController.h"
+#import "NewAccountWindowController.h"
 
 
 @interface MainWindowController ()
@@ -17,6 +18,9 @@
 @property (strong,nonatomic) FirstPageTabController *firstPageWC;
 
 @property (strong,nonatomic) JumpRegistereWindowController *registereWC;
+
+@property (strong,nonatomic) NewAccountWindowController *accountWC;
+
 
 //ip地址
 @property (weak) IBOutlet NSTextField *ipcontent;
@@ -67,6 +71,8 @@
     self.getCodeBtn.hidden = YES;
     
     self.contentViewController.view.layer.backgroundColor = [NSColor magentaColor].CGColor;
+    
+    self.accountWC = [[NewAccountWindowController alloc]initWithWindowNibName:@"NewAccountWindowController"];
 
     self.firstPageWC = [[FirstPageTabController alloc]initWithWindowNibName:@"FirstPageTabController"];
 
@@ -321,17 +327,12 @@
 
 -(void)ischeck{
     
-    if(self.ipcontent.stringValue.length < 1){
+    if(self.ipcontent.stringValue.length < 1 || self.portcontent.stringValue.length < 1){
         
-        [self show:@"提示" andMessage:@"请填写ip地址"];
-        
-        return;
-        
-    }else if (self.portcontent.stringValue.length < 1){
-        
-        [self show:@"提示" andMessage:@"请填写端口号"];
+        [self show:@"提示" andMessage:@"ip地址或端口号不能为空"];
         
         return;
+        
     }
     
     L2CWeakSelf(self);
@@ -647,17 +648,12 @@
 
 - (IBAction)getServerSet:(NSButton *)sender {
     
-    if(self.ipcontent.stringValue.length < 1){
+    if(self.ipcontent.stringValue.length < 1 || self.portcontent.stringValue.length < 1){
         
-        [self show:@"提示" andMessage:@"请填写ip地址"];
+        [self show:@"提示" andMessage:@"ip地址或端口号不能为空"];
         
         return;
-    
-    }else if (self.portcontent.stringValue.length < 1){
         
-        [self show:@"提示" andMessage:@"请填写端口号"];
-
-        return;
     }
     
     self.isgetServer = NO;
@@ -688,5 +684,25 @@
     }];
 }
 
+#pragma mark --- 注册新用户
+
+- (IBAction)newAccount:(NSButton *)sender {
+    
+    if(self.ipcontent.stringValue.length < 1 || self.portcontent.stringValue.length < 1){
+        
+        [self show:@"提示" andMessage:@"ip地址或端口号不能为空"];
+        
+        return;
+        
+    }
+    
+    self.accountWC.ipAddress = self.ipcontent.stringValue;
+    
+    self.accountWC.port = self.portcontent.stringValue;
+
+    [self.accountWC.window orderFront:nil];//显示要跳转的窗口
+    
+    [[self.accountWC window] center];//显示在屏幕中间
+}
 
 @end
