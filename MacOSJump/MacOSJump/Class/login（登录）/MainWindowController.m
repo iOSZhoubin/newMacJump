@@ -94,7 +94,13 @@
     self.ipcontent.stringValue = SafeString(defaultDict[@"ipAddress"]);
     self.codecontent.stringValue = SafeString(defaultDict[@"password"]);
     
-    self.deviceCode = [JumpKeyChain firstGetUUIDInKeychain];
+    [JumpKeyChain deleteKeychainDataForKey:@"userInfo"];
+    [JumpKeyChain deleteKeychainDataForKey:@"newId"];
+
+    //获取钥匙串中保存的设备唯一识别码
+    NSDictionary *dict = [JumpKeyChain getKeychainDataForKey:@"userInfo"];
+    
+    self.deviceCode = SafeString(dict[@"deviceId"]);
     
     JumpLog(@"设备id是(钥匙串中)---%@",self.deviceCode);
 
@@ -163,14 +169,19 @@
         
         if([responseObject[@"message"] isEqualToString:@"ok"]){
             
+            NSString *newDevId = [JumpKeyChain getKeychainDataForKey:@"newId"];
+
             NSString *userId = SafeString(responseObject[@"result"][@"userId"]);
 
-            if(weakself.deviceCode.length > 0){
+            if([weakself.deviceCode isEqualToString:SafeString(newDevId)] && weakself.deviceCode.length > 0){
                 
+                //如果钥匙串获取的设备id和原来的保存id相等的话，直接进入，不需要注册
                 NSDictionary *dict = [weakself saveDataWithUserId:userId deviceId:weakself.deviceCode];
 
-                [JumpKeyChain addKeychainData:dict forKey:@"userInfo"];
-
+                [JumpKeyChain addKeychainData:dict forKey:@"userInfo"];//用户名密码保存
+                
+                [JumpKeyChain addKeychainData:newDevId forKey:@"newId"];//保存新的i设备id（同步）
+                
                 [weakself.firstPageWC.window orderFront:nil];//显示要跳转的窗口
                 
                 [[weakself.firstPageWC window] center];//显示在屏幕中间
@@ -179,9 +190,9 @@
                 
             }else{
 
-                NSDictionary *dict = [weakself saveDataWithUserId:userId deviceId:weakself.deviceCode];
-
                 weakself.deviceCode = [JumpKeyChain getUUIDInKeychain];
+
+                NSDictionary *dict = [weakself saveDataWithUserId:userId deviceId:weakself.deviceCode];
                 
                 JumpLog(@"设备id是(新设备生成的)---%@",weakself.deviceCode);
 

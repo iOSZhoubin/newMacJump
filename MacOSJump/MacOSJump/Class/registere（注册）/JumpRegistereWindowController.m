@@ -184,20 +184,20 @@
 
 
 -(void)registerAction{
-    
+ 
     L2CWeakSelf(self);
-    
+
     //获取本机的ip地址
     NSString *macIp = [self getDeviceIPAddress];
-    
+
     NSDictionary *defaultDict = [JumpKeyChain getKeychainDataForKey:@"userInfo"];
-    
+
     NSString *port = SafeString(defaultDict[@"port"]);
     NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
     NSString *userId = SafeString(defaultDict[@"userId"]);
-    
+
     NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
-    
+
     paramters[@"userId"] = userId;
     paramters[@"name"] = SafeString(self.userName.stringValue);
     paramters[@"departmentName"] = SafeString(self.dataDict[@"companyName"]);
@@ -212,27 +212,29 @@
     paramters[@"mac"] = SafeString(self.macAddress);
 
     NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_Register];
-    
+
     [AFNHelper macPost:urlStr parameters:paramters success:^(id responseObject) {
-        
+
         if([responseObject[@"message"] isEqualToString:@"ok"]){
-            
-                [JumpKeyChain addKeychainData:weakself.redataDict forKey:@"userInfo"];
-            
-                [weakself.firstPageWC.window orderFront:nil];//显示要跳转的窗口
-                
-                [[weakself.firstPageWC window] center];//显示在屏幕中间
-                
-                [weakself.window orderOut:nil];//关闭当前窗口
-         
+
+            [JumpKeyChain addKeychainData:weakself.redataDict forKey:@"userInfo"];//保存用户名密码
+
+            [JumpKeyChain addKeychainData:weakself.deviceCode forKey:@"newId"];//保存新生成的id
+
+            [weakself.firstPageWC.window orderFront:nil];//显示要跳转的窗口
+
+            [[weakself.firstPageWC window] center];//显示在屏幕中间
+
+            [weakself.window orderOut:nil];//关闭当前窗口
+
         }else{
-            
+
             [weakself show:@"提示" andMessage:@"保存失败"];
-            
+
         }
-        
+
     } andFailed:^(id error) {
-        
+
         [weakself show:@"提示" andMessage:@"保存失败"];
     }];
 }
@@ -243,11 +245,9 @@
     
     L2CWeakSelf(self);
     
-    NSDictionary *defaultDict = [JumpKeyChain getKeychainDataForKey:@"userInfo"];
-    
-    NSString *port = SafeString(defaultDict[@"port"]);
-    NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
-    NSString *userId = SafeString(defaultDict[@"userId"]);
+    NSString *port = SafeString(self.redataDict[@"port"]);
+    NSString *ipAddress = SafeString(self.redataDict[@"ipAddress"]);
+    NSString *userId = SafeString(self.redataDict[@"userId"]);
     
     NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_RegInfoName];
     
@@ -255,9 +255,9 @@
         
         if([SafeString(responseObject[@"message"]) isEqualToString:@"ok"]){
             
-            self.titleArray = [NSMutableArray array];
+            weakself.titleArray = [NSMutableArray array];
             
-            self.titleArray = responseObject[@"result"];
+            weakself.titleArray = responseObject[@"result"];
             
             [weakself settingDefaultUI];//判断是否可以输入
             
@@ -385,14 +385,7 @@
             
         }else if ([title isEqualToString:@"设备类型"]){
             
-            if([type isEqualToString:@"0"]){
-                
-                self.deviceType.enabled = NO;
-                
-            }else{
-                
-                self.deviceType.enabled = YES;
-            }
+            self.deviceType.enabled = NO;
             
             self.deviceType.stringValue = @"Mac";
             
