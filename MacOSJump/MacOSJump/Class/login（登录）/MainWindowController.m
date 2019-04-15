@@ -258,7 +258,7 @@
             accountStr = SafeString(self.accountcontent.stringValue);
         }
         
-        dict = @{@"userName":accountStr,@"password":@"",@"deviceId":SafeString(deviceId),@"userId":SafeString(userId)};
+        dict = @{@"userName":accountStr,@"password":@"",@"deviceId":SafeString(deviceId),@"ipAddress":self.ipcontent.stringValue,@"port":self.portcontent.stringValue,@"userId":SafeString(userId)};
         
     }
     
