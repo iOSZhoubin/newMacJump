@@ -94,7 +94,7 @@
         NSString *title = SafeString(titleDict[@"title"]);
         NSString *type = SafeString(titleDict[@"type"]);
         
-        if([title isEqualToString:@"使用人"] && self.userName.stringValue.length < 1 && [type isEqualToString:@"1"]){
+        if([title isEqualToString:@"使用人"] && self.userName.stringValue.length < 1 && [type isEqualToString:@"2"]){
             
             [self show:@"提示" andMessage:@"请输入使用人"];
             
@@ -102,7 +102,7 @@
             
             break;
             
-        }else if ([title isEqualToString:@"所属部门"] && self.companyName.stringValue.length < 1&& [type isEqualToString:@"1"]){
+        }else if ([title isEqualToString:@"所属部门"] && self.companyName.stringValue.length < 1&& [type isEqualToString:@"2"]){
             
             [self show:@"提示" andMessage:@"请选择部门"];
             
@@ -110,7 +110,7 @@
             
             break;
             
-        }else if ([title isEqualToString:@"设备位置"] && self.computerAddress.stringValue.length < 1&& [type isEqualToString:@"1"]){
+        }else if ([title isEqualToString:@"设备位置"] && self.computerAddress.stringValue.length < 1&& [type isEqualToString:@"2"]){
             
             [self show:@"提示" andMessage:@"请输入设备位置"];
             
@@ -118,7 +118,7 @@
             
             break;
             
-        }else if ([title isEqualToString:@"联系电话"] && self.phoneNum.stringValue.length < 1&& [type isEqualToString:@"1"]){
+        }else if ([title isEqualToString:@"联系电话"] && self.phoneNum.stringValue.length < 1&& [type isEqualToString:@"2"]){
             
             [self show:@"提示" andMessage:@"请输入联系电话"];
             
@@ -126,7 +126,7 @@
             
             break;
             
-        }else if ([title isEqualToString:@"电子邮箱"] && self.mail.stringValue.length < 1 && [type isEqualToString:@"1"]){
+        }else if ([title isEqualToString:@"电子邮箱"] && self.mail.stringValue.length < 1 && [type isEqualToString:@"2"]){
             
             [self show:@"提示" andMessage:@"请输入电子邮箱"];
             
@@ -134,7 +134,7 @@
             
             break;
             
-        }else if ([title isEqualToString:@"设备类型"] && self.deviceType.stringValue.length < 1 && [type isEqualToString:@"1"]){
+        }else if ([title isEqualToString:@"设备类型"] && self.deviceType.stringValue.length < 1 && [type isEqualToString:@"2"]){
             
             [self show:@"提示" andMessage:@"请输入设备类型"];
             
@@ -142,7 +142,7 @@
             
             break;
             
-        }else if ([title isEqualToString:@"备注"] && self.remark.stringValue.length < 1 && [type isEqualToString:@"1"]){
+        }else if ([title isEqualToString:@"备注"] && self.remark.stringValue.length < 1 && [type isEqualToString:@"2"]){
             
             [self show:@"提示" andMessage:@"请输入备注"];
             
@@ -190,11 +190,9 @@
     //获取本机的ip地址
     NSString *macIp = [self getDeviceIPAddress];
 
-    NSDictionary *defaultDict = [JumpKeyChain getKeychainDataForKey:@"userInfo"];
-
-    NSString *port = SafeString(defaultDict[@"port"]);
-    NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
-    NSString *userId = SafeString(defaultDict[@"userId"]);
+    NSString *port = SafeString(self.redataDict[@"port"]);
+    NSString *ipAddress = SafeString(self.redataDict[@"ipAddress"]);
+    NSString *userId = SafeString(self.redataDict[@"userId"]);
 
     NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
 

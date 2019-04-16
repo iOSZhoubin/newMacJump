@@ -181,6 +181,12 @@
 
             if([weakself.deviceCode isEqualToString:SafeString(newDevId)] && weakself.deviceCode.length > 0){
                 
+                if([weakself.isSyn isEqualToString:@"1"] && [weakself.passwordTitle.stringValue isEqualToString:@"验证码"]){
+                    //服务器勾选了将手机号同步到设备联系电话（只有注册过的用户才进行同步）
+                    
+                    [self synWithPhone];
+                }
+                
                 //如果钥匙串获取的设备id和原来的保存id相等的话，直接进入，不需要注册
                 NSDictionary *dict = [weakself saveDataWithUserId:userId deviceId:weakself.deviceCode];
 
@@ -212,14 +218,7 @@
 
                 [weakself.window orderOut:nil];//关闭当前窗口
             }
-            
-
-            if([weakself.isSyn isEqualToString:@"1"] && [weakself.passwordTitle.stringValue isEqualToString:@"验证码"]){
-                //服务器勾选了将手机号同步到设备联系电话
-                
-                [self synWithPhone];
-            }
-        
+ 
         }else{
             
             [weakself show:@"提示" andMessage:@"登录失败"];

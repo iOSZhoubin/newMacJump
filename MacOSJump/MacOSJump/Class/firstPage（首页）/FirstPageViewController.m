@@ -319,11 +319,11 @@
     
     NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
     
-    NSString *userId = SafeString(defaultDict[@"userId"]);
+    NSString *deviceId = SafeString(defaultDict[@"deviceId"]);
     
     NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_ServerInfo];
     
-    [AFNHelper macPost:urlStr parameters:@{@"userId":userId} success:^(id responseObject) {
+    [AFNHelper macPost:urlStr parameters:@{@"userId":deviceId} success:^(id responseObject) {
         
         if([responseObject[@"message"] isEqualToString:@"ok"]){
             
