@@ -10,6 +10,7 @@
 #import "ChooseConmpanyWindowController.h"
 #import "AppDelegate.h"
 #import "FirstPageViewController.h"
+#import "FirstPageTabController.h"
 
 //wifi信息
 #import <sys/socket.h>
@@ -25,6 +26,8 @@
 @property (strong,nonatomic) JumploginRegistereViewController *rgistereVC;
 
 @property (strong,nonatomic) ChooseConmpanyWindowController *choosePeople;
+
+@property (strong,nonatomic) FirstPageTabController *firstPageWC;
 
 @property (strong,nonatomic) FirstPageViewController *checkVC;
 
@@ -70,11 +73,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    //加载对应的控制器
     self.checkVC = [[FirstPageViewController alloc]initWithNibName:@"FirstPageViewController" bundle:nil];
     
     self.choosePeople = [[ChooseConmpanyWindowController alloc]initWithWindowNibName:@"ChooseConmpanyWindowController"];
     
+    self.firstPageWC = [[FirstPageTabController alloc]initWithWindowNibName:@"FirstPageTabController"];
+
     self.choosePeople.delegate = self;
     
     [self getMacaddress];
@@ -221,15 +226,27 @@
             [JumpKeyChain addKeychainData:weakself.redataDict forKey:@"userInfo"];//保存用户名密码
             
             [JumpKeyChain addKeychainData:weakself.deviceCode forKey:@"newId"];//保存新生成的id
-
-            weakself.checkVC.dataDict = weakself.redataDict;
-            
-            weakself.checkVC.devnewId = weakself.deviceCode;
-            
-            weakself.checkVC.rewindow = weakself.rewindow;
-            
-            [weakself presentViewControllerAsSheet:self.checkVC];
-            
+         
+            if([weakself.isCheck isEqualToString:@"1"]){
+                
+                weakself.checkVC.dataDict = weakself.redataDict;
+                
+                weakself.checkVC.devnewId = weakself.deviceCode;
+                
+                weakself.checkVC.rewindow = weakself.rewindow;
+                
+                [weakself presentViewControllerAsSheet:self.checkVC];
+                
+            }else{
+                
+                [self.firstPageWC.window orderFront:nil];//显示要跳转的窗口
+                
+                [[self.firstPageWC window] center];//显示在屏幕中间
+                
+                [self.rewindow orderOut:nil];//关闭当前窗口
+                
+            }
+ 
         }else{
             
             [weakself show:@"提示" andMessage:@"保存失败"];
@@ -390,7 +407,7 @@
             
             self.deviceType.enabled = NO;
             
-            self.deviceType.stringValue = @"Mac";
+            self.deviceType.stringValue = @"MacOS";
             
         }else if ([title isEqualToString:@"备注"]){
             

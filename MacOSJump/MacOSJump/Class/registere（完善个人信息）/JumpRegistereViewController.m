@@ -382,24 +382,10 @@
             }
             
         }else if ([title isEqualToString:@"设备类型"]){
-            
-            if([type isEqualToString:@"0"]){
-                
-                self.deviceType.enabled = NO;
-                
-            }else{
-                
-                self.deviceType.enabled = YES;
-            }
-            
-            if(defaultContent.length > 0){
-                
-                self.deviceType.placeholderString = defaultContent;
-                
-            }else{
-                
-                self.deviceType.placeholderString = discripe;
-            }
+ 
+            self.deviceType.enabled = NO;
+           
+            self.deviceType.stringValue = @"MacOS";
             
         }else if ([title isEqualToString:@"备注"]){
             
@@ -449,7 +435,7 @@
             //电子邮箱
             weakself.mail.stringValue = SafeString(responseObject[@"result"][@"email"]);
             //设备类型
-            weakself.deviceType.stringValue = @"Mac";
+            weakself.deviceType.stringValue = @"MacOS";
             //电话
             weakself.phoneNum.stringValue = SafeString(responseObject[@"result"][@"phoneNumber"]);
             //设备位置

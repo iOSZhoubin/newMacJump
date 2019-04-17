@@ -49,7 +49,7 @@
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FS7-bB-HI8">
                                 <rect key="frame" x="128" y="189" width="347" height="20"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" alignment="left" title="正常" id="qvZ-mV-jsi">
+                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" alignment="left" id="qvZ-mV-jsi">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -81,7 +81,7 @@
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vxT-bP-4zL">
                                 <rect key="frame" x="128" y="144" width="347" height="20"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" alignment="left" title="2019-01-17 15:00:00" id="9fX-0W-cwa">
+                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" alignment="left" id="9fX-0W-cwa">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -89,7 +89,7 @@
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ROg-pT-4eA">
                                 <rect key="frame" x="128" y="99" width="347" height="20"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" alignment="left" title="8天" id="R6I-VD-v6R">
+                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" alignment="left" id="R6I-VD-v6R">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -135,7 +135,7 @@
                             <constraint firstItem="AJ0-eg-bTG" firstAttribute="leading" secondItem="iEq-Th-SgJ" secondAttribute="leading" constant="30" id="xLW-kW-j9j"/>
                         </constraints>
                     </view>
-                    <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                    <color key="borderColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </box>
             </subviews>
             <constraints>

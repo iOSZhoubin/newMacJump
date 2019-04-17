@@ -35,6 +35,8 @@
     
     self.rgistereVC.deviceCode = self.deviceCode;
     
+    self.rgistereVC.deviceCode = self.isCheck;
+    
     self.rgistereVC.rewindow = self.window;
     
     [self.window setContentView:self.rgistereVC.view];

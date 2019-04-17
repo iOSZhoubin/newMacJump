@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "JumpRegistereWindowController.h"
 #import "NewAccountWindowController.h"
+#import "FirstPageTabController.h"
 
 @interface JumpLoginViewController ()
 
@@ -19,6 +20,9 @@
 @property (strong,nonatomic) JumpRegistereWindowController *registereWC;
 
 @property (strong,nonatomic) NewAccountWindowController *accountWC;
+
+@property (strong,nonatomic) FirstPageTabController *firstPageWC;
+
 
 //ip地址
 @property (weak) IBOutlet NSTextField *ipcontent;
@@ -74,7 +78,9 @@
     self.registereWC = [[JumpRegistereWindowController alloc]initWithWindowNibName:@"JumpRegistereWindowController"];
     
     self.checkVC = [[FirstPageViewController alloc]initWithNibName:@"FirstPageViewController" bundle:nil];
-
+    
+    self.firstPageWC = [[FirstPageTabController alloc]initWithWindowNibName:@"FirstPageTabController"];
+    
     self.isgetServer = NO;
     
     [self defaultShow];
@@ -190,7 +196,9 @@
             
             NSString *userId = SafeString(responseObject[@"result"][@"userId"]);
             
-            [weakself pushSuccessVcWithUserId:userId newDevId:newDevId];
+            NSString *isCheck = SafeString(responseObject[@"result"][@"isCheck"]);
+            
+            [weakself pushSuccessVcWithUserId:userId newDevId:newDevId isCheck:isCheck];
             
         }else{
             
@@ -204,37 +212,53 @@
     }];
 }
 
--(void)pushSuccessVcWithUserId:(NSString *)userId newDevId:(NSString *)newDevId{
+
+
+/**
+ 判断跳转的页面
+
+ @param userId 用户id
+ @param newDevId 新设备id
+ @param isCheck 是否需要安检（0-否 1-是）
+
+ */
+-(void)pushSuccessVcWithUserId:(NSString *)userId newDevId:(NSString *)newDevId isCheck:(NSString *)isCheck{
     
     if([self.deviceCode isEqualToString:SafeString(newDevId)] && self.deviceCode.length > 0){
         
         NSDictionary *dict = [self saveDataWithUserId:userId deviceId:self.deviceCode];
 
-        self.checkVC.dataDict = dict;
+        if([isCheck isEqualToString:@"1"]){
+            
+            self.checkVC.dataDict = dict;
+            
+            self.checkVC.devnewId = newDevId;
+            
+            self.checkVC.rewindow = self.mainWC;
+            
+            [self presentViewControllerAsSheet:self.checkVC];
+            
+        }else{
+            
+            //如果钥匙串获取的设备id和原来的保存id相等的话，直接进入，不需要注册
+            
+            [JumpKeyChain addKeychainData:dict forKey:@"userInfo"];//用户名密码保存
+            
+            [JumpKeyChain addKeychainData:newDevId forKey:@"newId"];//保存新的i设备id（同步）
+            
+            [self.firstPageWC.window orderFront:nil];//显示要跳转的窗口
+            
+            [[self.firstPageWC window] center];//显示在屏幕中间
+            
+            [self.mainWC orderOut:nil];//关闭当前窗口
+        }
         
-        self.checkVC.devnewId = newDevId;
-        
-        self.checkVC.rewindow = self.mainWC;
-        
-        [self presentViewControllerAsSheet:self.checkVC];
-
         if([self.isSyn isEqualToString:@"1"] && [self.passwordTitle.stringValue isEqualToString:@"验证码"]){
             //服务器勾选了将手机号同步到设备联系电话（只有注册过的用户才进行同步）
             
             [self synWithPhone];
         }
-        
-//        //如果钥匙串获取的设备id和原来的保存id相等的话，直接进入，不需要注册
-//        
-//        [JumpKeyChain addKeychainData:dict forKey:@"userInfo"];//用户名密码保存
-//        
-//        [JumpKeyChain addKeychainData:newDevId forKey:@"newId"];//保存新的i设备id（同步）
-//        
-//        [self.firstPageWC.window orderFront:nil];//显示要跳转的窗口
-//        
-//        [[self.firstPageWC window] center];//显示在屏幕中间
-//        
-//        [self.view.window orderOut:nil];//关闭当前窗口
+    
         
     }else{
         
@@ -245,6 +269,8 @@
         JumpLog(@"设备id是(新设备生成的)---%@",self.deviceCode);
         
         self.registereWC.deviceCode = self.deviceCode;
+        
+        self.registereWC.isCheck = isCheck;
         
         self.registereWC.redataDict = dict;
         
