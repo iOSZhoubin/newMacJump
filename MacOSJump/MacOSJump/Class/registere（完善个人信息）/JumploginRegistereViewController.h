@@ -1,8 +1,8 @@
 //
-//  JumpRegistereWindowController.h
+//  JumploginRegistereViewController.h
 //  MacOSJump
 //
-//  Created by jumpapp1 on 2019/4/3.
+//  Created by jumpapp1 on 2019/4/17.
 //  Copyright © 2019年 zb. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JumpRegistereWindowController : NSWindowController
+@interface JumploginRegistereViewController : NSViewController
 
 //设备唯一识别码
 @property (copy,nonatomic) NSString *deviceCode;
@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 //注册成功后本地保存数据
 @property (copy,nonatomic) NSDictionary *redataDict;
 
+@property (strong,nonatomic) NSWindow *rewindow;
 
 @end
 

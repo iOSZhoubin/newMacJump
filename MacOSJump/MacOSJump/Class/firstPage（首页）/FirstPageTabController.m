@@ -46,9 +46,9 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
   
-    self.firstVc = [[FirstPageViewController alloc]initWithNibName:@"FirstPageViewController" bundle:nil];
-
-    self.firstItem.view = self.firstVc.view;
+//    self.firstVc = [[FirstPageViewController alloc]initWithNibName:@"FirstPageViewController" bundle:nil];
+//
+//    self.firstItem.view = self.firstVc.view;
    
     
     self.jumpStatusVC = [[JumpStatusViewController alloc]initWithNibName:@"JumpStatusViewController" bundle:nil];

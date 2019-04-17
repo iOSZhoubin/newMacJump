@@ -18,5 +18,7 @@
 
 @property (weak,nonatomic) id<ChooseCompanyDelegate> delegate;
 
+//准备保存在钥匙串中的字典
+@property (strong,nonatomic) NSDictionary *dict;
 
 @end

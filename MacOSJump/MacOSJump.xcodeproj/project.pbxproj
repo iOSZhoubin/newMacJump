@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		391828F8224CC6EE00242C41 /* ApplicitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 391828F6224CC6EE00242C41 /* ApplicitionViewController.m */; };
 		391828F9224CC6EE00242C41 /* ApplicitionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 391828F7224CC6EE00242C41 /* ApplicitionViewController.xib */; };
+		391BD0762266BCBB00437AB3 /* JumpLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 391BD0742266BCBB00437AB3 /* JumpLoginViewController.m */; };
+		391BD0772266BCBB00437AB3 /* JumpLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 391BD0752266BCBB00437AB3 /* JumpLoginViewController.xib */; };
+		391BD07B2266D8D900437AB3 /* JumploginRegistereViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 391BD0792266D8D900437AB3 /* JumploginRegistereViewController.m */; };
+		391BD07C2266D8D900437AB3 /* JumploginRegistereViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 391BD07A2266D8D900437AB3 /* JumploginRegistereViewController.xib */; };
 		392693A6223798170020343F /* JumpKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 392693A4223798170020343F /* JumpKeyChain.m */; };
 		39510B69222E1643000A7A62 /* ChooseConmpanyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39510B67222E1643000A7A62 /* ChooseConmpanyWindowController.m */; };
 		39510B6A222E1643000A7A62 /* ChooseConmpanyWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39510B68222E1643000A7A62 /* ChooseConmpanyWindowController.xib */; };
@@ -51,6 +55,12 @@
 		391828F5224CC6EE00242C41 /* ApplicitionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicitionViewController.h; sourceTree = "<group>"; };
 		391828F6224CC6EE00242C41 /* ApplicitionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicitionViewController.m; sourceTree = "<group>"; };
 		391828F7224CC6EE00242C41 /* ApplicitionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ApplicitionViewController.xib; sourceTree = "<group>"; };
+		391BD0732266BCBB00437AB3 /* JumpLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JumpLoginViewController.h; sourceTree = "<group>"; };
+		391BD0742266BCBB00437AB3 /* JumpLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JumpLoginViewController.m; sourceTree = "<group>"; };
+		391BD0752266BCBB00437AB3 /* JumpLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JumpLoginViewController.xib; sourceTree = "<group>"; };
+		391BD0782266D8D900437AB3 /* JumploginRegistereViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JumploginRegistereViewController.h; sourceTree = "<group>"; };
+		391BD0792266D8D900437AB3 /* JumploginRegistereViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JumploginRegistereViewController.m; sourceTree = "<group>"; };
+		391BD07A2266D8D900437AB3 /* JumploginRegistereViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JumploginRegistereViewController.xib; sourceTree = "<group>"; };
 		392693A4223798170020343F /* JumpKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JumpKeyChain.m; sourceTree = "<group>"; };
 		392693A5223798170020343F /* JumpKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpKeyChain.h; sourceTree = "<group>"; };
 		39510B66222E1643000A7A62 /* ChooseConmpanyWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseConmpanyWindowController.h; sourceTree = "<group>"; };
@@ -273,6 +283,9 @@
 				398EA47D21EC87F30075F2F3 /* MainWindowController.h */,
 				398EA47E21EC87F30075F2F3 /* MainWindowController.m */,
 				398EA47F21EC87F30075F2F3 /* MainWindowController.xib */,
+				391BD0732266BCBB00437AB3 /* JumpLoginViewController.h */,
+				391BD0742266BCBB00437AB3 /* JumpLoginViewController.m */,
+				391BD0752266BCBB00437AB3 /* JumpLoginViewController.xib */,
 			);
 			path = "login（登录）";
 			sourceTree = "<group>";
@@ -286,6 +299,9 @@
 				39C512E12254650500EBA745 /* JumpRegistereWindowController.h */,
 				39C512E22254650500EBA745 /* JumpRegistereWindowController.m */,
 				39C512E32254650500EBA745 /* JumpRegistereWindowController.xib */,
+				391BD0782266D8D900437AB3 /* JumploginRegistereViewController.h */,
+				391BD0792266D8D900437AB3 /* JumploginRegistereViewController.m */,
+				391BD07A2266D8D900437AB3 /* JumploginRegistereViewController.xib */,
 			);
 			path = "registere（完善个人信息）";
 			sourceTree = "<group>";
@@ -390,9 +406,11 @@
 			files = (
 				39C512E52254650500EBA745 /* JumpRegistereWindowController.xib in Resources */,
 				398EA46D21EC87B80075F2F3 /* Assets.xcassets in Resources */,
+				391BD0772266BCBB00437AB3 /* JumpLoginViewController.xib in Resources */,
 				39A29FF82240F00C0021D415 /* HistoryRecordViewController.xib in Resources */,
 				39A2A0022240F6970021D415 /* FirstPageViewController.xib in Resources */,
 				3989098D2264558000DBF1CE /* NewAccountWindowController.xib in Resources */,
+				391BD07C2266D8D900437AB3 /* JumploginRegistereViewController.xib in Resources */,
 				39A29F922240BBA00021D415 /* RecordRemarkController.xib in Resources */,
 				398EA48121EC87F30075F2F3 /* MainWindowController.xib in Resources */,
 				39A29FFD2240F2930021D415 /* JumpRegistereViewController.xib in Resources */,
@@ -433,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39A29FF22240EC280021D415 /* JumpStatusViewController.m in Sources */,
+				391BD07B2266D8D900437AB3 /* JumploginRegistereViewController.m in Sources */,
 				398EA48021EC87F30075F2F3 /* MainWindowController.m in Sources */,
 				392693A6223798170020343F /* JumpKeyChain.m in Sources */,
 				39510B69222E1643000A7A62 /* ChooseConmpanyWindowController.m in Sources */,
@@ -448,6 +467,7 @@
 				39510B6D222E43D4000A7A62 /* JumpCompanyModel.m in Sources */,
 				3989098C2264558000DBF1CE /* NewAccountWindowController.m in Sources */,
 				398EA47321EC87B80075F2F3 /* main.m in Sources */,
+				391BD0762266BCBB00437AB3 /* JumpLoginViewController.m in Sources */,
 				39A29FF72240F00C0021D415 /* HistoryRecordViewController.m in Sources */,
 				39C512E42254650500EBA745 /* JumpRegistereWindowController.m in Sources */,
 				3978B8D6222CFBB300D28D95 /* SecurityNSString.m in Sources */,

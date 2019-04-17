@@ -9,7 +9,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="FirstPageTabController">
             <connections>
                 <outlet property="fifthItem" destination="Nhz-4F-mtJ" id="AZ8-9L-GEh"/>
-                <outlet property="firstItem" destination="Hr5-vD-xhm" id="4ST-Hh-rxw"/>
                 <outlet property="fourthItem" destination="BcF-Fy-GRO" id="13j-oe-0Ap"/>
                 <outlet property="secondItem" destination="oDc-Ri-IR9" id="gVo-S0-Dpf"/>
                 <outlet property="thirdItem" destination="YIa-kU-S3m" id="VIK-HT-EzU"/>
@@ -31,12 +30,6 @@
                         <rect key="frame" x="13" y="0.0" width="774" height="496"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
-                            <tabViewItem label="检测" identifier="" id="Hr5-vD-xhm">
-                                <view key="view" id="Trb-FS-Cps">
-                                    <rect key="frame" x="10" y="33" width="754" height="450"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                            </tabViewItem>
                             <tabViewItem label="状态" identifier="" id="oDc-Ri-IR9">
                                 <view key="view" id="jZu-QB-bWb">
                                     <rect key="frame" x="10" y="33" width="754" height="450"/>

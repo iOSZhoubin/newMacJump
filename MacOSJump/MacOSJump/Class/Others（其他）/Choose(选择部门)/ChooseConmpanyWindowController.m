@@ -190,11 +190,24 @@
     L2CWeakSelf(self);
     
     NSDictionary *defaultDict = [JumpKeyChain getKeychainDataForKey:@"userInfo"];
-    
-    NSString *port = SafeString(defaultDict[@"port"]);
-    NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
-    NSString *userId = SafeString(defaultDict[@"userId"]);
 
+    NSString *port;
+    NSString *ipAddress;
+    NSString *userId;
+    
+    if(self.dict){
+        
+        port = SafeString(self.dict[@"port"]);
+        ipAddress = SafeString(self.dict[@"ipAddress"]);
+        userId = SafeString(self.dict[@"userId"]);
+        
+    }else{
+       
+        port = SafeString(defaultDict[@"port"]);
+        ipAddress = SafeString(defaultDict[@"ipAddress"]);
+        userId = SafeString(defaultDict[@"userId"]);
+    }
+    
     NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_CompanyTree];
     
     [AFNHelper macPost:urlStr parameters:@{@"userId":userId} success:^(id responseObject) {

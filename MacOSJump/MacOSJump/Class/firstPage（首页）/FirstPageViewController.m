@@ -9,6 +9,8 @@
 #import "FirstPageViewController.h"
 #import "ApplicitionModel.h"
 #import "DateCalculater.h"
+#import "FirstPageTabController.h"
+//wifi信息
 #import <sys/socket.h>
 #import <ifaddrs.h>
 #import <netinet/in.h>
@@ -57,6 +59,13 @@
 //
 @property (assign,nonatomic) BOOL isRight;
 
+@property (strong,nonatomic) FirstPageTabController *firstPageWC;
+
+@property (copy,nonatomic) NSString *isNormal;
+
+@property (copy,nonatomic) NSString *isBan;
+
+
 @end
 
 @implementation FirstPageViewController
@@ -73,6 +82,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.firstPageWC = [[FirstPageTabController alloc]initWithWindowNibName:@"FirstPageTabController"];
+
+    self.isNormal = @"1"; //默认通过
+   
+    self.isBan = @"1"; //默认通过
     
     [self getAllCheck];
 
@@ -113,6 +128,8 @@
                 [self saveData:@"0"];
             }
             
+            [self pushVc]; //检查是否可以登录
+            
         }else{
             
             [weakself.progress incrementBy:1];
@@ -131,7 +148,7 @@
 - (IBAction)backAction:(NSButton *)sender {
     
     [self getAllCheck];
-    
+
     [self progressStatus];
 }
 
@@ -144,13 +161,11 @@
     
     L2CWeakSelf(self);
     
-    NSDictionary *defaultDict = [JumpKeyChain getKeychainDataForKey:@"userInfo"];
+    NSString *port = SafeString(self.dataDict[@"port"]);
     
-    NSString *port = SafeString(defaultDict[@"port"]);
+    NSString *ipAddress = SafeString(self.dataDict[@"ipAddress"]);
     
-    NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
-    
-    NSString *userId = SafeString(defaultDict[@"userId"]);
+    NSString *userId = SafeString(self.dataDict[@"userId"]);
     
     NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_CheckEntry];
     
@@ -219,9 +234,6 @@
 //检查进程等
 -(void)ishaveAppname{
     
-    NSString *isNormal = @"1";
-    NSString *isBan = @"1";
-    
     for (ApplicitionModel *model in self.dataArray) {
 
         NSString *name = model.localizedName;
@@ -232,17 +244,17 @@
 
             if([name isEqualToString:proName]){
 
-                isNormal = @"0";
+                self.isNormal = @"0";
 
                 break;
 
             }else{
 
-                isNormal = @"1";
+                self.isNormal = @"1";
             }
         }
 
-        if([isNormal isEqualToString:@"0"]){
+        if([self.isNormal isEqualToString:@"0"]){
 
             break;
         }
@@ -258,18 +270,18 @@
             
             if([name isEqualToString:proName]){
                 
-                isBan = @"1";
+                self.isBan = @"1";
                 
             }else{
                 
-                isBan = @"0";
+                self.isBan = @"0";
                 
                 break;
 
             }
         }
         
-        if([isBan isEqualToString:@"0"]){
+        if([self.isBan isEqualToString:@"0"]){
             
             break;
         }
@@ -278,23 +290,23 @@
     self.contentStr = [NSMutableString string];
 
     
-    if([isNormal isEqualToString:@"0"]){
+    if([self.isNormal isEqualToString:@"0"]){
         
         [self.contentStr appendFormat:@"允许运行进程检查异常..."];
 
         
-    }else if([isNormal isEqualToString:@"1"]){
+    }else if([self.isNormal isEqualToString:@"1"]){
         
         [self.contentStr appendFormat:@"允许运行进程检查正常..."];
 
     }
     
     
-    if([isBan isEqualToString:@"1"]){
+    if([self.isBan isEqualToString:@"1"]){
 
         [self.contentStr appendFormat:@"\n禁止运行进程检查异常..."];
 
-    }else if([isBan isEqualToString:@"0"]){
+    }else if([self.isBan isEqualToString:@"0"]){
 
         [self.contentStr appendFormat:@"\n禁止运行进程检查正常..."];
 
@@ -313,17 +325,15 @@
     
     L2CWeakSelf(self);
     
-    NSDictionary *defaultDict = [JumpKeyChain getKeychainDataForKey:@"userInfo"];
+    NSString *port = SafeString(self.dataDict[@"port"]);
     
-    NSString *port = SafeString(defaultDict[@"port"]);
+    NSString *ipAddress = SafeString(self.dataDict[@"ipAddress"]);
     
-    NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
-    
-    NSString *deviceId = SafeString(defaultDict[@"deviceId"]);
+    NSString *deviceId = SafeString(self.dataDict[@"deviceId"]);
     
     NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_ServerInfo];
     
-    [AFNHelper macPost:urlStr parameters:@{@"userId":deviceId} success:^(id responseObject) {
+    [AFNHelper macPost:urlStr parameters:@{@"sid":deviceId} success:^(id responseObject) {
         
         if([responseObject[@"message"] isEqualToString:@"ok"]){
             
@@ -481,6 +491,51 @@
     
     NSLog(@"IP地址是：%@", address);
     return address;
+}
+
+#pragma mark --- 检查是否可以登录
+
+-(void)pushVc{
+    
+    if([self.isBan isEqualToString:@"0"] && [self.isNormal isEqualToString:@"1"] && self.isTrue == YES && self.isRight == YES){
+        
+        //如果钥匙串获取的设备id和原来的保存id相等的话，直接进入，不需要注册
+        
+        [JumpKeyChain addKeychainData:self.dataDict forKey:@"userInfo"];//用户名密码保存
+        
+        [JumpKeyChain addKeychainData:self.devnewId forKey:@"newId"];//保存新的设备id（同步）
+        
+        [self.firstPageWC.window orderFront:nil];//显示要跳转的窗口
+        
+        [[self.firstPageWC window] center];//显示在屏幕中间
+        
+        [self.rewindow orderOut:nil];//关闭当前窗口
+    
+    }else{
+     
+        [self show:@"提示" andMessage:@"检查异常,通过后方可登录"];
+    }
+}
+
+#pragma mark --- 提示框
+
+-(void)show:(NSString *)title andMessage:(NSString *)message{
+    
+    NSAlert *alert = [[NSAlert alloc]init];
+    
+    alert.messageText = title;
+    
+    alert.informativeText = message;
+    
+    //设置提示框的样式
+    alert.alertStyle = NSAlertStyleWarning;
+    
+    [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+
+        [self dismissViewController:self];
+        
+    }];
+    
 }
 
 @end
