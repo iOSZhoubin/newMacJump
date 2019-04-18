@@ -65,9 +65,9 @@
 
     self.thirdItem.view = self.historyVC.view;
     
-    self.applicitionVC = [[ApplicitionViewController alloc]initWithNibName:@"ApplicitionViewController" bundle:nil];
-    
-    self.fifthItem.view = self.applicitionVC.view;
+//    self.applicitionVC = [[ApplicitionViewController alloc]initWithNibName:@"ApplicitionViewController" bundle:nil];
+//
+//    self.fifthItem.view = self.applicitionVC.view;
 
     [self.window setContentSize:NSMakeSize(800, 600)];
     

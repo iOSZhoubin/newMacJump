@@ -31,7 +31,7 @@
     self.loginVC.mainWC = self.window;
     
    [self.window setContentView:self.loginVC.view];
-    
+        
 }
 
 @end

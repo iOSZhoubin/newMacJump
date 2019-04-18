@@ -12,14 +12,6 @@
 #import "FirstPageViewController.h"
 #import "FirstPageTabController.h"
 
-//wifi信息
-#import <sys/socket.h>
-#import <ifaddrs.h>
-#import <netinet/in.h>
-#import <arpa/inet.h>
-#import <sys/sysctl.h>
-#import <net/if.h>
-#import <net/if_dl.h>
 
 @interface JumploginRegistereViewController ()<ChooseCompanyDelegate>
 
@@ -53,8 +45,7 @@
 @property (weak) IBOutlet NSTextField *remark;
 //选择部门
 @property (weak) IBOutlet NSButton *chooseDepart;
-//mac地址
-@property (copy,nonatomic) NSString *macAddress;
+
 
 @end
 
@@ -81,8 +72,6 @@
     self.firstPageWC = [[FirstPageTabController alloc]initWithWindowNibName:@"FirstPageTabController"];
 
     self.choosePeople.delegate = self;
-    
-    [self getMacaddress];
     
     [self getTitleNameArray];//获取注册列表
 
@@ -196,8 +185,9 @@
     L2CWeakSelf(self);
     
     //获取本机的ip地址
-    NSString *macIp = [self getDeviceIPAddress];
-    
+    NSString *macIp = [JumpPublicAction getDeviceIPAddress];
+    NSString *macAddress = [JumpPublicAction getDeviceMacAddress];
+
     NSString *port = SafeString(self.redataDict[@"port"]);
     NSString *ipAddress = SafeString(self.redataDict[@"ipAddress"]);
     NSString *userId = SafeString(self.redataDict[@"userId"]);
@@ -215,7 +205,7 @@
     paramters[@"remark"] = SafeString(self.remark.stringValue);
     paramters[@"sid"] = SafeString(self.deviceCode);
     paramters[@"ip"] = SafeString(macIp);
-    paramters[@"mac"] = SafeString(self.macAddress);
+    paramters[@"mac"] = SafeString(macAddress);
     
     NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_Register];
     
@@ -449,92 +439,5 @@
     [alert beginSheetModalForWindow:self.view.window completionHandler:nil];
 }
 
-
-#pragma mark -- 获取本机IP地址和Mac地址
-
-- (NSString *)getDeviceIPAddress {
-    
-    NSString *address = @"";
-    
-    struct ifaddrs *interfaces = NULL;
-    struct ifaddrs *temp_addr = NULL;
-    int success = 0;
-    
-    success = getifaddrs(&interfaces);
-    
-    if (success == 0) { // 0 表示获取成功
-        
-        temp_addr = interfaces;
-        while (temp_addr != NULL) {
-            
-            if( temp_addr->ifa_addr->sa_family == AF_INET) {
-                // Check if interface is en0 which is the wifi connection on the iPhone
-                if ([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
-                    // Get NSString from C String
-                    struct sockaddr_in *sockaddr = (struct sockaddr_in *)temp_addr->ifa_addr;
-                    address = [NSString stringWithUTF8String:inet_ntoa(sockaddr->sin_addr)];
-                }
-            }
-            
-            temp_addr = temp_addr->ifa_next;
-        }
-    }
-    
-    freeifaddrs(interfaces);
-    
-    NSLog(@"IP地址是：%@", address);
-    return address;
-}
-
-
-- (void)getMacaddress
-{
-    kern_return_t kr;
-    CFMutableDictionaryRef matchDict;
-    io_iterator_t iterator;
-    io_registry_entry_t entry;
-    
-    matchDict = IOServiceMatching("IOEthernetInterface");
-    kr = IOServiceGetMatchingServices(kIOMasterPortDefault, matchDict, &iterator);
-    
-    NSDictionary *resultInfo = nil;
-    
-    while ((entry = IOIteratorNext(iterator)) != 0)
-    {
-        CFMutableDictionaryRef properties=NULL;
-        kr = IORegistryEntryCreateCFProperties(entry,
-                                               &properties,
-                                               kCFAllocatorDefault,
-                                               kNilOptions);
-        if (properties)
-        {
-            resultInfo = (__bridge_transfer NSDictionary *)properties;
-            NSString *bsdName = [resultInfo objectForKey:@"BSD Name"];
-            NSData *macData = [resultInfo objectForKey:@"IOMACAddress"];
-            if (!macData)
-            {
-                continue;
-            }
-            
-            NSMutableString *macAddress = [[NSMutableString alloc] init];
-            const UInt8 *bytes = [macData bytes];
-            for (int i=0; i<macData.length; i++)
-            {
-                [macAddress appendFormat:@"%02x",*(bytes+i)];
-            }
-            
-            //            打印Mac地址
-            if (bsdName && macAddress)
-            {
-                NSLog(@"网卡:%@\nMac地址:%@\n",bsdName,macAddress);
-            }
-            
-            self.macAddress = [NSString stringWithFormat:@"%@",macAddress];
-            
-        }
-    }
-    
-    IOObjectRelease(iterator);
-}
 
 @end

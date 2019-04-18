@@ -53,11 +53,17 @@
     NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
     NSString *userId = SafeString(defaultDict[@"userId"]);
     NSString *deviceCode = SafeString(defaultDict[@"deviceId"]);
+    NSString *macIp = [JumpPublicAction getDeviceIPAddress];
 
     NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_GetUserInfo];
     
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
-    [AFNHelper macPost:urlStr parameters:@{@"userId":userId,@"sid":deviceCode} success:^(id responseObject) {
+    parameters[@"userId"] = userId;
+    parameters[@"sid"] = deviceCode;
+    parameters[@"ip"] = macIp;
+
+    [AFNHelper macPost:urlStr parameters:parameters success:^(id responseObject) {
         
         if([responseObject[@"message"] isEqualToString:@"ok"]){
             

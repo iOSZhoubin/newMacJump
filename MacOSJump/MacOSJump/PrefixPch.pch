@@ -12,6 +12,7 @@
 #import "InterfaceHeader.h"
 #import "JumpKeyChain.h"
 #import "AppDelegate.h"
+#import "JumpPublicAction.h"
 
 #ifndef PrefixPch_pch
 #define PrefixPch_pch

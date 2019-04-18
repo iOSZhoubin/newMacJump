@@ -14,6 +14,7 @@
 		391BD07B2266D8D900437AB3 /* JumploginRegistereViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 391BD0792266D8D900437AB3 /* JumploginRegistereViewController.m */; };
 		391BD07C2266D8D900437AB3 /* JumploginRegistereViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 391BD07A2266D8D900437AB3 /* JumploginRegistereViewController.xib */; };
 		392693A6223798170020343F /* JumpKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 392693A4223798170020343F /* JumpKeyChain.m */; };
+		394008B32268180D0085C0D4 /* JumpPublicAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 394008B22268180D0085C0D4 /* JumpPublicAction.m */; };
 		39510B69222E1643000A7A62 /* ChooseConmpanyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39510B67222E1643000A7A62 /* ChooseConmpanyWindowController.m */; };
 		39510B6A222E1643000A7A62 /* ChooseConmpanyWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39510B68222E1643000A7A62 /* ChooseConmpanyWindowController.xib */; };
 		39510B6D222E43D4000A7A62 /* JumpCompanyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 39510B6C222E43D4000A7A62 /* JumpCompanyModel.m */; };
@@ -63,6 +64,8 @@
 		391BD07A2266D8D900437AB3 /* JumploginRegistereViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JumploginRegistereViewController.xib; sourceTree = "<group>"; };
 		392693A4223798170020343F /* JumpKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JumpKeyChain.m; sourceTree = "<group>"; };
 		392693A5223798170020343F /* JumpKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpKeyChain.h; sourceTree = "<group>"; };
+		394008B12268180D0085C0D4 /* JumpPublicAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JumpPublicAction.h; sourceTree = "<group>"; };
+		394008B22268180D0085C0D4 /* JumpPublicAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JumpPublicAction.m; sourceTree = "<group>"; };
 		39510B66222E1643000A7A62 /* ChooseConmpanyWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseConmpanyWindowController.h; sourceTree = "<group>"; };
 		39510B67222E1643000A7A62 /* ChooseConmpanyWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseConmpanyWindowController.m; sourceTree = "<group>"; };
 		39510B68222E1643000A7A62 /* ChooseConmpanyWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseConmpanyWindowController.xib; sourceTree = "<group>"; };
@@ -180,6 +183,8 @@
 				3978B8D4222CFBB300D28D95 /* SecurityNSString.m */,
 				39803FBA223F22E2004C03AC /* MytitleView.h */,
 				39803FBB223F22E2004C03AC /* MytitleView.m */,
+				394008B12268180D0085C0D4 /* JumpPublicAction.h */,
+				394008B22268180D0085C0D4 /* JumpPublicAction.m */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -466,6 +471,7 @@
 				3978B8D3222CFA8D00D28D95 /* AFNHelper.m in Sources */,
 				39510B6D222E43D4000A7A62 /* JumpCompanyModel.m in Sources */,
 				3989098C2264558000DBF1CE /* NewAccountWindowController.m in Sources */,
+				394008B32268180D0085C0D4 /* JumpPublicAction.m in Sources */,
 				398EA47321EC87B80075F2F3 /* main.m in Sources */,
 				391BD0762266BCBB00437AB3 /* JumpLoginViewController.m in Sources */,
 				39A29FF72240F00C0021D415 /* HistoryRecordViewController.m in Sources */,

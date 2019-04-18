@@ -8,7 +8,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="FirstPageTabController">
             <connections>
-                <outlet property="fifthItem" destination="Nhz-4F-mtJ" id="AZ8-9L-GEh"/>
                 <outlet property="fourthItem" destination="BcF-Fy-GRO" id="13j-oe-0Ap"/>
                 <outlet property="secondItem" destination="oDc-Ri-IR9" id="gVo-S0-Dpf"/>
                 <outlet property="thirdItem" destination="YIa-kU-S3m" id="VIK-HT-EzU"/>
@@ -48,12 +47,6 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                             </tabViewItem>
-                            <tabViewItem label="进程管理" identifier="" id="Nhz-4F-mtJ">
-                                <view key="view" id="0Vy-eo-PUx">
-                                    <rect key="frame" x="10" y="33" width="754" height="450"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                            </tabViewItem>
                         </tabViewItems>
                     </tabView>
                 </subviews>
@@ -69,10 +62,8 @@
             </connections>
             <point key="canvasLocation" x="139.5" y="136.5"/>
         </window>
-        <viewController title="检测" identifier="firstVc" id="Bdc-DQ-dYm"/>
         <viewController title="状态" identifier="secondVc" id="LrL-hY-Q8m"/>
         <viewController title="检测历史" identifier="thirdVc" id="Rnb-UO-jdv"/>
         <viewController title="完善信息" identifier="fourthVc" id="KC5-YO-Ql6"/>
-        <viewController title="进程管理" id="4Kr-nM-0hS"/>
     </objects>
 </document>
