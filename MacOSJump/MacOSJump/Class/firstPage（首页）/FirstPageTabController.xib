@@ -10,7 +10,6 @@
             <connections>
                 <outlet property="fourthItem" destination="BcF-Fy-GRO" id="13j-oe-0Ap"/>
                 <outlet property="secondItem" destination="oDc-Ri-IR9" id="gVo-S0-Dpf"/>
-                <outlet property="thirdItem" destination="YIa-kU-S3m" id="VIK-HT-EzU"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -31,12 +30,6 @@
                         <tabViewItems>
                             <tabViewItem label="状态" identifier="" id="oDc-Ri-IR9">
                                 <view key="view" id="jZu-QB-bWb">
-                                    <rect key="frame" x="10" y="33" width="754" height="450"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                            </tabViewItem>
-                            <tabViewItem label="检测历史" identifier="" id="YIa-kU-S3m">
-                                <view key="view" id="C3s-BW-ao3">
                                     <rect key="frame" x="10" y="33" width="754" height="450"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
@@ -63,7 +56,9 @@
             <point key="canvasLocation" x="139.5" y="136.5"/>
         </window>
         <viewController title="状态" identifier="secondVc" id="LrL-hY-Q8m"/>
-        <viewController title="检测历史" identifier="thirdVc" id="Rnb-UO-jdv"/>
         <viewController title="完善信息" identifier="fourthVc" id="KC5-YO-Ql6"/>
+        <viewController identifier="firstVc" id="7Sb-8P-RKJ"/>
+        <viewController identifier="thirdVc" id="IiU-J3-j1m"/>
+        <viewController id="kcF-4I-vtR"/>
     </objects>
 </document>

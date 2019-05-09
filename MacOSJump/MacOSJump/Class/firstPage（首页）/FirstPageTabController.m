@@ -61,9 +61,9 @@
     self.fourthItem.view = self.registereVC.view;
     
     
-    self.historyVC = [[HistoryRecordViewController alloc]initWithNibName:@"HistoryRecordViewController" bundle:nil];
-
-    self.thirdItem.view = self.historyVC.view;
+//    self.historyVC = [[HistoryRecordViewController alloc]initWithNibName:@"HistoryRecordViewController" bundle:nil];
+//
+//    self.thirdItem.view = self.historyVC.view;
     
 //    self.applicitionVC = [[ApplicitionViewController alloc]initWithNibName:@"ApplicitionViewController" bundle:nil];
 //

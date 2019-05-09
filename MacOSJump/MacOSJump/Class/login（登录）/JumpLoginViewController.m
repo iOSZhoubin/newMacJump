@@ -32,7 +32,7 @@
 @property (weak) IBOutlet NSTextField *accountcontent;
 //密码or验证码的title
 @property (weak) IBOutlet NSTextField *passwordTitle;
-//密码or验证码
+//验证码
 @property (weak) IBOutlet NSTextField *codecontent;
 //获取验证码
 @property (weak) IBOutlet NSButton *getCodeBtn;
@@ -42,6 +42,8 @@
 @property (weak) IBOutlet NSButton *loginBtn;
 //距离右侧距离  验证码98  账号20
 @property (weak) IBOutlet NSLayoutConstraint *rightDistance;
+//密码
+@property (weak) IBOutlet NSSecureTextField *passT;
 
 @property (strong,nonatomic) NSTimer *timer;
 
@@ -83,6 +85,9 @@
     
     self.isgetServer = NO;
     
+//    [JumpKeyChain deleteKeychainDataForKey:@"userInfo"];
+//    [JumpKeyChain deleteKeychainDataForKey:@"newId"];
+    
     [self defaultShow];
     
     [self getLoginType];
@@ -97,7 +102,6 @@
     self.accountcontent.stringValue = SafeString(defaultDict[@"userName"]);
     self.portcontent.stringValue = SafeString(defaultDict[@"port"]);
     self.ipcontent.stringValue = SafeString(defaultDict[@"ipAddress"]);
-    self.codecontent.stringValue = SafeString(defaultDict[@"password"]);
     
     //获取钥匙串中保存的设备唯一识别码
     NSDictionary *dict = [JumpKeyChain getKeychainDataForKey:@"userInfo"];
@@ -131,14 +135,25 @@
         
         return;
         
-    }else if (self.codecontent.stringValue.length < 1){
+    }
+    
+    
+    if([self.passwordTitle.stringValue isEqualToString:@"密码"] && self.codecontent.stringValue.length < 1){
         
-        [self show:@"提示" andMessage:@"请输入密码或验证码"];
+        [self show:@"提示" andMessage:@"请输入密码"];
+        
+        return;
+        
+    }else if([self.passwordTitle.stringValue isEqualToString:@"验证码"] && self.passT.stringValue.length < 1){
+        
+        [self show:@"提示" andMessage:@"请输入验证码"];
         
         return;
         
     }
     
+        
+        
     if (self.isgetServer == NO){
         
         [self show:@"提示" andMessage:@"请先获取服务器配置"];
@@ -178,7 +193,7 @@
     //登录方式 1-账号密码登录  2-验证码登录
     if([loginType isEqualToString:@"1"]){
         
-        parameters[@"password"] = SafeString(self.codecontent.stringValue);
+        parameters[@"password"] = SafeString(self.passT.stringValue);
         
     }else{
         
@@ -228,6 +243,8 @@
         
         NSDictionary *dict = [self saveDataWithUserId:userId deviceId:self.deviceCode];
 
+        isCheck = @"0"; //强制不检查
+        
         if([isCheck isEqualToString:@"1"]){
             
             self.checkVC.dataDict = dict;
@@ -590,7 +607,9 @@
         
         self.getCodeBtn.hidden = YES;
         
-        self.codecontent.placeholderString = @"请输入密码(必填)";
+        self.passT.hidden = NO;
+        
+        self.codecontent.hidden = YES;
         
         self.passwordTitle.stringValue = @"密码";
         
@@ -602,7 +621,9 @@
         
         self.getCodeBtn.hidden = NO;
         
-        self.codecontent.placeholderString = @"请输入验证码(必填)";
+        self.passT.hidden = YES;
+        
+        self.codecontent.hidden = NO;
         
         self.passwordTitle.stringValue = @"验证码";
         

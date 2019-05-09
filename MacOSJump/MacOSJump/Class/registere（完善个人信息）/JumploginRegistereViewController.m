@@ -217,6 +217,8 @@
             
             [JumpKeyChain addKeychainData:weakself.deviceCode forKey:@"newId"];//保存新生成的id
          
+            weakself.isCheck = @"0"; //强制不检查
+            
             if([weakself.isCheck isEqualToString:@"1"]){
                 
                 weakself.checkVC.dataDict = weakself.redataDict;
