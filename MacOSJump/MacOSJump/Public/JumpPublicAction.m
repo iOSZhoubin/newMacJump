@@ -120,7 +120,19 @@
 }
 
 
+//密码MD5
 
++(NSString *)md5:(NSString *)string
+{
+    const char *cStr = [string UTF8String];
+    unsigned char result[32];
+    CC_MD5(cStr, strlen(cStr), result);
+    NSMutableString *ret = [NSMutableString stringWithCapacity:16];
+    for (int i = 0; i< 16; i++) {
+        [ret appendFormat:@"%02x",result[i]];
+    }
+    return ret;
+}
 
 
 @end

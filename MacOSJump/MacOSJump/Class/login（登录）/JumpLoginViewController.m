@@ -86,7 +86,6 @@
     self.isgetServer = NO;
     
 //    [JumpKeyChain deleteKeychainDataForKey:@"userInfo"];
-//    [JumpKeyChain deleteKeychainDataForKey:@"newId"];
     
     [self defaultShow];
     
@@ -138,13 +137,13 @@
     }
     
     
-    if([self.passwordTitle.stringValue isEqualToString:@"密码"] && self.codecontent.stringValue.length < 1){
+    if([self.passwordTitle.stringValue isEqualToString:@"密码"] && self.passT.stringValue.length < 1){
         
         [self show:@"提示" andMessage:@"请输入密码"];
         
         return;
         
-    }else if([self.passwordTitle.stringValue isEqualToString:@"验证码"] && self.passT.stringValue.length < 1){
+    }else if([self.passwordTitle.stringValue isEqualToString:@"验证码"] && self.codecontent.stringValue.length < 1){
         
         [self show:@"提示" andMessage:@"请输入验证码"];
         
@@ -175,6 +174,8 @@
     
     L2CWeakSelf(self);
     
+    self.deviceCode = [JumpKeyChain getUUIDInKeychain];
+    
     NSString *loginType = @"";
     
     if([self.passwordTitle.stringValue isEqualToString:@"密码"]){
@@ -189,11 +190,13 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"account"] = SafeString(self.accountcontent.stringValue);
     parameters[@"loginType"] = SafeString(loginType);
+    parameters[@"sid"] = SafeString(self.deviceCode);
+
     
     //登录方式 1-账号密码登录  2-验证码登录
     if([loginType isEqualToString:@"1"]){
         
-        parameters[@"password"] = SafeString(self.passT.stringValue);
+        parameters[@"password"] = [JumpPublicAction md5:SafeString(self.passT.stringValue)];
         
     }else{
         
@@ -207,13 +210,15 @@
         
         if([responseObject[@"message"] isEqualToString:@"ok"]){
             
-            NSString *newDevId = [JumpKeyChain getKeychainDataForKey:@"newId"];
-            
+            NSString *isRegistered = SafeString(responseObject[@"result"][@"regedite"]);
+                        
             NSString *userId = SafeString(responseObject[@"result"][@"userId"]);
             
             NSString *isCheck = SafeString(responseObject[@"result"][@"isCheck"]);
             
-            [weakself pushSuccessVcWithUserId:userId newDevId:newDevId isCheck:isCheck];
+            NSString *isUser = SafeString(responseObject[@"result"][@"binduser"]);
+
+            [weakself pushSuccessVcWithUserId:userId isCheck:isCheck isregiter:isRegistered binduser:SafeString(isUser)];
             
         }else{
             
@@ -233,69 +238,79 @@
  判断跳转的页面
 
  @param userId 用户id
- @param newDevId 新设备id
  @param isCheck 是否需要安检（0-否 1-是）
+ @param isregiter 是否注册过（0-否 1-是）
+ @param binduser 已经绑定的用户
 
  */
--(void)pushSuccessVcWithUserId:(NSString *)userId newDevId:(NSString *)newDevId isCheck:(NSString *)isCheck{
+-(void)pushSuccessVcWithUserId:(NSString *)userId isCheck:(NSString *)isCheck isregiter:(NSString *)isregiter binduser:(NSString *)binduser{
     
-    if([self.deviceCode isEqualToString:SafeString(newDevId)] && self.deviceCode.length > 0){
+    
+    if([binduser isEqualToString:self.accountcontent.stringValue] || binduser.length < 1){
         
-        NSDictionary *dict = [self saveDataWithUserId:userId deviceId:self.deviceCode];
-
-        isCheck = @"0"; //强制不检查
-        
-        if([isCheck isEqualToString:@"1"]){
+        if([isregiter isEqualToString:@"1"]){
             
-            self.checkVC.dataDict = dict;
+            NSDictionary *dict = [self saveDataWithUserId:userId deviceId:self.deviceCode];
             
-            self.checkVC.devnewId = newDevId;
+            isCheck = @"0"; //强制不检查
             
-            self.checkVC.rewindow = self.mainWC;
+            if([isCheck isEqualToString:@"1"]){
+                
+                self.checkVC.dataDict = dict;
+                
+                self.checkVC.devnewId = self.deviceCode;
+                
+                self.checkVC.rewindow = self.mainWC;
+                
+                [self presentViewControllerAsSheet:self.checkVC];
+                
+            }else{
+                
+                //不需要注册
+                
+                [JumpKeyChain addKeychainData:dict forKey:@"userInfo"];//用户名密码保存
+                
+                [self.firstPageWC.window orderFront:nil];//显示要跳转的窗口
+                
+                [[self.firstPageWC window] center];//显示在屏幕中间
+                
+                [self.mainWC orderOut:nil];//关闭当前窗口
+            }
             
-            [self presentViewControllerAsSheet:self.checkVC];
+            if([self.isSyn isEqualToString:@"1"] && [self.passwordTitle.stringValue isEqualToString:@"验证码"]){
+                //服务器勾选了将手机号同步到设备联系电话（只有注册过的用户才进行同步）
+                
+                [self synWithPhone];
+            }
+            
             
         }else{
             
-            //如果钥匙串获取的设备id和原来的保存id相等的话，直接进入，不需要注册
+            self.deviceCode = [JumpKeyChain getUUIDInKeychain];
             
-            [JumpKeyChain addKeychainData:dict forKey:@"userInfo"];//用户名密码保存
+            NSDictionary *dict = [self saveDataWithUserId:userId deviceId:self.deviceCode];
             
-            [JumpKeyChain addKeychainData:newDevId forKey:@"newId"];//保存新的i设备id（同步）
+            JumpLog(@"设备id是(新设备生成的)---%@",self.deviceCode);
             
-            [self.firstPageWC.window orderFront:nil];//显示要跳转的窗口
+            self.registereWC.deviceCode = self.deviceCode;
             
-            [[self.firstPageWC window] center];//显示在屏幕中间
+            self.registereWC.isCheck = isCheck;
             
-            [self.mainWC orderOut:nil];//关闭当前窗口
+            self.registereWC.redataDict = dict;
+            
+            [self.registereWC.window orderFront:nil];//显示要跳转的窗口
+            
+            [[self.registereWC window] center];//显示在屏幕中间
+            
+            [self.view.window orderOut:nil];//关闭当前窗口
         }
-        
-        if([self.isSyn isEqualToString:@"1"] && [self.passwordTitle.stringValue isEqualToString:@"验证码"]){
-            //服务器勾选了将手机号同步到设备联系电话（只有注册过的用户才进行同步）
-            
-            [self synWithPhone];
-        }
-    
         
     }else{
         
-        self.deviceCode = [JumpKeyChain getUUIDInKeychain];
+        NSString *str = [NSString stringWithFormat:@"登录失败，该设备已被（%@）账户绑定",binduser];
         
-        NSDictionary *dict = [self saveDataWithUserId:userId deviceId:self.deviceCode];
+        [self show:@"提示" andMessage:str];
         
-        JumpLog(@"设备id是(新设备生成的)---%@",self.deviceCode);
-        
-        self.registereWC.deviceCode = self.deviceCode;
-        
-        self.registereWC.isCheck = isCheck;
-        
-        self.registereWC.redataDict = dict;
-        
-        [self.registereWC.window orderFront:nil];//显示要跳转的窗口
-        
-        [[self.registereWC window] center];//显示在屏幕中间
-        
-        [self.view.window orderOut:nil];//关闭当前窗口
     }
 }
 

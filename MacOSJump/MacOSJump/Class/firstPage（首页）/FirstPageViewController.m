@@ -503,8 +503,6 @@
         
         [JumpKeyChain addKeychainData:self.dataDict forKey:@"userInfo"];//用户名密码保存
         
-        [JumpKeyChain addKeychainData:self.devnewId forKey:@"newId"];//保存新的设备id（同步）
-        
         [self.firstPageWC.window orderFront:nil];//显示要跳转的窗口
         
         [[self.firstPageWC window] center];//显示在屏幕中间

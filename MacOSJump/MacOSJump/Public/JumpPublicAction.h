@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 //获取设备的Mac地址
 +(NSString *)getDeviceMacAddress;
 
+//密码转为MD5
++(NSString *)md5:(NSString *)string;
+
 @end
 
 NS_ASSUME_NONNULL_END
