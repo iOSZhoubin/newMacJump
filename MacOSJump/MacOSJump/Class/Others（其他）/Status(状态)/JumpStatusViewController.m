@@ -7,6 +7,8 @@
 //
 
 #import "JumpStatusViewController.h"
+#import "MainWindowController.h"
+
 
 @interface JumpStatusViewController ()
 
@@ -19,7 +21,11 @@
 //状态图片
 @property (weak) IBOutlet NSImageView *statusImage;
 
+@property (strong ,nonatomic) NSTimer *connectTimer;
+
 @property(assign,nonatomic) BOOL isClick;
+
+@property (strong, nonatomic) MainWindowController *mainWc;
 
 @end
 
@@ -30,6 +36,8 @@
     
     self.isClick = NO;
     
+    self.mainWc = [[MainWindowController alloc]initWithWindowNibName:@"MainWindowController"];
+
     [self creatInfo];
 }
 
@@ -67,22 +75,27 @@
         
         if([responseObject[@"message"] isEqualToString:@"ok"]){
             
+            if(weakself.isClick == NO){
+                
+                [weakself timeStart]; //启动心跳
+            }
+            
             if([SafeString(responseObject[@"result"][@"deviceStatus"]) isEqualToString:@"1"]){
                 
-                self.statusImage.image = [NSImage imageNamed:@"bg-state-Y"];
-                self.status.stringValue = @"在线";
+                weakself.statusImage.image = [NSImage imageNamed:@"bg-state-Y"];
+                weakself.status.stringValue = @"在线";
                 
             }else{
                 
-                self.statusImage.image = [NSImage imageNamed:@"bg-state-N"];
-                self.status.stringValue = @"离线";
+                weakself.statusImage.image = [NSImage imageNamed:@"bg-state-N"];
+                weakself.status.stringValue = @"离线";
                 
             }
             
-            self.time.stringValue = SafeString(responseObject[@"result"][@"sureTime"]);
-            self.longtime.stringValue = SafeString(responseObject[@"result"][@"surelength"]);
+            weakself.time.stringValue = SafeString(responseObject[@"result"][@"sureTime"]);
+            weakself.longtime.stringValue = SafeString(responseObject[@"result"][@"surelength"]);
             
-            if(self.isClick){
+            if(weakself.isClick){
                 
                 [weakself show:@"提示" andMessage:@"刷新成功"];
             }
@@ -118,5 +131,81 @@
 
 }
 
+
+
+-(void)timeStart{
+    
+    self.connectTimer = [NSTimer scheduledTimerWithTimeInterval:60.0f  //间隔时间
+                                                         target:self
+                                                       selector:@selector(longConnect)
+                                                       userInfo:nil
+                                                        repeats:YES];
+}
+
+
+
+-(void)longConnect{
+    
+    L2CWeakSelf(self);
+    
+    NSDictionary *defaultDict = [JumpKeyChain getKeychainDataForKey:@"userInfo"];
+    
+    NSString *port = SafeString(defaultDict[@"port"]);
+    NSString *ipAddress = SafeString(defaultDict[@"ipAddress"]);
+    NSString *deviceCode = SafeString(defaultDict[@"deviceId"]);
+    
+    NSString *urlStr = [NSString stringWithFormat:@"http://%@:%@%@",ipAddress,port,Mac_DeviceisOnline];
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"sid"] = deviceCode;
+    
+    [AFNHelper macPost:urlStr parameters:parameters success:^(id responseObject) {
+        
+        if([responseObject[@"message"] isEqualToString:@"ok"]){
+            
+            if(![SafeString(responseObject[@"result"][@"isonline"]) isEqualToString:@"1"]){
+                
+                [weakself offlineAlert];
+            }
+           
+        }else{
+            
+            [weakself offlineAlert];
+        }
+        
+    } andFailed:^(id error) {
+        
+        JumpLog(@"连接服务器失败");
+        
+    }];
+}
+
+
+-(void)offlineAlert{
+    
+    [self.connectTimer invalidate];
+    
+    self.connectTimer = nil;
+    
+    NSAlert *alert = [[NSAlert alloc]init];
+    
+    alert.messageText = @"提示";
+    
+    alert.informativeText = @"该设备已下线";
+    
+    //设置提示框的样式
+    alert.alertStyle = NSAlertStyleWarning;
+    
+    [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+       
+        [self.mainWc.window orderFront:nil];//显示要跳转的窗口
+        
+        [[self.mainWc window] center];//显示在屏幕中间
+        
+        [self.tabwindow orderOut:nil];//关闭当前窗口
+        
+    }];
+}
 
 @end

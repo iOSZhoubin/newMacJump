@@ -82,77 +82,116 @@
 
 - (IBAction)saveAction:(NSButton *)sender {
     
-        NSString *isgo = @"1";
+    NSString *isgo = @"1";
     
-        for (NSDictionary *titleDict in self.titleArray) {
-    
-            NSString *title = SafeString(titleDict[@"title"]);
-            NSString *type = SafeString(titleDict[@"type"]);
-    
-            if([title isEqualToString:@"使用人"] && self.userName.stringValue.length < 1 && [type isEqualToString:@"2"]){
-    
-                [self show:@"提示" andMessage:@"请输入使用人"];
-    
-                isgo = @"0";
-    
-                break;
-    
-            }else if ([title isEqualToString:@"所属部门"] && self.companyName.stringValue.length < 1&& [type isEqualToString:@"2"]){
-    
-                [self show:@"提示" andMessage:@"请选择部门"];
-    
-                isgo = @"0";
-    
-                break;
-    
-            }else if ([title isEqualToString:@"设备位置"] && self.computerAddress.stringValue.length < 1&& [type isEqualToString:@"2"]){
-    
-                [self show:@"提示" andMessage:@"请输入设备位置"];
-    
-                isgo = @"0";
-    
-                break;
-    
-            }else if ([title isEqualToString:@"联系电话"] && self.phoneNum.stringValue.length < 1&& [type isEqualToString:@"2"]){
-    
-                [self show:@"提示" andMessage:@"请输入联系电话"];
-    
-                isgo = @"0";
-    
-                break;
-    
-            }else if ([title isEqualToString:@"电子邮箱"] && self.mail.stringValue.length < 1 && [type isEqualToString:@"2"]){
-    
+    for (NSDictionary *titleDict in self.titleArray) {
+        
+        NSString *title = SafeString(titleDict[@"title"]);
+        NSString *type = SafeString(titleDict[@"type"]);
+        
+        if([title isEqualToString:@"使用人"] && self.userName.stringValue.length < 1 && [type isEqualToString:@"2"]){
+            
+            [self show:@"提示" andMessage:@"请输入使用人"];
+            
+            isgo = @"0";
+            
+            break;
+            
+        }else if ([title isEqualToString:@"所属部门"] && self.companyName.stringValue.length < 1&& [type isEqualToString:@"2"]){
+            
+            [self show:@"提示" andMessage:@"请选择部门"];
+            
+            isgo = @"0";
+            
+            break;
+            
+        }else if ([title isEqualToString:@"设备位置"] && self.computerAddress.stringValue.length < 1&& [type isEqualToString:@"2"]){
+            
+            [self show:@"提示" andMessage:@"请输入设备位置"];
+            
+            isgo = @"0";
+            
+            break;
+            
+        }else if ([title isEqualToString:@"联系电话"] && self.phoneNum.stringValue.length < 1&& [type isEqualToString:@"2"]){
+            
+            [self show:@"提示" andMessage:@"请输入联系电话"];
+            
+            isgo = @"0";
+            
+            break;
+            
+        }else if ([title isEqualToString:@"电子邮箱"]){
+            
+            if(self.mail.stringValue.length < 1 && [type isEqualToString:@"2"]){
+                
                 [self show:@"提示" andMessage:@"请输入电子邮箱"];
-    
+                
                 isgo = @"0";
-    
+                
                 break;
-    
-            }else if ([title isEqualToString:@"设备类型"] && self.deviceType.stringValue.length < 1 && [type isEqualToString:@"2"]){
-    
-                [self show:@"提示" andMessage:@"请输入设备类型"];
-    
-                isgo = @"0";
-    
-                break;
-    
-            }else if ([title isEqualToString:@"备注"] && self.remark.stringValue.length < 1 && [type isEqualToString:@"2"]){
-    
+                
+            }else if (self.mail.stringValue.length > 1){
+                
+                BOOL isemail = [JumpPublicAction isEmailAdress:self.mail.stringValue];
+                
+                if(isemail){
+                    
+                    isgo = @"1";
+                    
+                    continue;
+                    
+                }else{
+                    
+                    [self show:@"提示" andMessage:@"邮箱格式有误"];
+                    
+                    isgo = @"0";
+                    
+                    break;
+                    
+                }
+            }
+            
+        }else if ([title isEqualToString:@"设备类型"] && self.deviceType.stringValue.length < 1 && [type isEqualToString:@"2"]){
+            
+            [self show:@"提示" andMessage:@"请输入设备类型"];
+            
+            isgo = @"0";
+            
+            break;
+            
+        }else if ([title isEqualToString:@"备注"]){
+            
+            if(self.remark.stringValue.length < 1 && [type isEqualToString:@"2"]){
+                
                 [self show:@"提示" andMessage:@"请输入备注"];
-    
+                
                 isgo = @"0";
-    
+                
                 break;
-    
+                
+            }else if (self.remark.stringValue.length > 100){
+                
+                [self show:@"提示" andMessage:@"备注长度超过限制"];
+                
+                isgo = @"0";
+                
+                break;
+                
+            }else{
+                
+                isgo = @"1";
+                
+                continue;
+                
             }
         }
+    }
     
-        if([isgo isEqualToString:@"1"]){
-    
-            [self registerAction];
-        }
-    
+    if([isgo isEqualToString:@"1"]){
+        
+        [self registerAction];
+    }
 }
 
 #pragma mark --- 选择部门

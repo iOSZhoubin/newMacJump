@@ -148,6 +148,19 @@
     
     NSDictionary *selectedItem = [outlineView itemAtRow:[outlineView selectedRow]];
     
+    NSInteger selectRow = [outlineView selectedRow];
+    
+    if(selectRow != 0){
+        
+        self.dataDict[@"text"] = SafeString(selectedItem[@"text"]);
+        self.dataDict[@"id"] = SafeString(selectedItem[@"id"]);
+    
+    }else{
+        
+        self.dataDict[@"text"] = @"";
+        self.dataDict[@"id"] = @"";
+    }
+    
 //    NSArray *array = selectedItem[@"children"];
 //
 //    if(array.count > 0){
@@ -156,9 +169,9 @@
 //        self.dataDict[@"id"] = @"";
 //
 //    }else{
-
-        self.dataDict[@"text"] = SafeString(selectedItem[@"text"]);
-        self.dataDict[@"id"] = SafeString(selectedItem[@"id"]);
+//
+//        self.dataDict[@"text"] = SafeString(selectedItem[@"text"]);
+//        self.dataDict[@"id"] = SafeString(selectedItem[@"id"]);
 
 //    }
 }

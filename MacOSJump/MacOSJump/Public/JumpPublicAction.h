@@ -21,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 //密码转为MD5
 +(NSString *)md5:(NSString *)string;
 
+//正则校验邮箱
++(BOOL)isEmailAdress:(NSString *)email;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

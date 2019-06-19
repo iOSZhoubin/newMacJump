@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JumpStatusViewController : NSViewController
 
+//需要关闭的窗口
+@property (strong,nonatomic) NSWindow *tabwindow;
 
 @end
 

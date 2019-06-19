@@ -53,6 +53,8 @@
     
     self.jumpStatusVC = [[JumpStatusViewController alloc]initWithNibName:@"JumpStatusViewController" bundle:nil];
     
+    self.jumpStatusVC.tabwindow = self.window;
+    
     self.secondItem.view = self.jumpStatusVC.view;
     
     

@@ -205,12 +205,12 @@
                                     <action selector="getServerSet:" target="-2" id="cYN-QG-Soa"/>
                                 </connections>
                             </button>
-                            <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cIb-1e-GuK">
+                            <secureTextField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cIb-1e-GuK">
                                 <rect key="frame" x="68" y="153" width="230" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="PYG-9Y-CqF"/>
                                 </constraints>
-                                <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="请输入密码(必填)" usesSingleLineMode="YES" bezelStyle="round" id="lWa-C3-Ulw">
+                                <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" focusRingType="none" placeholderString="请输入密码(必填)" usesSingleLineMode="YES" bezelStyle="round" id="lWa-C3-Ulw">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

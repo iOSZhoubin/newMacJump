@@ -33,6 +33,7 @@
 #define Mac_UpdataPhone @"/mobile/updateDevinfoPhone.action"
 //注册用户
 #define Mac_Registed @"/mobile/registUser.action"
-
+//查看设备是否在线
+#define Mac_DeviceisOnline @"/mobile/getMachineIsOnline.action"
 
 #endif /* InterfaceHeader_h */
