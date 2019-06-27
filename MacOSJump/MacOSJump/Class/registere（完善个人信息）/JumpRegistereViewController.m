@@ -180,6 +180,17 @@
         }
     }
     
+    if(SafeString(self.userName.stringValue).length > 50){
+        
+        [self show:@"提示" andMessage:@"使用人最大为50字符"];
+
+        isgo = @"0";
+        
+        return;
+    }
+    
+    
+    
     if([isgo isEqualToString:@"1"]){
         
         [self registerAction];

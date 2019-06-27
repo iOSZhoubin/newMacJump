@@ -307,7 +307,7 @@
         
     }else{
         
-        NSString *str = [NSString stringWithFormat:@"登录失败，该设备已被（%@）账户绑定",binduser];
+        NSString *str = [NSString stringWithFormat:@"登录失败，该设备已被%@绑定",binduser];
         
         [self show:@"提示" andMessage:str];
         
