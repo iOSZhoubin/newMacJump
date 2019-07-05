@@ -273,15 +273,15 @@
                 
                 weakself.checkVC.rewindow = weakself.rewindow;
                 
-                [weakself presentViewControllerAsSheet:self.checkVC];
+                [weakself presentViewControllerAsSheet:weakself.checkVC];
                 
             }else{
                 
-                [self.firstPageWC.window orderFront:nil];//显示要跳转的窗口
+                [weakself.firstPageWC.window orderFront:nil];//显示要跳转的窗口
                 
-                [[self.firstPageWC window] center];//显示在屏幕中间
+                [[weakself.firstPageWC window] center];//显示在屏幕中间
                 
-                [self.rewindow orderOut:nil];//关闭当前窗口
+                [weakself.rewindow orderOut:nil];//关闭当前窗口
                 
             }
  

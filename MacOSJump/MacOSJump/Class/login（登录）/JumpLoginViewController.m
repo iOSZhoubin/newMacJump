@@ -85,8 +85,6 @@
     
     self.isgetServer = NO;
     
-//    [JumpKeyChain deleteKeychainDataForKey:@"userInfo"];
-    
     [self defaultShow];
     
     [self getLoginType];
