@@ -148,9 +148,7 @@
         return;
         
     }
-    
-        
-        
+   
     if (self.isgetServer == NO){
         
         [self show:@"提示" andMessage:@"请先获取服务器配置"];
@@ -555,22 +553,15 @@
                     title = @"用户名密码登录";
                     
                 }
-                
             }
             
-            if(weakself.isgetServer == NO){
+            [weakself show:@"提示" andMessage:@"获取服务器配置成功"];
                 
-                [weakself show:@"提示" andMessage:@"获取服务器配置成功"];
-                
-            }else{
-                
-                [weakself show:@"提示" andMessage:@"获取服务器配置失败,请检查ip地址是否正确"];
-                
-            }
-            
             weakself.isgetServer = YES;
             
         }else{
+            
+            weakself.isgetServer = NO;
             
             type = @"3";
             
@@ -583,11 +574,15 @@
                 title = @"用户名密码登录";
                 
             }
+            
+            [weakself show:@"提示" andMessage:@"获取服务器配置失败,请检查ip地址是否正确"];
         }
         
         [weakself defaultUI:title andType:type];
         
     } andFailed:^(id error) {
+        
+        weakself.isgetServer = NO;
         
         NSString *title;
         

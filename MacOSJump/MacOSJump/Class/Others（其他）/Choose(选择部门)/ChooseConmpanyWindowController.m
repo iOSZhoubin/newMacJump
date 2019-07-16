@@ -150,8 +150,9 @@
     
     NSInteger selectRow = [outlineView selectedRow];
     
-    if(selectRow != 0){
-        
+//    if(selectRow != 0){
+    if(selectRow >= 0){
+
         self.dataDict[@"text"] = SafeString(selectedItem[@"text"]);
         self.dataDict[@"id"] = SafeString(selectedItem[@"id"]);
     

@@ -135,7 +135,7 @@
 
 -(void)timeStart{
     
-    self.connectTimer = [NSTimer scheduledTimerWithTimeInterval:60.0f  //间隔时间
+    self.connectTimer = [NSTimer scheduledTimerWithTimeInterval:20.0f  //间隔时间
                                                          target:self
                                                        selector:@selector(longConnect)
                                                        userInfo:nil
