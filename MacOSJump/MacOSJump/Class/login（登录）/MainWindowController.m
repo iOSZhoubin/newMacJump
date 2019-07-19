@@ -22,6 +22,10 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     
+    AppDelegate *appdelegate = [NSApp delegate];
+    
+    appdelegate.windowVc = self;
+    
     [self.window setContentSize:NSMakeSize(800, 600)];
 
     self.window.restorable = NO;

@@ -45,6 +45,10 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+    
+    AppDelegate *appdelegate = [NSApp delegate];
+    
+    appdelegate.windowVc = self;
   
 //    self.firstVc = [[FirstPageViewController alloc]initWithNibName:@"FirstPageViewController" bundle:nil];
 //

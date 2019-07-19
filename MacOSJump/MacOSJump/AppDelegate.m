@@ -11,12 +11,15 @@
 
 @interface AppDelegate ()
 
+@property (strong,nonatomic) NSStatusItem *statusItem;
 
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    
+    [self addSmallicon];
 
     self.mainWindowC = [[MainWindowController alloc]initWithWindowNibName:@"MainWindowController"];
     
@@ -137,18 +140,53 @@
     return NSTerminateNow;
 }
 
--(BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
+//-(BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
+//
+//    return YES;
+//}
+
+
+//添加小图标
+-(void)addSmallicon{
     
-    return YES;
+    NSStatusBar *itemBar = [NSStatusBar systemStatusBar];
+    
+    self.statusItem = [itemBar statusItemWithLength:NSSquareStatusItemLength];
+    
+    self.statusItem.target = self;
+    
+    self.statusItem.image = [NSImage imageNamed:@"logo_2"];
+    
+    NSMenu *menu = [[NSMenu alloc]initWithTitle:@"StatusMenu"];
+    
+    [menu addItemWithTitle:@"打开应用" action:@selector(openAction) keyEquivalent:@""];
+    [menu addItemWithTitle:@"退出应用" action:@selector(outAction) keyEquivalent:@""];
+    
+    self.statusItem.menu = menu;
+    
 }
 
 
-//-(BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag{
-//    
-//    [self.mainWindowC.window makeKeyAndOrderFront:self];
-//    
-//    return YES;
-//}
+//打开应用
+-(void)openAction{
+    
+    [self.windowVc.window makeKeyAndOrderFront:self];
+}
+
+//退出应用
+-(void)outAction{
+    
+    [[NSApplication sharedApplication] terminate:self];
+}
+
+
+
+-(BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag{
+    
+    [self.windowVc.window makeKeyAndOrderFront:self];
+    
+    return YES;
+}
 
 
 
