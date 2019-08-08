@@ -42,6 +42,18 @@
 //选择部门
 @property (weak) IBOutlet NSButton *chooseDepart;
 
+//使用人title
+@property (weak) IBOutlet NSTextField *userNameL;
+//邮箱title
+@property (weak) IBOutlet NSTextField *emailL;
+//电话title
+@property (weak) IBOutlet NSTextField *phoneL;
+//位置title
+@property (weak) IBOutlet NSTextField *addressL;
+//部门title
+@property (weak) IBOutlet NSTextField *deparmentL;
+//备注title
+@property (weak) IBOutlet NSTextField *remarkL;
 
 @end
 
@@ -180,16 +192,47 @@
         }
     }
     
-    if(SafeString(self.userName.stringValue).length > 50){
+    if(SafeString(self.phoneNum.stringValue).length > 0){
         
-        [self show:@"提示" andMessage:@"使用人最大为50字符"];
-
-        isgo = @"0";
+        BOOL isPhone1 = [self validateCellPhoneNumber:self.phoneNum.stringValue];
+        BOOL isPhone2 = [self isphone:self.phoneNum.stringValue];
         
-        return;
+        if(isPhone1 == NO && isPhone2 == NO){
+            
+            [self show:@"提示" andMessage:@"请输入正确的11位手机号码或座机号码(0298888888)"];
+            
+            return;
+        }
     }
     
     
+    if(SafeString(self.userName.stringValue).length > 0){
+        
+        BOOL isSpectil = [JumpPublicAction specialRight:SafeString(self.userName.stringValue)];
+        
+        if(isSpectil == NO){
+            
+            [self show:@"提示" andMessage:@"使用人中包含了特殊字符，请重新输入"];
+
+            return;
+            
+        }
+    }
+    
+    
+    if(SafeString(self.userName.stringValue).length > 32){
+        
+        [self show:@"提示" andMessage:@"使用人最大为32字符"];
+        
+        return;
+    
+    }else if (SafeString(self.computerAddress.stringValue).length > 32){
+        
+        [self show:@"提示" andMessage:@"设备位置最长为32个字符"];
+
+        return;
+        
+    }
     
     if([isgo isEqualToString:@"1"]){
         
@@ -327,10 +370,15 @@
             if([type isEqualToString:@"0"]){
                 
                 self.userName.enabled = NO;
+                
+                self.userNameL.textColor = [NSColor lightGrayColor];
 
             }else{
 
                 self.userName.enabled = YES;
+                
+                self.userNameL.textColor = [NSColor blackColor];
+
             }
             
             if(defaultContent.length > 0){
@@ -348,9 +396,15 @@
                 
                 self.chooseDepart.enabled = NO;
                 
+                self.deparmentL.textColor = [NSColor lightGrayColor];
+
+                
             }else{
                 
-                self.chooseDepart.enabled = YES;
+                self.deparmentL.enabled = YES;
+                
+                self.companyName.textColor = [NSColor blackColor];
+
             }
             
             if(defaultContent.length > 0){
@@ -368,9 +422,15 @@
                 
                 self.computerAddress.enabled = NO;
                 
+                self.addressL.textColor = [NSColor lightGrayColor];
+
+                
             }else{
                 
                 self.computerAddress.enabled = YES;
+                
+                self.addressL.textColor = [NSColor blackColor];
+
             }
             
             if(defaultContent.length > 0){
@@ -388,9 +448,15 @@
                 
                 self.phoneNum.enabled = NO;
                 
+                self.phoneL.textColor = [NSColor lightGrayColor];
+
+                
             }else{
                 
                 self.phoneNum.enabled = YES;
+                
+                self.phoneL.textColor = [NSColor blackColor];
+
             }
             
             if(defaultContent.length > 0){
@@ -408,9 +474,15 @@
                 
                 self.mail.enabled = NO;
                 
+                self.emailL.textColor = [NSColor lightGrayColor];
+
+                
             }else{
                 
                 self.mail.enabled = YES;
+                
+                self.emailL.textColor = [NSColor blackColor];
+
             }
             
             if(defaultContent.length > 0){
@@ -434,9 +506,15 @@
                 
                 self.remark.enabled = NO;
                 
+                self.remarkL.textColor = [NSColor lightGrayColor];
+
+                
             }else{
                 
                 self.remark.enabled = YES;
+                
+                self.remarkL.textColor = [NSColor blackColor];
+
             }
             
             if(defaultContent.length > 0){
@@ -527,5 +605,83 @@
     [alert beginSheetModalForWindow:self.view.window completionHandler:nil];
 }
 
+
+#pragma mark --- 正则校验手机号码
+
+-(BOOL)validateCellPhoneNumber:(NSString *)cellNum{
+    /**
+     * 手机号码
+     * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     * 联通：130,131,132,152,155,156,185,186
+     * 电信：133,1349,153,180,189
+     */
+    NSString * MOBILE = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
+    
+    /**
+     10         * 中国移动：China Mobile
+     11         * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     12         */
+    NSString * CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$";
+    
+    /**
+     15         * 中国联通：China Unicom
+     16         * 130,131,132,152,155,156,175,176,185,186
+     17         */
+    NSString * CU = @"^1(3[0-2]|5[256]|7[56]|8[56])\\d{8}$";
+    
+    /**
+     20         * 中国电信：China Telecom
+     21         * 133,1349,153,177,180,189
+     22         */
+    NSString * CT = @"^1((33|53|77|8[09])[0-9]|349)\\d{7}$";
+    
+    
+    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
+    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
+    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
+    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
+    
+    if(([regextestmobile evaluateWithObject:cellNum] == YES)
+       || ([regextestcm evaluateWithObject:cellNum] == YES)
+       || ([regextestct evaluateWithObject:cellNum] == YES)
+       || ([regextestcu evaluateWithObject:cellNum] == YES)){
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+/**
+ 校验固话
+ 
+ @param phoneNum 座机号码
+ @return 是否通过
+ */
+-(BOOL)isphone:(NSString *)phoneNum{
+    
+    /**
+     
+     大陆地区固话及小灵通
+     
+     区号：010，020，021，022，023，024，025，027，028，029
+     
+     号码：7位或8位
+     
+     */
+    
+    NSString *phs = @"^0(10|2[0-5789]|\\d{3})\\d{7,8}$";
+    
+    NSPredicate *regextestphs = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phs];
+    
+    
+    if([regextestphs evaluateWithObject:phoneNum] == YES){
+        
+        return YES;
+        
+    }else{
+        
+        return NO;
+    }
+}
 
 @end

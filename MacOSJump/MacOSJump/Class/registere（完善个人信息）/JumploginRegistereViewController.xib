@@ -8,14 +8,20 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="JumploginRegistereViewController">
             <connections>
+                <outlet property="addressL" destination="4GF-R5-fB0" id="pfa-ya-zhV"/>
                 <outlet property="chooseDepart" destination="Whx-A2-4xB" id="xzp-YV-jXK"/>
                 <outlet property="companyName" destination="uxI-oe-EG9" id="ppX-42-i28"/>
                 <outlet property="computerAddress" destination="2gK-Ff-sOm" id="WI8-0C-o29"/>
+                <outlet property="deparmentL" destination="jfA-SC-CnW" id="4pe-ao-4l9"/>
                 <outlet property="deviceType" destination="bap-Gw-jH5" id="7iE-af-kF9"/>
+                <outlet property="emailL" destination="skI-vt-e4S" id="pgO-hB-KyB"/>
                 <outlet property="mail" destination="LGA-IG-VHv" id="HsA-To-jfd"/>
+                <outlet property="phoneL" destination="O9M-s4-gT4" id="jZZ-9u-J9W"/>
                 <outlet property="phoneNum" destination="9fn-ZR-PJm" id="9W7-0I-KMo"/>
                 <outlet property="remark" destination="K2v-3w-h24" id="q3H-Ke-zTl"/>
+                <outlet property="remarkL" destination="NAA-Tt-Ved" id="Yge-pX-mQi"/>
                 <outlet property="userName" destination="A70-e4-7PN" id="Ca0-0G-DfV"/>
+                <outlet property="userNameL" destination="ZTn-2f-Fgi" id="5Kc-jF-Pcp"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>

@@ -20,9 +20,9 @@
 @property (weak) IBOutlet NSTabViewItem *firstItem;
 //状态
 @property (weak) IBOutlet NSTabViewItem *secondItem;
-//完善信息
-@property (weak) IBOutlet NSTabViewItem *thirdItem;
 //检测记录
+@property (weak) IBOutlet NSTabViewItem *thirdItem;
+//完善信息
 @property (weak) IBOutlet NSTabViewItem *fourthItem;
 //进程管家
 @property (weak) IBOutlet NSTabViewItem *fifthItem;
@@ -67,9 +67,9 @@
     self.fourthItem.view = self.registereVC.view;
     
     
-//    self.historyVC = [[HistoryRecordViewController alloc]initWithNibName:@"HistoryRecordViewController" bundle:nil];
-//
-//    self.thirdItem.view = self.historyVC.view;
+    self.historyVC = [[HistoryRecordViewController alloc]initWithNibName:@"HistoryRecordViewController" bundle:nil];
+
+    self.thirdItem.view = self.historyVC.view;
     
 //    self.applicitionVC = [[ApplicitionViewController alloc]initWithNibName:@"ApplicitionViewController" bundle:nil];
 //

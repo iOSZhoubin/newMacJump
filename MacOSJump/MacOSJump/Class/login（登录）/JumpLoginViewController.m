@@ -88,6 +88,8 @@
     [self defaultShow];
     
     [self getLoginType];
+    
+    NSString *ipAddress = [JumpPublicAction getDeviceIPAddress];
 
 }
 
@@ -183,10 +185,13 @@
         loginType = @"2";
     }
     
+    NSString *macIp = [JumpPublicAction getDeviceIPAddress];
+
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"account"] = SafeString(self.accountcontent.stringValue);
     parameters[@"loginType"] = SafeString(loginType);
     parameters[@"sid"] = SafeString(self.deviceCode);
+    parameters[@"ip"] = SafeString(macIp);
 
     
     //登录方式 1-账号密码登录  2-验证码登录
@@ -210,10 +215,10 @@
                         
             NSString *userId = SafeString(responseObject[@"result"][@"userId"]);
             
-            NSString *isCheck = SafeString(responseObject[@"result"][@"isCheck"]);
+            NSString *isCheck = SafeString(responseObject[@"result"][@"ischeck"]);
             
             NSString *isUser = SafeString(responseObject[@"result"][@"binduser"]);
-
+            
             [weakself pushSuccessVcWithUserId:userId isCheck:isCheck isregiter:isRegistered binduser:SafeString(isUser)];
             
         }else{
@@ -248,7 +253,7 @@
             
             NSDictionary *dict = [self saveDataWithUserId:userId deviceId:self.deviceCode];
             
-            isCheck = @"0"; //强制不检查
+//            isCheck = @"0"; //强制不检查
             
             if([isCheck isEqualToString:@"1"]){
                 

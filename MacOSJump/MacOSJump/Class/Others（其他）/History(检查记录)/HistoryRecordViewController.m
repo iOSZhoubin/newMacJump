@@ -132,7 +132,7 @@
     NSTableView *tableView = notification.object;
     
     NSInteger selectRow = tableView.selectedRow;
-    
+
     if(self.dataArray.count > 0 && selectRow >= 0){
         
         self.recordVC.alertStr = self.dataArray[selectRow][@"desc"];
@@ -142,7 +142,9 @@
     
     if(selectRow >= 0 ){
         
-        [self.firstPopover showRelativeToRect:CGRectMake(260, 25 * self.dataArray.count, 200, 200) ofView:self.view preferredEdge:NSRectEdgeMaxX];
+        [self.firstPopover showRelativeToRect:CGRectMake(260, 400, 200, 200) ofView:self.view preferredEdge:NSRectEdgeMaxX];
+
+
     }
 }
 

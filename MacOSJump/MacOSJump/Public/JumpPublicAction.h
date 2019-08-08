@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JumpPublicAction : NSObject
 
-//获取设备wifi的ip地址
+//获取以太网ip地址
 +(NSString *)getDeviceIPAddress;
 
 //获取设备的Mac地址
@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 //正则校验邮箱
 +(BOOL)isEmailAdress:(NSString *)email;
 
+//判断字符串是否通过
++(BOOL)specialRight:(NSString *)intriduction;
 
 @end
 

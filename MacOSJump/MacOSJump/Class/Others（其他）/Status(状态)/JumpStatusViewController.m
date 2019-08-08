@@ -80,16 +80,16 @@
                 [weakself timeStart]; //启动心跳
             }
             
-            if([SafeString(responseObject[@"result"][@"deviceStatus"]) isEqualToString:@"1"]){
+            if([SafeString(responseObject[@"result"][@"deviceStatus"]) isEqualToString:@"0"]){
                 
-                weakself.statusImage.image = [NSImage imageNamed:@"bg-state-Y"];
-                weakself.status.stringValue = @"在线";
+                weakself.statusImage.image = [NSImage imageNamed:@"bg-state-N"];
+                weakself.status.stringValue = @"下线";
                 
             }else{
                 
-                weakself.statusImage.image = [NSImage imageNamed:@"bg-state-N"];
-                weakself.status.stringValue = @"离线";
-                
+               
+                weakself.statusImage.image = [NSImage imageNamed:@"bg-state-Y"];
+                weakself.status.stringValue = @"在线";
             }
             
             weakself.time.stringValue = SafeString(responseObject[@"result"][@"sureTime"]);
@@ -164,7 +164,7 @@
         
         if([responseObject[@"message"] isEqualToString:@"ok"]){
             
-            if(![SafeString(responseObject[@"result"][@"isonline"]) isEqualToString:@"1"]){
+            if([SafeString(responseObject[@"result"][@"isonline"]) isEqualToString:@"0"]){
                 
                 [weakself offlineAlert];
             }

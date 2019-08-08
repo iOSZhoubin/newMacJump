@@ -16,8 +16,10 @@
 #import <sys/sysctl.h>
 #import <net/if.h>
 #import <net/if_dl.h>
-
-
+#include <netdb.h>
+#import <dlfcn.h>
+#import <SystemConfiguration/CaptiveNetwork.h>
+#import <NetworkExtension/NetworkExtension.h>
 
 @implementation JumpPublicAction
 
@@ -144,5 +146,43 @@
 }
 
 
+/**
+ 判断特殊字符
+ 
+ @param intriduction 输入的字符
+ @return YES-通过 NO-不通过
+ */
++(BOOL)specialRight:(NSString *)intriduction{
+    
+    NSString *newStr = [intriduction stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSMutableArray *specialStringArray = [NSMutableArray array];
+    
+    NSString *string = @"~,￥,#,&,*,<,>,《,》,(,),[,],{,},【,】,^,@,/,￡,¤,|,§,¨,「,」,『,』,￠,￢,￣,（,）,——,+,|,$,€, ,¥,!,%";
+
+    BOOL isRight = NO;
+    
+    NSArray *array = [string componentsSeparatedByString:@","];
+    
+    [specialStringArray addObjectsFromArray:array];
+    
+    for (NSInteger i=0; i<specialStringArray.count; i++) {
+        
+        if ([newStr rangeOfString:specialStringArray[i]].location != NSNotFound) {
+            
+            isRight = NO;
+            
+            break;
+            
+        }else{
+            
+            isRight = YES;
+            
+            continue;
+        }
+    }
+    
+    return isRight;
+}
 
 @end
