@@ -32,8 +32,6 @@
 		398EA47C21EC87E30075F2F3 /* MainWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 398EA47B21EC87E30075F2F3 /* MainWindow.m */; };
 		398EA48021EC87F30075F2F3 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 398EA47E21EC87F30075F2F3 /* MainWindowController.m */; };
 		398EA48121EC87F30075F2F3 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398EA47F21EC87F30075F2F3 /* MainWindowController.xib */; };
-		39A29F912240BBA00021D415 /* RecordRemarkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A29F8F2240BBA00021D415 /* RecordRemarkController.m */; };
-		39A29F922240BBA00021D415 /* RecordRemarkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A29F902240BBA00021D415 /* RecordRemarkController.xib */; };
 		39A29FBB2240DEFB0021D415 /* FirstPageTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A29FB92240DEFB0021D415 /* FirstPageTabController.m */; };
 		39A29FBC2240DEFB0021D415 /* FirstPageTabController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A29FBA2240DEFB0021D415 /* FirstPageTabController.xib */; };
 		39A29FF22240EC280021D415 /* JumpStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A29FF02240EC280021D415 /* JumpStatusViewController.m */; };
@@ -44,6 +42,8 @@
 		39A29FFD2240F2930021D415 /* JumpRegistereViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A29FFB2240F2930021D415 /* JumpRegistereViewController.xib */; };
 		39A2A0012240F6970021D415 /* FirstPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A29FFF2240F6970021D415 /* FirstPageViewController.m */; };
 		39A2A0022240F6970021D415 /* FirstPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A2A0002240F6970021D415 /* FirstPageViewController.xib */; };
+		39C2738C22FD41790060D03A /* CustomMessageCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C2738922FD41780060D03A /* CustomMessageCellView.m */; };
+		39C2738D22FD41790060D03A /* CustomMessageCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39C2738B22FD41780060D03A /* CustomMessageCellView.xib */; };
 		39C512E42254650500EBA745 /* JumpRegistereWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C512E22254650500EBA745 /* JumpRegistereWindowController.m */; };
 		39C512E52254650500EBA745 /* JumpRegistereWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39C512E32254650500EBA745 /* JumpRegistereWindowController.xib */; };
 		39CE977022435ED600566EC6 /* DateCalculater.m in Sources */ = {isa = PBXBuildFile; fileRef = 39CE976E22435ED600566EC6 /* DateCalculater.m */; };
@@ -98,9 +98,6 @@
 		398EA47D21EC87F30075F2F3 /* MainWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
 		398EA47E21EC87F30075F2F3 /* MainWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainWindowController.m; sourceTree = "<group>"; };
 		398EA47F21EC87F30075F2F3 /* MainWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindowController.xib; sourceTree = "<group>"; };
-		39A29F8E2240BBA00021D415 /* RecordRemarkController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordRemarkController.h; sourceTree = "<group>"; };
-		39A29F8F2240BBA00021D415 /* RecordRemarkController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordRemarkController.m; sourceTree = "<group>"; };
-		39A29F902240BBA00021D415 /* RecordRemarkController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordRemarkController.xib; sourceTree = "<group>"; };
 		39A29FB82240DEFB0021D415 /* FirstPageTabController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstPageTabController.h; sourceTree = "<group>"; };
 		39A29FB92240DEFB0021D415 /* FirstPageTabController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstPageTabController.m; sourceTree = "<group>"; };
 		39A29FBA2240DEFB0021D415 /* FirstPageTabController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstPageTabController.xib; sourceTree = "<group>"; };
@@ -116,6 +113,9 @@
 		39A29FFE2240F6970021D415 /* FirstPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstPageViewController.h; sourceTree = "<group>"; };
 		39A29FFF2240F6970021D415 /* FirstPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstPageViewController.m; sourceTree = "<group>"; };
 		39A2A0002240F6970021D415 /* FirstPageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstPageViewController.xib; sourceTree = "<group>"; };
+		39C2738922FD41780060D03A /* CustomMessageCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMessageCellView.m; sourceTree = "<group>"; };
+		39C2738A22FD41780060D03A /* CustomMessageCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMessageCellView.h; sourceTree = "<group>"; };
+		39C2738B22FD41780060D03A /* CustomMessageCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomMessageCellView.xib; sourceTree = "<group>"; };
 		39C512E12254650500EBA745 /* JumpRegistereWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JumpRegistereWindowController.h; sourceTree = "<group>"; };
 		39C512E22254650500EBA745 /* JumpRegistereWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JumpRegistereWindowController.m; sourceTree = "<group>"; };
 		39C512E32254650500EBA745 /* JumpRegistereWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JumpRegistereWindowController.xib; sourceTree = "<group>"; };
@@ -207,9 +207,9 @@
 				39A29FF42240F00C0021D415 /* HistoryRecordViewController.h */,
 				39A29FF52240F00C0021D415 /* HistoryRecordViewController.m */,
 				39A29FF62240F00C0021D415 /* HistoryRecordViewController.xib */,
-				39A29F8E2240BBA00021D415 /* RecordRemarkController.h */,
-				39A29F8F2240BBA00021D415 /* RecordRemarkController.m */,
-				39A29F902240BBA00021D415 /* RecordRemarkController.xib */,
+				39C2738A22FD41780060D03A /* CustomMessageCellView.h */,
+				39C2738922FD41780060D03A /* CustomMessageCellView.m */,
+				39C2738B22FD41780060D03A /* CustomMessageCellView.xib */,
 			);
 			path = "History(检查记录)";
 			sourceTree = "<group>";
@@ -414,9 +414,9 @@
 				391BD0772266BCBB00437AB3 /* JumpLoginViewController.xib in Resources */,
 				39A29FF82240F00C0021D415 /* HistoryRecordViewController.xib in Resources */,
 				39A2A0022240F6970021D415 /* FirstPageViewController.xib in Resources */,
+				39C2738D22FD41790060D03A /* CustomMessageCellView.xib in Resources */,
 				3989098D2264558000DBF1CE /* NewAccountWindowController.xib in Resources */,
 				391BD07C2266D8D900437AB3 /* JumploginRegistereViewController.xib in Resources */,
-				39A29F922240BBA00021D415 /* RecordRemarkController.xib in Resources */,
 				398EA48121EC87F30075F2F3 /* MainWindowController.xib in Resources */,
 				39A29FFD2240F2930021D415 /* JumpRegistereViewController.xib in Resources */,
 				39510B6A222E1643000A7A62 /* ChooseConmpanyWindowController.xib in Resources */,
@@ -474,13 +474,13 @@
 				394008B32268180D0085C0D4 /* JumpPublicAction.m in Sources */,
 				398EA47321EC87B80075F2F3 /* main.m in Sources */,
 				391BD0762266BCBB00437AB3 /* JumpLoginViewController.m in Sources */,
+				39C2738C22FD41790060D03A /* CustomMessageCellView.m in Sources */,
 				39A29FF72240F00C0021D415 /* HistoryRecordViewController.m in Sources */,
 				39C512E42254650500EBA745 /* JumpRegistereWindowController.m in Sources */,
 				3978B8D6222CFBB300D28D95 /* SecurityNSString.m in Sources */,
 				39803FBC223F22E2004C03AC /* MytitleView.m in Sources */,
 				39813D7C223B47DA00805151 /* ApplicitionModel.m in Sources */,
 				398EA46B21EC87AD0075F2F3 /* MacOSJump.xcdatamodeld in Sources */,
-				39A29F912240BBA00021D415 /* RecordRemarkController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

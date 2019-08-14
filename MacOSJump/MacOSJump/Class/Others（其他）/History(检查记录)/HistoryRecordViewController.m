@@ -7,7 +7,7 @@
 //
 
 #import "HistoryRecordViewController.h"
-#import "RecordRemarkController.h"
+#import "CustomMessageCellView.h"
 
 @interface HistoryRecordViewController ()<NSTableViewDelegate,NSTableViewDataSource>
 
@@ -15,44 +15,10 @@
 @property (weak) IBOutlet NSTableView *tableView;
 //数据源
 @property (strong,nonatomic) NSMutableArray *dataArray;
-//提示框
-@property(nonatomic,strong) NSPopover *firstPopover;
-//提示框
-@property(nonatomic,strong) RecordRemarkController *recordVC;
-
 
 @end
 
 @implementation HistoryRecordViewController
-
-
-
-- (NSPopover *)firstPopover
-{
-    if(!_firstPopover)
-    {
-        _firstPopover=[[NSPopover alloc]init];
-        
-        _firstPopover.appearance = [NSAppearance appearanceNamed:NSAppearanceNameAqua];
-        
-        _firstPopover.contentViewController = self.recordVC;
-        
-        _firstPopover.behavior = NSPopoverBehaviorTransient;
-        
-        _firstPopover.contentSize = NSMakeSize(400, 100);
-        
-    }
-    return _firstPopover;
-}
-
-- (RecordRemarkController *)recordVC
-{
-    if(!_recordVC)
-    {
-        _recordVC = [[RecordRemarkController alloc]init];
-    }
-    return _recordVC;
-}
 
 
 -(NSMutableArray *)dataArray{
@@ -72,6 +38,8 @@
     
     self.tableView.dataSource = self;
     
+    [self.tableView registerNib:[[NSNib alloc] initWithNibNamed:@"CustomMessageCellView" bundle:nil] forIdentifier:@"CustomMessageCellView"];
+    
     NSArray *array = [[NSUserDefaults standardUserDefaults] objectForKey:@"status"];
 
     self.dataArray = array.mutableCopy;
@@ -81,7 +49,6 @@
     [KNotification addObserver:self selector:@selector(notifi:) name:@"HistoryRecordViewController" object:nil];
 
 }
-
 
 
 - (void)notifi:(NSNotification *)note{
@@ -102,6 +69,11 @@
     return self.dataArray.count;
 }
 
+-(CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row{
+    
+    return 75;
+}
+
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
     
     
@@ -113,40 +85,26 @@
         
         return oneCell;
         
-    }else{
+    }else if([tableColumn.identifier isEqualToString:@"twoColumn"]){
         
         NSTableCellView *twoCell = [tableView makeViewWithIdentifier:@"twoCell" owner:self];
         
         twoCell.textField.stringValue = self.dataArray[row][@"status"];
         
         return twoCell;
+    
+    }else{
+        
+        CustomMessageCellView *cellView = [tableView makeViewWithIdentifier:@"CustomMessageCellView" owner:self];
+        
+        NSString *content = self.dataArray[row][@"desc"];
+        
+        [cellView refreshWithContent:content];
+        
+        return cellView;
     }
 }
 
-
-#pragma mark --- NSOutlineViewDelegate
-
-//单击某一行
-- (void)tableViewSelectionDidChange:(NSNotification *)notification{
-    
-    NSTableView *tableView = notification.object;
-    
-    NSInteger selectRow = tableView.selectedRow;
-
-    if(self.dataArray.count > 0 && selectRow >= 0){
-        
-        self.recordVC.alertStr = self.dataArray[selectRow][@"desc"];
-    }
-    
-    NSLog(@"1:点击了第%ld行",selectRow);
-    
-    if(selectRow >= 0 ){
-        
-        [self.firstPopover showRelativeToRect:CGRectMake(260, 400, 200, 200) ofView:self.view preferredEdge:NSRectEdgeMaxX];
-
-
-    }
-}
 
 
 #pragma mark --- 清空记录

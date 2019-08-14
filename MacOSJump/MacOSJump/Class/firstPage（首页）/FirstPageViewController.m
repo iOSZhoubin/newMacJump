@@ -61,9 +61,10 @@
 
 @property (strong,nonatomic) FirstPageTabController *firstPageWC;
 
-@property (copy,nonatomic) NSString *isNormal;
-
-@property (copy,nonatomic) NSString *isBan;
+//必须进程检查
+@property (strong,nonatomic) NSMutableString *yesStr;
+//禁止运行检查
+@property (strong,nonatomic) NSMutableString *noStr;
 
 
 @end
@@ -85,10 +86,6 @@
     
     self.firstPageWC = [[FirstPageTabController alloc]initWithWindowNibName:@"FirstPageTabController"];
 
-    self.isNormal = @"1"; //默认通过
-   
-    self.isBan = @"1"; //默认通过
-    
     [self getAllCheck];
 
     [self progressStatus];
@@ -103,7 +100,7 @@
     
     self.itemContent.stringValue = @"";
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.25f repeats:YES block:^(NSTimer * _Nonnull timer) {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.02f repeats:YES block:^(NSTimer * _Nonnull timer) {
         
         weakself.progressV = weakself.progress.doubleValue;
         
@@ -118,8 +115,10 @@
             self.againBtn.enabled = YES;
             
             self.itemContent.stringValue = self.contentStr;
+            
+            JumpLog(@"%@===%@",self.noStr,self.yesStr);
 
-            if(self.isRight==YES && self.isTrue==YES){
+            if(self.noStr.length < 1 && self.yesStr.length < 1 && self.isTrue == YES && self.isRight == YES){
 
                 [self saveData:@"1"];
 
@@ -179,8 +178,6 @@
         for (NSDictionary *dict in dataArray) {
             
             /**
-             name:必须安装APP检查  type:mobilemustappcheck
-             name:禁止安装APP检查  type:mobileprogibitedappcheck
              name:必须运行进程检查  type:mobilemustprocesscheck
              name:禁止运行进程检查  type:mobileprogibitedprocesscheck
              */
@@ -197,7 +194,9 @@
                 
                 [weakself.processY addObjectsFromArray:array];
                 
-            }else if ([type isEqualToString:@"mobileprogibitedprocesscheck"]){
+            }
+            
+            if ([type isEqualToString:@"mobileprogibitedprocesscheck"]){
                 
                 [weakself.processN addObjectsFromArray:array];
 
@@ -227,6 +226,8 @@
         [self.dataArray addObject:model];
     }
     
+    JumpLog(@"所有的进程名称：%@",self.dataArray);
+    
     [self ishaveAppname];
  
 }
@@ -234,84 +235,82 @@
 //检查进程等
 -(void)ishaveAppname{
     
-    for (ApplicitionModel *model in self.dataArray) {
+    self.yesStr = [NSMutableString string];
+    self.noStr = [NSMutableString string];
+    
+    for (NSInteger i=0; i<self.processY.count; i++) {
+    //必须运行进程检查
+        NSString *proName = self.processY[i][@"processname"];
+    
+        for(NSInteger j=0;j<self.dataArray.count;j++){
+            
+            ApplicitionModel *model = self.dataArray[j];
 
-        NSString *name = model.localizedName;
+            NSString *name = model.localizedName;
 
-        for (NSInteger i=0; i<self.processN.count; i++) {
-
-            NSString *proName = self.processN[i][@"processname"];
-
-            if([name isEqualToString:proName]){
-
-                self.isNormal = @"0";
-
+            if([proName isEqualToString:name]){
+                
                 break;
-
+                
             }else{
-
-                self.isNormal = @"1";
+                
+                if(j == self.dataArray.count - 1){
+                    
+                    [self.yesStr appendFormat:@"%@", [NSString stringWithFormat:@"%@,",proName]];
+                    
+                }
             }
-        }
-
-        if([self.isNormal isEqualToString:@"0"]){
-
-            break;
         }
     }
     
-    for (ApplicitionModel *model in self.dataArray) {
+    
+    
+    
+    for (NSInteger i=0; i<self.processN.count; i++) {
+        //禁止运行进程检查
+        NSString *proName = self.processN[i][@"processname"];
         
-        NSString *name = model.localizedName;
-        
-        for (NSInteger i=0; i<self.processY.count; i++) {
+        for(NSInteger j=0;j<self.dataArray.count;j++){
             
-            NSString *proName = self.processY[i][@"processname"];
+            ApplicitionModel *model = self.dataArray[j];
             
-            if([name isEqualToString:proName]){
+            NSString *name = model.localizedName;
+            
+            if([proName isEqualToString:name]){
                 
-                self.isBan = @"1";
-                
-            }else{
-                
-                self.isBan = @"0";
+                [self.noStr appendFormat:@"%@", [NSString stringWithFormat:@"%@,",proName]];
                 
                 break;
-
             }
         }
-        
-        if([self.isBan isEqualToString:@"0"]){
-            
-            break;
-        }
     }
+    
     
     self.contentStr = [NSMutableString string];
-
     
-    if([self.isNormal isEqualToString:@"0"]){
+    
+    if(self.yesStr.length > 0){
         
-        [self.contentStr appendFormat:@"允许运行进程检查异常..."];
+        [self.contentStr appendFormat:@"%@", [NSString stringWithFormat:@"必须运行进程检查异常，需运行%@进程",self.yesStr]];
 
+    }else{
         
-    }else if([self.isNormal isEqualToString:@"1"]){
-        
-        [self.contentStr appendFormat:@"允许运行进程检查正常..."];
+        [self.contentStr appendFormat:@"必须运行进程检查正常..."];
 
     }
     
-    
-    if([self.isBan isEqualToString:@"1"]){
 
-        [self.contentStr appendFormat:@"\n禁止运行进程检查异常..."];
+    if(self.noStr.length > 0){
+        
+        [self.contentStr appendFormat:@"%@", [NSString stringWithFormat:@"\n禁止运行进程检查异常，需禁止%@进程",self.noStr]];
 
-    }else if([self.isBan isEqualToString:@"0"]){
-
+    }else{
+        
         [self.contentStr appendFormat:@"\n禁止运行进程检查正常..."];
 
     }
     
+    JumpLog(@"%@",self.contentStr);
     
     [self getServerInfo];
     
@@ -423,7 +422,7 @@
     //NSDate转NSString
     NSString *currentDateString = [dateFormatter stringFromDate:currentDate];
     
-    NSString *status = @"正常";
+    NSString *status = @"";
     
     if([isNormal isEqualToString:@"1"]){
         
@@ -497,7 +496,7 @@
 
 -(void)pushVc{
     
-    if([self.isBan isEqualToString:@"0"] && [self.isNormal isEqualToString:@"1"] && self.isTrue == YES && self.isRight == YES){
+    if(self.noStr.length < 1 && self.yesStr.length < 1 && self.isTrue == YES && self.isRight == YES){
         
         //如果钥匙串获取的设备id和原来的保存id相等的话，直接进入，不需要注册
         

@@ -89,8 +89,6 @@
     
     [self getLoginType];
     
-    NSString *ipAddress = [JumpPublicAction getDeviceIPAddress];
-
 }
 
 
